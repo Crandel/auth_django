@@ -1,0 +1,12 @@
+{% load cms_tags sekizai_tags i18n %}
+<div class="address">
+                                <p>{{ instance.name }}</p>
+                                <p>{{ instance.line1 }}</p>
+                                <p>{{ instance.line2 }}</p>
+                                <p>{{ instance.city }}</p>
+                                <p>{{ instance.country }} </p>
+                                <p>{% trans 'Tel.' %}: {{ instance.tele }}</p>
+                                <p>{% trans 'Fax' %}: {{ instance.fax }}</p>
+                                <p>{% trans 'Email' %}: {{ instance.email }}</p>
+                                <p>{% trans 'Website' %}: {{ instance.web }}</p>
+                            </div>

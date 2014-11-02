@@ -1,0 +1,46 @@
+{% load thumbnail i18n generaltags %}
+<div class="inner-contents-wrapper">
+    <div class="title-area clearfix">
+        <h1>{{ gallery.title }}</h1>
+        <ul class="bredcrums clearfix">
+            <li><a href="/">{% trans 'Home' %}</a></li>
+
+                {% cms_navigation as cms_pages %}
+                {% for page in cms_pages %}
+            {% for child in page.children.all|slice:'1' %}
+            {% for child1 in child.children.all|slice:'1' %}            
+             <li><a href=" {{ child1.get_absolute_url }}">{% trans 'Subsidiaries' %}</a></li>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}           
+            <li>{{ gallery.title }}</li>
+        </ul>
+    </div>
+    <div class="naranj-restaurants clearfix">
+        <div class="gallery">
+            <div class="image">
+               
+                {% thumbnail gallery.image '432x289' crop='center' as large_img %}
+                <a class="example-image-link" href="{{ large_img.url }}" data-lightbox="example-set"><img src="{{ large_img.url }}" alt="Sub main Image">
+                </a>{% endthumbnail %}
+            </div>
+            <div class="thumbnails">
+                <div class="arrow-left"></div>
+                <div class="arrow-right"></div>
+                <div class="th-carousel">
+                    <ul>{% for image in images %}
+                        {% thumbnail image.image '122x83'  crop='center' as small_img %}
+                        {% thumbnail image.image '432x289'  crop='center' as large_img %}
+                        <li><img src="{{ small_img.url }}" data-large="{{ large_img.url }}" alt="Subsi sub{{ foorloop.counter }}"></li>
+                        {% endthumbnail %}
+                        {% endthumbnail %}
+										{% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+						{{ gallery.desc|safe }}
+
+    </div>
+</div>

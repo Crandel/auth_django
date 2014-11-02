@@ -1,0 +1,47 @@
+
+{% extends 'frontend_base.html' %}
+{% load cms_tags sekizai_tags %}
+{% load generaltags thumbnail i18n %}
+{% block title %}{% trans 'Subsidiaries' %} {% endblock %}
+{% block extra_css %}
+
+<link rel="stylesheet" href="/static/css/lightbox.css" media="screen"/>
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jcarousellite.js"></script>
+<script type="text/javascript" src="/static/js/lightbox-2.6.min.js"></script>
+
+<script type="text/javascript">
+    $(window).load(function() {
+        $(".gallery .th-carousel").jCarouselLite({
+            btnNext: ".gallery .arrow-left",
+            btnPrev: ".gallery .arrow-right",
+            visible: 3
+        });
+    });
+    $(document).ready(function() {
+        $(".gallery .th-carousel img").click(function(e){
+            var imagePath = $(this).attr("data-large");
+            $(".gallery .image").css("background-image", "url("+imagePath+")");
+            $(".gallery .image").find("img").fadeTo(1000, 0, function(e){
+                $(".gallery .image").find("img").attr("src", imagePath);
+                $(".gallery .image").find("img").fadeTo(1000, 1);
+                $(".gallery .image").find("a").attr("href", imagePath);
+            });
+        });
+    });
+</script>
+{% endblock %}
+{% block page_banner %}
+{% get_banners as subsidiaries_banner %}
+<section class="inner-banner">
+    {% thumbnail subsidiaries_banner.subsideri_page '1351x211' crop='center' as thumb %}
+    <img src="{{ thumb.url }}" alt="Subsidiaries">
+    {% endthumbnail %}
+</section>
+{% endblock %}
+		{% block content %}
+				{% placeholder "imagegallery" %}
+			{% endblock %}
+

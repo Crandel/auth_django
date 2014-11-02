@@ -1,0 +1,15 @@
+{% load thumbnail %}
+<section role="main" id="news_detail" class="left">
+							<h2>News</h2>
+							<div class="main-content clearfix">
+								<article class="store left">
+									<h2>{{ news_obj.news_title }}<span>{{ news_obj.news_date_time|date:"d F Y"}}</span></h2>
+									<div class="items">
+                                                                            {% thumbnail news_obj.news_image '630x450' crop="center" as thumb %}
+                                                                            <img src="{{ thumb.url }}" alt="{{ news_obj.news_title }}">
+                                                                            {% endthumbnail %}
+                                                                        </div>
+									<p>{{ news_obj.news_desc|safe }}</p>
+								</article>
+							</div>
+						</section>

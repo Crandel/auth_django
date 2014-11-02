@@ -1,0 +1,792 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-19 10:49+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: SITCO/settings.py:198 apps/contact_plugin/cms_plugins.py:13
+msgid "Contact Address Plugin"
+msgstr ""
+
+#: SITCO/settings.py:213
+msgid "Image Gallery"
+msgstr ""
+
+#: apps/careers/admin.py:25 apps/careers/admin.py:33
+msgid "Expired Jobs"
+msgstr ""
+
+#: apps/careers/admin.py:34
+msgid "Applicable Jobs"
+msgstr ""
+
+#: apps/careers/forms.py:23 apps/contactus/forms.py:29
+msgid "Please enter digits only!"
+msgstr ""
+
+#: apps/careers/forms.py:25 apps/contactus/forms.py:31
+msgid "Please enter digits between 8 to 15!"
+msgstr ""
+
+#: apps/careers/forms.py:31
+msgid "Please enter your name."
+msgstr ""
+
+#: apps/careers/forms.py:38
+msgid "Invalid file format.."
+msgstr ""
+
+#: apps/careers/forms.py:51
+msgid "Please enter valid closing date."
+msgstr ""
+
+#: apps/careers/models.py:14 apps/gallery_plugin/models.py:7
+#: apps/utility_files/db.py:16
+msgid "Title"
+msgstr ""
+
+#: apps/careers/models.py:21
+msgid "Career Information"
+msgstr ""
+
+#: apps/careers/models.py:22
+msgid "Career Informations"
+msgstr ""
+
+#: apps/careers/models.py:30 apps/careers/models.py:37
+#: apps/careers/models.py:47 apps/careers/models.py:70
+#: templates/careers/career.html:154
+msgid "Job Category"
+msgstr ""
+
+#: apps/careers/models.py:31 apps/careers/models.py:53
+#: apps/flatpages/models.py:26 apps/gallery_plugin/models.py:25
+#: apps/home/models.py:32 apps/home/models.py:48 apps/newsevents/models.py:17
+#: apps/newsevents/models.py:51
+msgid "Sort Order"
+msgstr ""
+
+#: apps/careers/models.py:38
+msgid "Job Categories"
+msgstr ""
+
+#: apps/careers/models.py:48
+msgid "Designation"
+msgstr ""
+
+#: apps/careers/models.py:49
+msgid "Short Description"
+msgstr ""
+
+#: apps/careers/models.py:50
+msgid "Created Date/Time"
+msgstr ""
+
+#: apps/careers/models.py:51
+msgid "Closing Date/Time"
+msgstr ""
+
+#: apps/careers/models.py:52
+msgid "Is Published"
+msgstr ""
+
+#: apps/careers/models.py:59
+msgid "Job vacancy"
+msgstr ""
+
+#: apps/careers/models.py:60
+msgid "Job vacancies"
+msgstr ""
+
+#: apps/careers/models.py:71
+msgid "Name of Applicant"
+msgstr ""
+
+#: apps/careers/models.py:72 apps/contactus/models.py:12
+msgid "Email Address"
+msgstr ""
+
+#: apps/careers/models.py:73 apps/contactus/models.py:13
+#: templates/careers/career.html:197
+#: templates/careers/career_email_to_admin.html:27
+#: templates/contactus/contact.html:84
+msgid "Telephone"
+msgstr ""
+
+#: apps/careers/models.py:74
+msgid "Uploaded CV"
+msgstr ""
+
+#: apps/careers/models.py:75
+msgid "Applied date"
+msgstr ""
+
+#: apps/careers/models.py:81 apps/careers/models.py:82
+msgid "Applied Jobs"
+msgstr ""
+
+#: apps/careers/views.py:86
+msgid "Job Application."
+msgstr ""
+
+#: apps/careers/views.py:96
+#, python-format
+msgid "You have successfully applied for the post of  %(desin)s."
+msgstr ""
+
+#: apps/contact_plugin/models.py:10
+msgid "Company name"
+msgstr ""
+
+#: apps/contact_plugin/models.py:11
+msgid "Addree Line1"
+msgstr ""
+
+#: apps/contact_plugin/models.py:12
+msgid "P.O Box"
+msgstr ""
+
+#: apps/contact_plugin/models.py:13
+msgid "City"
+msgstr ""
+
+#: apps/contact_plugin/models.py:14
+msgid "Country name"
+msgstr ""
+
+#: apps/contact_plugin/models.py:15
+msgid "Telephone number"
+msgstr ""
+
+#: apps/contact_plugin/models.py:16
+#: apps/contact_plugin/templates/contact_address.html:9
+msgid "Fax"
+msgstr ""
+
+#: apps/contact_plugin/models.py:17 templates/careers/career.html:193
+#: templates/contactus/contact.html:80
+msgid "Email ID"
+msgstr ""
+
+#: apps/contact_plugin/models.py:18
+#: apps/contact_plugin/templates/contact_address.html:11
+msgid "Website"
+msgstr ""
+
+#: apps/contact_plugin/templates/contact_address.html:8
+msgid "Tel."
+msgstr ""
+
+#: apps/contact_plugin/templates/contact_address.html:10
+#: templates/careers/career_email_to_admin.html:25
+msgid "Email"
+msgstr ""
+
+#: apps/contactus/models.py:11 templates/careers/career.html:189
+#: templates/careers/career_email_to_admin.html:24
+#: templates/contactus/contact.html:76
+msgid "Name"
+msgstr ""
+
+#: apps/contactus/models.py:14 templates/contactus/contact.html:89
+msgid "Enquiry"
+msgstr ""
+
+#: apps/contactus/models.py:15
+msgid "Contacted Time"
+msgstr ""
+
+#: apps/contactus/models.py:21 apps/contactus/models.py:22
+#: templates/404.html:55 templates/htmlsitemap.html:60
+#: templates/common/header.html:60 templates/contactus/contact.html:5
+#: templates/contactus/contact.html:59 templates/contactus/contact.html:62
+msgid "Contact Us"
+msgstr ""
+
+#: apps/contactus/models.py:30
+msgid "Latitude"
+msgstr ""
+
+#: apps/contactus/models.py:31
+msgid "Longitude"
+msgstr ""
+
+#: apps/contactus/models.py:38
+msgid "Google map setting"
+msgstr ""
+
+#: apps/contactus/models.py:39
+msgid "Google map settings"
+msgstr ""
+
+#: apps/contactus/views.py:24
+msgid "Thanks for contacting us.We will contact you soon!"
+msgstr ""
+
+#: apps/flatpages/admin.py:14
+msgid "Advanced options"
+msgstr ""
+
+#: apps/flatpages/models.py:9
+msgid "URL"
+msgstr ""
+
+#: apps/flatpages/models.py:10
+msgid "title"
+msgstr ""
+
+#: apps/flatpages/models.py:11
+msgid "content"
+msgstr ""
+
+#: apps/flatpages/models.py:12
+msgid "enable comments"
+msgstr ""
+
+#: apps/flatpages/models.py:13
+msgid "template name"
+msgstr ""
+
+#: apps/flatpages/models.py:14
+msgid ""
+"Example: 'flatpages/contact_page.html'. If this isn't provided, the system "
+"will use 'flatpages/default.html'."
+msgstr ""
+
+#: apps/flatpages/models.py:15
+msgid "registration required"
+msgstr ""
+
+#: apps/flatpages/models.py:16
+msgid "If this is checked, only logged-in users will be able to view the page."
+msgstr ""
+
+#: apps/flatpages/models.py:23
+msgid "Select where to deploy the page"
+msgstr ""
+
+#: apps/flatpages/models.py:29
+msgid "flat page"
+msgstr ""
+
+#: apps/flatpages/models.py:30
+msgid "flat pages"
+msgstr ""
+
+#: apps/gallery_plugin/cms_plugins.py:12
+msgid "Image gallery"
+msgstr ""
+
+#: apps/gallery_plugin/models.py:8
+msgid "Description"
+msgstr ""
+
+#: apps/gallery_plugin/models.py:9
+msgid "Main Image"
+msgstr ""
+
+#: apps/gallery_plugin/models.py:23
+msgid "Gallery Image"
+msgstr ""
+
+#: apps/general/models.py:13
+msgid "Copy Right Text"
+msgstr ""
+
+#: apps/general/models.py:14
+msgid "Copy Right year"
+msgstr ""
+
+#: apps/general/models.py:15
+msgid "Facebook Icon"
+msgstr ""
+
+#: apps/general/models.py:16
+msgid "Facebook Url"
+msgstr ""
+
+#: apps/general/models.py:17
+msgid "Hide facebook icon"
+msgstr ""
+
+#: apps/general/models.py:18
+msgid "Twitter Icon"
+msgstr ""
+
+#: apps/general/models.py:19
+msgid "Twitter Url"
+msgstr ""
+
+#: apps/general/models.py:20
+msgid "Hide twitter icon"
+msgstr ""
+
+#: apps/general/models.py:21
+msgid "Instagram Icon"
+msgstr ""
+
+#: apps/general/models.py:22
+msgid "Instagram Url"
+msgstr ""
+
+#: apps/general/models.py:23
+msgid "Hide instagram icon"
+msgstr ""
+
+#: apps/general/models.py:24
+msgid "Youtube Icon"
+msgstr ""
+
+#: apps/general/models.py:25
+msgid "Youtube Url"
+msgstr ""
+
+#: apps/general/models.py:26
+msgid "Hide youtube icon"
+msgstr ""
+
+#: apps/general/models.py:32
+msgid "Footer Setting"
+msgstr ""
+
+#: apps/general/models.py:33
+msgid "Footer Settings"
+msgstr ""
+
+#: apps/general/models.py:42
+msgid "Logo Image"
+msgstr ""
+
+#: apps/general/models.py:43
+msgid "Logo Url"
+msgstr ""
+
+#: apps/general/models.py:49
+msgid "Common Setting"
+msgstr ""
+
+#: apps/general/models.py:50
+msgid "Common Settings"
+msgstr ""
+
+#: apps/general/models.py:59
+msgid "Contact admin email"
+msgstr ""
+
+#: apps/general/models.py:60
+msgid "Career admin email"
+msgstr ""
+
+#: apps/general/models.py:66
+msgid "Admin emails Setting"
+msgstr ""
+
+#: apps/general/models.py:67
+msgid "Admin emails Settings"
+msgstr ""
+
+#: apps/general/models.py:75
+msgid "Contact page banner"
+msgstr ""
+
+#: apps/general/models.py:76
+msgid "Career page banner"
+msgstr ""
+
+#: apps/general/models.py:77
+msgid "Flat page banner"
+msgstr ""
+
+#: apps/general/models.py:78
+msgid "News & Event page banner"
+msgstr ""
+
+#: apps/general/models.py:79
+msgid "Subsidiaries page banner"
+msgstr ""
+
+#: apps/general/models.py:80
+msgid "Search page banner"
+msgstr ""
+
+#: apps/general/models.py:81
+msgid "Sitemap page banner"
+msgstr ""
+
+#: apps/general/models.py:87 apps/general/models.py:88
+msgid "Page banner management"
+msgstr ""
+
+#: apps/home/models.py:11
+msgid "Main Title"
+msgstr ""
+
+#: apps/home/models.py:12
+msgid "Sub Title"
+msgstr ""
+
+#: apps/home/models.py:13
+msgid "CEO Title"
+msgstr ""
+
+#: apps/home/models.py:14
+msgid "CEO Description"
+msgstr ""
+
+#: apps/home/models.py:21
+msgid "Home page content"
+msgstr ""
+
+#: apps/home/models.py:22
+msgid "Home page contents"
+msgstr ""
+
+#: apps/home/models.py:30
+msgid "Banner Title"
+msgstr ""
+
+#: apps/home/models.py:31 apps/home/models.py:36
+msgid "Banner Image"
+msgstr ""
+
+#: apps/home/models.py:37
+msgid "Banner Images"
+msgstr ""
+
+#: apps/home/models.py:46
+msgid "Image Url"
+msgstr ""
+
+#: apps/home/models.py:47 apps/home/models.py:53
+msgid "CEO Images"
+msgstr ""
+
+#: apps/home/models.py:52
+msgid "CEO Image"
+msgstr ""
+
+#: apps/newsevents/forms.py:37
+msgid "Please select valid year."
+msgstr ""
+
+#: apps/newsevents/forms.py:53
+msgid "Please enter valid event date."
+msgstr ""
+
+#: apps/newsevents/models.py:13
+msgid "Event Title"
+msgstr ""
+
+#: apps/newsevents/models.py:14
+msgid "Event Date and Time"
+msgstr ""
+
+#: apps/newsevents/models.py:15
+msgid "Event Description"
+msgstr ""
+
+#: apps/newsevents/models.py:16 apps/newsevents/models.py:50
+msgid "Is published"
+msgstr ""
+
+#: apps/newsevents/models.py:23
+msgid "Event"
+msgstr ""
+
+#: apps/newsevents/models.py:24
+msgid "Events"
+msgstr ""
+
+#: apps/newsevents/models.py:30
+msgid "News year"
+msgstr ""
+
+#: apps/newsevents/models.py:46
+msgid "News Title"
+msgstr ""
+
+#: apps/newsevents/models.py:47
+msgid "News Date and Time"
+msgstr ""
+
+#: apps/newsevents/models.py:48
+msgid "News Description"
+msgstr ""
+
+#: apps/newsevents/models.py:49
+msgid "News Image"
+msgstr ""
+
+#: apps/newsevents/models.py:57 apps/newsevents/models.py:58
+#: templates/newsevents/events.html:94
+msgid "News"
+msgstr ""
+
+#: apps/utility_files/db.py:17
+msgid "Slug"
+msgstr ""
+
+#: apps/utility_files/db.py:18
+msgid "Created"
+msgstr ""
+
+#: apps/utility_files/db.py:19
+msgid "Modified"
+msgstr ""
+
+#: apps/utility_files/db.py:32
+msgid "created"
+msgstr ""
+
+#: apps/utility_files/db.py:33
+msgid "modified"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:6
+msgid "Always"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:7
+msgid "hourly"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:8
+msgid "daily"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:9
+msgid "weekly"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:10
+msgid "monthly"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:11
+msgid "yearly"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:12
+msgid "never"
+msgstr ""
+
+#: apps/xmlsitemap/models.py:23
+msgid "Xml Sitemap"
+msgstr ""
+
+#: haystack/admin.py:126
+#, python-format
+msgid "0 of %(count)d selected"
+msgid_plural "of %(count)d selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: haystack/admin.py:128
+#, python-format
+msgid "%(total_count)s selected"
+msgid_plural "All %(total_count)s selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: haystack/forms.py:22 templates/search/search.html:5
+msgid "Search"
+msgstr ""
+
+#: haystack/forms.py:96
+msgid "Search In"
+msgstr ""
+
+#: haystack/panels.py:26
+msgid "Haystack"
+msgstr ""
+
+#: haystack/panels.py:50
+msgid "Search Queries"
+msgstr ""
+
+#: haystack/templates/panels/haystack.html:5
+msgid "Query"
+msgstr ""
+
+#: haystack/templates/panels/haystack.html:6
+msgid "Backend Alias"
+msgstr ""
+
+#: haystack/templates/panels/haystack.html:7
+msgid "Timeline"
+msgstr ""
+
+#: haystack/templates/panels/haystack.html:8
+msgid "Time"
+msgstr ""
+
+#: haystack/templates/panels/haystack.html:9
+msgid "Kwargs"
+msgstr ""
+
+#: templates/404.html:3
+msgid "404 error page"
+msgstr ""
+
+#: templates/404.html:12 templates/404.html.py:15
+msgid "404 Error Page"
+msgstr ""
+
+#: templates/404.html:14 templates/home.html:2 templates/htmlsitemap.html:20
+#: templates/admin/base.html:48 templates/careers/career.html:141
+#: templates/contactus/contact.html:61 templates/flatpages/default.html:42
+#: templates/newsevents/events.html:66 templates/search/search.html:19
+msgid "Home"
+msgstr ""
+
+#: templates/404.html:19
+msgid "404 Error Page Found"
+msgstr ""
+
+#: templates/404.html:52 templates/htmlsitemap.html:57
+#: templates/common/header.html:59 templates/newsevents/events.html:64
+#: templates/newsevents/events.html:67
+msgid "News & Events"
+msgstr ""
+
+#: templates/home.html:46
+msgid "Latest News"
+msgstr ""
+
+#: templates/htmlsitemap.html:4
+msgid "Sitco - Sitemap"
+msgstr ""
+
+#: templates/htmlsitemap.html:17 templates/common/footer.html:8
+msgid "Sitemap"
+msgstr ""
+
+#: templates/htmlsitemap.html:27 templates/common/header.html:14
+#: templates/flatpages/default.html:43
+msgid "About Us"
+msgstr ""
+
+#: templates/admin/base.html:29
+msgid "Welcome,"
+msgstr ""
+
+#: templates/admin/base.html:34
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/base.html:37
+msgid "Change password"
+msgstr ""
+
+#: templates/admin/base.html:39
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/inc/branding.html:4
+msgid "Sitco administration"
+msgstr ""
+
+#: templates/careers/career.html:4 templates/careers/career.html.py:139
+#: templates/careers/career.html:142 templates/common/footer.html:13
+msgid "Careers"
+msgstr ""
+
+#: templates/careers/career.html:149
+msgid "Submit Your CV"
+msgstr ""
+
+#: templates/careers/career.html:152
+msgid "Available Vacancies"
+msgstr ""
+
+#: templates/careers/career.html:156
+msgid "All Categories"
+msgstr ""
+
+#: templates/careers/career.html:168
+msgid "Apply For This Vacancy"
+msgstr ""
+
+#: templates/careers/career.html:181
+msgid "Please fill the below form"
+msgstr ""
+
+#: templates/careers/career.html:185
+#: templates/careers/career_email_to_admin.html:26
+msgid "Job Title"
+msgstr ""
+
+#: templates/careers/career.html:201
+msgid "Upload CV"
+msgstr ""
+
+#: templates/careers/career.html:210 templates/contactus/contact.html:98
+msgid "Submit"
+msgstr ""
+
+#: templates/careers/career_email_to_admin.html:18
+#: templates/careers/career_to_user.html:18
+msgid "Career Notification"
+msgstr ""
+
+#: templates/careers/career_to_user.html:24
+msgid "You have successfully applied for the post of"
+msgstr ""
+
+#: templates/careers/career_to_user.html:24
+msgid "We will contact you soon"
+msgstr ""
+
+#: templates/cms/toolbar/items/logo.html:14
+msgid "SITCO"
+msgstr ""
+
+#: templates/common/footer.html:20
+msgid "Contact  With Us"
+msgstr ""
+
+#: templates/contactus/contact.html:73
+msgid ""
+"If you have any enquires, please feel free to contact us by filling the form "
+"below."
+msgstr ""
+
+#: templates/endless/show_more.html:5
+msgid "more"
+msgstr ""
+
+#: templates/newsevents/events.html:110
+msgid "News Archive"
+msgstr ""
+
+#: templates/search/search.html:17 templates/search/search.html.py:20
+msgid "Search Results"
+msgstr ""
+
+#: templates/search/search.html:24
+msgid "result(s) found for keyword :"
+msgstr ""
+
+#: templates/search/search.html:33 templates/search/search.html.py:43
+#: templates/search/search.html:52
+msgid "Read More"
+msgstr ""
+
+#: templates/subsidiaries/subsidiaries.html:5
+msgid "Subsidiaries"
+msgstr ""

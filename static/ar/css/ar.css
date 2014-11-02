@@ -1,0 +1,93 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+@font-face {
+    font-family: 'AmiriRegular';
+    src: url('../fonts/Amiri-Regular/amiri-regular.eot');
+    src: url('../fonts/Amiri-Regular/amiri-regular.eot') format('embedded-opentype'),
+         url('../fonts/Amiri-Regular/amiri-regular.woff') format('woff'),
+         url('../fonts/Amiri-Regular/amiri-regular.ttf') format('truetype'),
+         url('../fonts/Amiri-Regular/amiri-regular.svg#AmiriRegular') format('svg');
+}
+html {
+ direction:rtl;
+}
+body{font-family: 'AmiriSlanted', 'Open Sans', sans-serif; }
+.left, .left-side, .pull-left{float:right;}
+.right, .right-side, .pull-right{float:left;}
+.align-right{text-align:left;}
+.align-left{text-align:right;}
+.page-width{text-align:right;}
+
+.logo{right:0;}
+#navigation {padding-right: 202px; padding-left:inherit;}
+#navigation ul li{float:right; margin-left: 28px; margin-right: 0px;}
+#navigation ul li .dd-menu{right:0; left:auto;}
+#navigation ul li .dd-menu .arrow{background-position:690px 0;}
+#navigation ul li .dd-menu p{text-align:left;}
+#navigation ul li .dd-menu p{text-align:right;}
+#navigation ul li .dd-menu ul.bullets-list li{padding-right: 13px; padding-left: 0px;  background-position: center right;}
+#navigation ul li .dd-menu p{font-weight: 800;}
+
+.header-search-area li.language{padding: 4px 24px 0px 18px;}
+ul.lang-list{right:inherit; left: -9px;}
+.header-search-area li{float:right;}
+.header-search-area li.language {background-position:left;}
+.header-search-area .go-btn{left:10px; right:inherit;}
+
+#footer .right ul.inline-list li:last-child {padding-right:10px; padding-left:auto;}
+#footer .center {float:right}
+#footer .left ul.inline-list li{margin-left: 15px;}
+#footer .right{text-align:left;}
+
+.ceo-images{float:left; margin-right: 32px; margin-left: auto;}
+.ceo-message{float:right;}
+.latest-news  .top-arrow{left:18px; right:auto;}
+.latest-news .bottom-arrow{left:18px; right:auto;}
+.latest-news h2{text-align:right;}
+.latest-news{float:left;}
+.title-area h1{float:right;}
+ul.bredcrums{float:left;}
+ul.bredcrums li {background:url(../images/bredcrums-arrow-left.png)no-repeat; float:right; background-position: left center; padding: 0 8px 0 18px !important; vertical-align:middle;}
+.wrap-right {float: left; margin-right: 24px; margin-left: auto;}
+
+.naranj-restaurants h4{background:url(../images/blue-arrow-left.png)right center no-repeat; padding-right:17px; padding-left:auto;}
+.gallery {float: left; margin-right: 24px; margin-left:auto;}
+.post-container .post-time {margin-left:10px ; margin-right: auto;}
+.date-time-cover .time{border-right:1px dashed #fff;}
+.date-time-cover .date{border-right:0;}
+section[role="main"]{margin-left: 1%; margin-right: auto;}
+.main-content .store p{line-height: 25px;}
+.main-content .store h2{line-height: 39px;}
+
+.sitemap-container .sitemap-column ul li ul li ul li{padding-right:10px; padding-left:auto; background-position: center right;}
+.sitemap-container .sitemap-column ul li ul li ul{padding-right: 45px; padding-left: auto;}
+.sitemap-container .sitemap-column ul li ul{padding-left: 0px; padding-right: auto;}
+.sitemap-container .sitemap-column ul{padding-right: 10px; padding-left: 0;}
+.careers .job-categories{float:right; clear:both;}
+.careers .job-categories div:first-child{float:right; padding-left: 18px; padding-right: 0px;}
+.careers .job-categories div{float:left; }
+.section2{overflow:hidden; clear:both;}
+.careers .info-area p:last-child{text-align:left;}
+.careers .section1 p:last-child{text-align:left;}
+
+.factsheet.left ul li{padding-right: 18px; padding-left: 0px; float:left; text-align:right; width: 440px;
+border-right: solid 1px #263a75;}
+.factsheet.left ul li:first-child{float:right; padding-right: 18px; padding-left: 0px;}
+
+.news-archive .post-time{float: right;}
+.news-archive .post-detail{float:left;}
+.jspVerticalBar{left:0 !important; right:auto !important;}
+
+.dropdown{background-position: 8px center !important; padding-left:5px;}
+.dropdown .selected, .dropdown li{text-align:right !important; padding-right:5px;}
+
+.latest-news .item .right p.title{text-align:right;}
+.gallery .th-carousel{direction:ltr;}
+#recaptcha_area, #recaptcha_table{direction:ltr;}
+#recaptcha_area, #recaptcha_table input{direction:rtl;}
+.sitemap-container .sitemap-column{float:right; width:22%;}
+.sitemap-container .sitemap-column:nth-child(2){width:42%;}
+
+.file-upload{display:inline-block;}
+
+
+

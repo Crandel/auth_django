@@ -1,0 +1,106 @@
+{% extends "frontend_base.html" %}
+{% load thumbnail i18n l10n %}
+{% load cms_tags sekizai_tags %}
+{% load generaltags %}
+{% block title %}{% trans 'Contact Us' %}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/lightbox.css" media="screen"/>
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function(e) {
+        $("#contact-form").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone:
+                    {
+                    required: true,
+                    number: true
+                }
+
+            },
+            messages: {
+                name: "Please enter your Name",
+                telephone: "Please enter Phone Number",
+                email: "Please enter a valid email address"
+
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block page_banner %}
+{% get_banners as cont_banner %}
+<section class="inner-banner">
+    {% thumbnail cont_banner.cont_page '1351x211' crop='center' as thumb %}
+    <img src="{{ thumb.url }}" alt="Contact-banner">
+    {% endthumbnail %}
+</section>
+{% endblock %}
+		{% block content %}
+<div class="inner-contents-wrapper">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="title-area clearfix">
+        <h1>{% trans 'Contact Us' %}</h1>
+        <ul class="bredcrums clearfix">
+            <li><a href="/">{% trans 'Home' %}</a></li>
+            <li>{% trans 'Contact Us' %}</li>
+        </ul>
+    </div>
+    <div class="naranj-restaurants clearfix">
+        <div class="contact right">
+            <div class="map">
+               <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27826.173746790442!2d{{ google_cordinates.long }}!3d{{ google_cordinates.lati }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf7621ccb0f409%3A0xd67b8473125207f7!2sAl-Salmiya!5e0!3m2!1sen!2s!4v1396738634194"></iframe>-->
+            <iframe src="https://maps.google.com/maps?q={{ google_cordinates.lati|unlocalize}},{{ google_cordinates.long|unlocalize}}&hl=es;z=14&amp;output=embed" width="4008px" height="290px" frameborder="0" style="border:0"></iframe>
+            </div>
+            {% placeholder "contactaddress" %}
+        </div>        
+        <div class="contact left contact-form">
+            <p>{% trans 'If you have any enquires, please feel free to contact us by filling the form below.' %}</p>
+            <form id="contact-form" action="." method="post">{% csrf_token %}
+                <ul class="clearfix">
+                    <li>{% trans 'Name' %}<span style="color:red;"> * </span></li>
+                    <li>{{ form.name }}{{ form.name.errors }}</li>
+                </ul>
+                <ul class="clearfix">
+                    <li>{% trans 'Email ID' %}<span style="color:red;"> * </span></li>
+                    <li>{{ form.email }} {{ form.email.errors }}</li>
+                </ul>
+                <ul class="clearfix">
+                    <li>{% trans 'Telephone' %}<span style="color:red;"> * </span></li>
+                    <li>{{ form.telephone }} {{ form.telephone.errors }}</li>
+
+                </ul>
+                <ul class="clearfix">
+                    <li>{% trans 'Enquiry' %}</li>
+                    <li>{{ form.enquiry }}</li>
+                </ul>
+                <ul class="clearfix">
+                    <li>&nbsp;</li>
+                    <li>{{ form.captcha }} {{ form.captcha.errors }}</li>
+                </ul>
+                <ul class="clearfix">
+                    <li>&nbsp;</li>
+                    <li><input type="submit" name="contact_submit" class="btn" value="{% trans 'Submit' %}"></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+			{% endblock %}
+

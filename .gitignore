@@ -1,0 +1,6 @@
+*.pyc
+media/
+*.log
+nbproject/
+*.svn
+SITCO/local_settings.py

@@ -1,0 +1,55 @@
+{% extends 'frontend_base.html' %}
+{% block title %} {{ flatpage.title }} {% endblock%}
+{% load generaltags thumbnail i18n %}
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/lightbox.css" media="screen"/>
+{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/static/js/lightbox-2.6.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".gallery .th-carousel").jCarouselLite({
+            btnNext: ".gallery .arrow-left",
+            btnPrev: ".gallery .arrow-right",
+            visible: 3,
+        });
+        $(".gallery .th-carousel img").click(function(e){
+            var imagePath = $(this).attr("data-large");
+            $(".gallery .image").css("background-image", "url("+imagePath+")");
+            $(".gallery .image").find("img").fadeTo(1000, 0, function(e){
+                $(".gallery .image").find("img").attr("src", imagePath);
+                $(".gallery .image").find("img").fadeTo(1000, 1);
+                $(".gallery .image").find("a").attr("href", imagePath);
+            });
+        });
+    });
+</script>
+{% endblock %}
+{% block page_banner %}
+{% get_banners as flate_banner %}
+<section class="inner-banner">
+     {% thumbnail flate_banner.flat_page '1351x211' crop='center' as thumb %}
+    <img src="{{ thumb.url }}" alt="{{ flatpage.title }}">
+     {% endthumbnail%}
+</section>
+ {% endblock %}
+		{% block content %}
+<div class="inner-contents-wrapper">
+    <div class="title-area clearfix">
+        <h1>{{ flatpage.title }}</h1>
+        <ul class="bredcrums clearfix">
+            <li><a href="/">{% trans 'Home' %}</a></li>
+            {% get_flatpage 'about' as aboutus_pages %}
+                                    {% for page in aboutus_pages|slice:'1' %}
+            <li><a href="/pages{{ page.url }}">{% trans 'About Us' %}</a></li>
+            {% endfor %}
+            <li>{{ flatpage.title }}</li>
+        </ul>
+    </div>
+    <div class="naranj-restaurants clearfix">
+        {{ flatpage.content|safe }}
+    </div>
+</div>
+
+{% endblock %}

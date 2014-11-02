@@ -1,0 +1,85 @@
+{% load generaltags thumbnail %}
+{% load i18n %}
+{% load flatpages %}
+<header id="header">
+    <div class="page-width relative clearfix">
+        {% get_logo as common %}
+        <div class="logo">
+            {% thumbnail common.logo_icon '133x105' as thumb %}
+            <a href="/"><img src="{{ thumb.url }}" alt=""></a>
+            {% endthumbnail %}
+        </div>
+        <nav id="navigation" class="left">
+            <ul class="clearfix">
+                <li><a href="/">Home</a></li>
+                <li><a href="">{% trans 'About Us' %}</a><div class="custdd-menu ">
+                        <div class="cust_arrow"></div>
+                        <div class="body">
+                            <div class="submenu1 submenu active">
+                                <ul class="bullets-list">
+                                    {% get_flatpage 'about' as aboutus_pages %}
+                                    {% for page in aboutus_pages %}
+                                    <li><a href="/pages{{ page.url }}">{{ page.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div></li>
+                {% cms_navigation as cms_pages %}
+                <li>{% for page in cms_pages %}<a href="">{{ page.get_title }}</a>
+                    <div class="dd-menu">
+                        <div class="arrow"></div>
+                        <div class="body">
+                            <ul class="title">
+                                {% for child in page.children.all %}
+                                <li data-ref="{% if forloop.counter == 2 %}.submenu2
+                                    {% elif forloop.counter == 3 %}.submenu3{% else %}.submenu1{% endif %}"> {{ child.get_title }}</li>
+                                {% endfor %}
+                            </ul>{% for child in page.children.all %}
+                            <div class="{% if forloop.counter == 2 %}submenu2 submenu
+                                 {% elif forloop.counter == 3 %}submenu3 submenu {% else %}submenu1 submenu active{% endif %}">
+                                {% for child1 in child.children.all %}
+                                <a href="{{ child1.get_absolute_url }}"><p>{{ child1.get_title }}</p></a>
+                                <ul class="bullets-list">
+                                    {% for child2 in child1.children.all %}
+                                    <li><a href="{{ child2.get_absolute_url }}">{{ child2.get_title}}</a>
+                                        <ul class="bullets-list">
+                                            {% for child3 in child2.children.all %}
+                                            <li><a href="{{ child3.get_absolute_url }}">{{ child3.get_title}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+											{% endfor %}                                                                                        
+                                </ul>
+                                {% endfor %}
+                            </div>{% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </li>
+                <li><a href="{% url 'events' %}">{% trans 'News & Events' %}</a></li>
+                <li><a href="{% url 'contactus' %}">{% trans 'Contact Us' %}</a></li>
+            </ul>
+        </nav>
+        <div class="right">
+            <ul class="header-search-area clearfix">
+                <li><form action="/search/" method="GET" id="search_form">{% csrf_token %}
+                        <input type="text" id="search_box"  name ="q" class="input" placeholder="Search Here">
+                    </form>
+                    <a href="javascript:document.getElementById('search_form').submit();"><button class="go-btn"></button></a>
+                </li>
+                {% for lang in LANGUAGES %}
+                {% ifequal lang.0 LANGUAGE_CODE %}
+                <li class="language">{% ifequal lang.0 'ar' %}AR{% else %}EN{% endifequal %}</li>
+                {% endifequal %}
+                {% endfor %}	</ul>
+            <ul class="lang-list">{% if LANGUAGE_CODE == 'ar' %}
+                <a href="{{ request.path|get_other_language_path }}">{% else %}<a>{% endif %}<li>EN</li></a>
+                    {% if LANGUAGE_CODE == 'en' %}
+                    <a href="{{request.path|get_other_language_path}}">
+                        {% else %}<a>{% endif %}<li>AR</li></a>
+                        </ul>
+                        </div>
+                        </div>
+                        </header>
+

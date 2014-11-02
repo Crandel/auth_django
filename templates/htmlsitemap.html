@@ -1,0 +1,66 @@
+{% extends 'frontend_base.html' %}
+{% load generaltags thumbnail generaltags i18n %}
+{% load flatpages %}
+{% block title %}{% trans 'Sitco - Sitemap' %}{% endblock %}
+{% block page_banner %}
+{% get_banners as sitemap_banner %}
+<section class="inner-banner">
+    {% thumbnail sitemap_banner.sitemap_page '1351x211' crop='center' as thumb %}
+    <img src="{{ thumb.url }}" alt="">
+    {% endthumbnail %}
+</section>
+
+{% endblock %}
+{% block content %}
+<div class="inner-contents-wrapper">
+    <div class="title-area clearfix">
+        <h1>{% trans 'Sitemap' %}</h1>
+
+        <ul class="bredcrums clearfix">
+            <li><a href="/">{% trans 'Home' %}</a></li>
+            <li>Sitemap</li>
+        </ul>
+    </div>
+    <div class="naranj-restaurants clearfix">
+        <div class="sitemap-container clearfix">
+            <article class="sitemap-column left">
+                <h4>{% trans 'About Us' %}</h4>
+                <ul>
+                    {% get_flatpage 'about' as aboutus_pages %}
+                    {% for page in aboutus_pages %}
+                    <li><a href="/pages{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </article>
+            <article class="sitemap-column">
+                {% cms_navigation as cms_pages %}
+                {% for page in cms_pages %} <h4>{{ page.get_title }}</h4>
+                <ul>{% for child in page.children.all %}
+                    <li>{{ child.get_title }}
+                        <ul>{% for child1 in child.children.all %}
+                            <li><a href="{{ child1.get_absolute_url }}">{{ child1.get_title }}</a>
+                                {% if child1.children.all %}
+                                <ul>{% for child2 in child1.children.all %}
+                                    <li> <a href="{{ child2.get_absolute_url }}">{{ child2.get_title }}</a></li>
+
+                                    {% endfor %}
+                                </ul>{% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>{% endfor %}
+
+                </ul>{% endfor %}
+
+            </article>
+            <article class="sitemap-column">
+                <h4><a href="{% url 'events' %}">{% trans 'News & Events' %}</a></h4>
+            </article>
+            <article class="sitemap-column">
+                <h4><a href="{% url 'contactus' %}">{% trans 'Contact Us' %}</a></h4>
+            </article>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
