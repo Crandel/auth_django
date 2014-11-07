@@ -2,29 +2,7 @@
 {% load i18n thumbnail %}
 {% block title %}{% trans 'Home' %}{% endblock %}
 {% block extra_js %}
-<script type="text/javascript" src="/static/js/jquery.featureCarousel.js"></script>
- <script type="text/javascript" src="/static/js/jcarousellite.js"></script>
- <script type="text/javascript">
-            $(document).ready(function() {
-                var carousel = $("#carousel").featureCarousel();
-                $(".latest-news .animation").jCarouselLite({
-                    btnNext: ".latest-news .top-arrow",
-                    btnPrev: ".latest-news .bottom-arrow",
-                    visible: 3,
-                    vertical: true,
-                });
-            });
-        </script>
-<script>
 
-
-           function goToDetail(current){
-                window.location.href = "/news_events/events/.?sitco_news_id=" + current;
-
-
-            }
-
-</script>
 {% endblock %}
 {% block content %}
 <div id="banner">
@@ -40,7 +18,7 @@
                    <!-- {% endthumbnail %}-->
                 </a>
             </div>
-            {% endfor %}            
+            {% endfor %}
         </div>
         <div id="carousel-left"></div>
         <div id="carousel-right"></div>
@@ -78,7 +56,7 @@
                      {% for n in news %}
                     <li>
                         <div class="item clearfix">
-                            <a href ='javascript:goToDetail({{ n.id }})' class="left"><span>{{ n.news_date_time|date:"d"}}</span>{{ n.news_date_time|date:"M"}}</a>                            
+                            <a href ='javascript:goToDetail({{ n.id }})' class="left"><span>{{ n.news_date_time|date:"d"}}</span>{{ n.news_date_time|date:"M"}}</a>
                             <div class="right">
                                 <p class="title"><a href='javascript:goToDetail({{ n.id }})'>{{ n.news_title }}</a></p>
                                 <p>{{ n.news_desc|safe|truncatewords:13 }}</p>

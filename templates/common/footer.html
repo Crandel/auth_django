@@ -1,30 +1,44 @@
-
 {% load generaltags %}
 {% load flatpages i18n %}
-<footer id="footer">
-    <div class="page-width clearfix">
-        <div class="left">
-            <ul class="inline-list">
-                <li><a href="{% url 'sitemap' %}">{% trans 'Sitemap' %}</a></li>
-                {% get_flatpage 'footer' as footer_pages %}
-                {% for page in footer_pages %}
-                <li><a href="/pages{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-                <li><a href="{% url 'career' %}">{% trans 'Careers' %}</a></li>
-            </ul>
-        </div>
-        {% footerset as footer %}
-        <div class="center">{{ footer.copyright }} {{ footer.copy_year }}.</div>
-        <div class="right">
-            <ul class="inline-list">
-                <li>{% trans 'Contact  With Us' %}</li>
-                <li>
-							{% if not footer.hide_face %}<a href="{{ footer.face_url }}" target="_blank"><img src="{{ footer.face_icon.url }}" alt="Facebook"></a>{% endif %}
-							{% if not footer.hide_twi %}<a href="{{ footer.twit_url }}" target="_blank"><img src="{{ footer.twit_icon.url }}" alt="Twitter"></a>{% endif %}
-							{% if not footer.hide_insta %}<a href="{{ footer.insta_url }}" target="_blank"><img src="{{ footer.insta_icon.url }}" alt="Instagram"></a>{% endif %}
-							{% if not footer.hide_you %}<a href="{{ footer.you_url }}" target="_blank"><img src="{{ footer.you_icon.url }}" alt="Youtube"></a>{% endif %}
-                </li>
+<footer class="bluebg">
+    <div class="page_width clearfix">
+        <div class="copyright left">&copy;2014 KUD All Rights Reserved.</div>
+        <div class="social_icons right">
+            <p>Get In Touch</p>
+            <ul class="clearfix">
+                <li><a href="#" class="twt"></a></li>
+                <li><a href="#" class="linkedin"></a></li>
             </ul>
         </div>
     </div>
 </footer>
+{% comment %}
+    <footer id="footer">
+        <div class="page-width clearfix">
+            <div class="left">
+                <ul class="inline-list">
+                    <li><a href="{% url 'sitemap' %}">{% trans 'Sitemap' %}</a></li>
+                    {% get_flatpage 'footer' as footer_pages %}
+                    {% for page in footer_pages %}
+                    <li><a href="/pages{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                    <li><a href="{% url 'career' %}">{% trans 'Careers' %}</a></li>
+                </ul>
+            </div>
+            {% footerset as footer %}
+            <div class="center">{{ footer.copyright }} {{ footer.copy_year }}.</div>
+            <div class="right">
+                <ul class="inline-list">
+                    <li>{% trans 'Contact  With Us' %}</li>
+                    <li>
+    							{% if not footer.hide_face %}<a href="{{ footer.face_url }}" target="_blank"><img src="{{ footer.face_icon.url }}" alt="Facebook"></a>{% endif %}
+    							{% if not footer.hide_twi %}<a href="{{ footer.twit_url }}" target="_blank"><img src="{{ footer.twit_icon.url }}" alt="Twitter"></a>{% endif %}
+    							{% if not footer.hide_insta %}<a href="{{ footer.insta_url }}" target="_blank"><img src="{{ footer.insta_icon.url }}" alt="Instagram"></a>{% endif %}
+    							{% if not footer.hide_you %}<a href="{{ footer.you_url }}" target="_blank"><img src="{{ footer.you_icon.url }}" alt="Youtube"></a>{% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+{% endcomment %}
