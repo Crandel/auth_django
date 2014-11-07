@@ -8,14 +8,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.autodiscover()
 
-urlpatterns = i18n_patterns('',    
+urlpatterns = i18n_patterns('',
     url(r'^', include('apps.home.urls')),
     url(r'^kud-admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
     url(r'^contact-us/', include('apps.contactus.urls')),
     url(r'^news_events/', include('apps.newsevents.urls')),
     url(r'^career/', include('apps.careers.urls')),
-    url(r'^sitco-site/', include('apps.htmlsitemap.urls')),
+    url(r'^kud-site/', include('apps.htmlsitemap.urls')),
     url(r'^', include('apps.xmlsitemap.urls')),
 #    url(r'^search/', include('apps.search.urls')),
     (r'^search/', include('haystack.urls')),

@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Sitco | {% block title %}{% endblock %}</title>
+        <title>KUD | {% block title %}{% endblock %}</title>
 
         {% load staticfiles %}
         <link rel="shortcut icon" href="/static/images/favicon.ico" />
@@ -32,15 +32,15 @@ margin-bottom: 5px;
 }
           </style>
         <link href="/static/css/styles.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="/static/css/feature-carousel.css" />        
+        <link rel="stylesheet" href="/static/css/feature-carousel.css" />
         {% endif %}
         {% block extra_css %}
         {% endblock %}
         {% render_block "css" %}
         {% render_block "js" %}
-        <script type="text/javascript" src="/static/js/jquery-1.7.min.js"></script>        
+        <script type="text/javascript" src="/static/js/jquery-1.7.min.js"></script>
         <script type="text/javascript" src="/static/js/custom.js"></script>
-        
+
         {% block extra_js %}
         {% endblock %}
     </head>

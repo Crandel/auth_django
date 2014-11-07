@@ -29,3 +29,8 @@ EMAIL_USE_TLS       =  True
 DEFAULT_FROM_EMAIL  = 'tester.kuwaitnet@gmail.com'
 
 EMAIL_BACKEND = "django_mailer.smtp_queue.EmailBackend"
+
+try:
+    from local_settings import *
+except e:
+    pass

@@ -1,5 +1,5 @@
 """
-Django settings for SITCO project.
+Django settings for kud project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -33,9 +33,9 @@ THUMBNAIL_DEBUG=True
 
 
 
-ROOT_URLCONF = 'SITCO.urls'
+ROOT_URLCONF = 'kud.urls'
 
-WSGI_APPLICATION = 'SITCO.wsgi.application'
+WSGI_APPLICATION = 'kud.wsgi.application'
 
 
 # Database
@@ -75,20 +75,20 @@ USE_TZ = True
 
 INSTALLED_APPS = (
     'djangocms_admin_style',
-    'django.contrib.messages',    
+    'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',    
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'modeltranslation',
-    'cms', 
-    'mptt',  
-    'menus',  
-    'south', 
-    'sekizai',           
+    'cms',
+    'mptt',
+    'menus',
+    'south',
+    'sekizai',
     'sorl.thumbnail',
     'ckeditor',
     'captcha',
@@ -189,7 +189,7 @@ RECAPTCHA_USE_SSL = True
 CMS_TEMPLATES = (
     ('contactus/contact.html', 'Contact Us'),
     ('subsidiaries/subsidiaries.html', 'Subsidiaries'),
-    
+
 )
 
 CMS_PLACEHOLDER_CONF = {

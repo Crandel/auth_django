@@ -1,5 +1,5 @@
 """
-WSGI config for SITCO project.
+WSGI config for kud project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SITCO.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kud.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
