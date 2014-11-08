@@ -1,0 +1,6 @@
+@media screen and (min-width:240px) and (max-width: 600px){
+	#container.deviceW{width:1210px !important; background: skyblue !important;}
+	/*.page_width{width: 1175px !important; border: 1px solid red;}*/
+	
+
+}

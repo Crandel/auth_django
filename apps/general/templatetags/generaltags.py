@@ -4,7 +4,7 @@ from django.utils.translation import get_language
 
 from cms.models.pagemodel import Page
 
-from apps.general.models import FooterSettings,CommonSettings,BannerSettings
+from apps.general.models import FooterSettings,CommonSettings, BannerImages
 from apps.flatpages.models import FlatPage
 
 register = template.Library()
@@ -37,22 +37,17 @@ register.assignment_tag(get_logo)
 
 
 def cms_navigation():
-    cms_pages = Page.objects.filter(in_navigation = True)[4:5]
+    cms_pages = Page.objects.filter(in_navigation=True, parent_id__isnull=True).distinct()
+    for page in cms_pages:
+        print page.pk
     return cms_pages
 
 register.assignment_tag(cms_navigation)
 
 
 def get_banners():
-    banner = None
-    try:
-        current_site = Site.objects.get_current()
-        banner = BannerSettings.objects.get(site=current_site)
-    except:
-        pass
-    if banner:
-        return banner
-    return None
+    banner = BannerImages.objects.filter(published=True)
+    return banner
 register.assignment_tag(get_banners)
 
 
@@ -62,7 +57,6 @@ def get_other_language_path(path):
     if lan=='en':
         return path.replace('/en/','/ar/')
     return path.replace('/ar/','/en/')
-
 
 
 def get_flatpage(page_type):
@@ -81,7 +75,7 @@ def get_flatpage(page_type):
         except:
             pass
         if footer:
-            return footer    
+            return footer
 register.assignment_tag(get_flatpage)
 
 

@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class ContactAddress(CMSPlugin):
     """
-    Model for getting sitco address details in contact page.
+    Model for getting kud address details in contact page.
     """
     name = models.CharField(_('Company name'),max_length=255,)
     line1 = models.CharField(_('Addree Line1'),max_length=255,)

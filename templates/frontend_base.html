@@ -1,64 +1,75 @@
 <!DOCTYPE html>
-{% load cms_tags sekizai_tags %}
-{% load staticfiles %}
+{% load cms_tags sekizai_tags staticfiles i18n %}
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Sitco | {% block title %}{% endblock %}</title>
+        <title>KUD | {% block title %}{% endblock %}</title>
 
-        {% load staticfiles %}
-        <link rel="shortcut icon" href="/static/images/favicon.ico" />
-        <link rel="stylesheet" href="/static/css/developer.css" />
-          {% if LANGUAGE_BIDI %}
-          <style>#navigation ul li .custdd-menu ul.bullets-list li {
-text-decoration: none;
-background: url(/static/images/icons/bullet.jpg) right no-repeat;
-padding-right: 13px;
-font-size: 14px;
-margin-bottom: 5px;
-}
-          </style>
-          <link href="/static/ar/css/styles.css" rel="stylesheet" type="text/css">
-          <link href="/static/ar/css/ar.css" rel="stylesheet" type="text/css">
-          <link rel="stylesheet" href="/static/ar/css/feature-carousel.css" />
-          {% else %}
-          <style>
-#navigation ul li .custdd-menu ul.bullets-list li {
-text-decoration: none;
-background: url(/static/images/icons/bullet.jpg) 0px 8px no-repeat;
-padding-left: 13px;
-font-size: 14px;
-margin-bottom: 5px;
-}
-          </style>
-        <link href="/static/css/styles.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="/static/css/feature-carousel.css" />        
+        <link rel="shortcut icon" href={% static "en/static/images/favicon.ico" %} />
+        <link href='http://fonts.googleapis.com/css?family=Michroma' rel='stylesheet' type='text/css' />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css' />
+
+        {% if LANGUAGE_CODE == 'ar' %}
+          <link href={% static "ar/css/style.css" %} rel="stylesheet" type="text/css" />
+          <link href={% static "ar/css/flexslider.css" %} rel="stylesheet" type="text/css" />
+          <link media="only screen and (min-device-width: 320px) and (max-device-width: 480px)" href={% static "ar/css/responsive.css" %} type= "text/css" rel="stylesheet">
+          <link href={% static "ar/css/ar.css" %} rel="stylesheet" type="text/css" />
+
+          <script type="text/javascript" src={% static "ar/js/jquery-1.8.2.min.js" %}></script>
+          <script type="text/javascript" src={% static "ar/js/jquery.flexslider.js" %}></script>
+          <script src={% static "en/js/jquery.easydropdown.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jcarousellite.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jquery.jscrollpane.js" %}></script>
+          <script type="text/javascript" src={% static "ar/js/custom.js" %}></script>
+        {% else %}
+          <link href={% static "en/css/style.css" %} rel="stylesheet" type="text/css" />
+          <link href={% static "en/css/flexslider.css" %} rel="stylesheet" type="text/css" />
+          <link media="only screen and (min-device-width: 320px) and (max-device-width: 480px)" href={% static "en/css/responsive.css" %} type= "text/css" rel="stylesheet">
+
+          <script type="text/javascript" src={% static "en/js/jquery-1.8.2.min.js" %}></script>
+          <script src={% static "en/js/jquery.easydropdown.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jcarousellite.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jquery.jscrollpane.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jquery.flexslider.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/custom.js" %}></script>
         {% endif %}
+        <script type="text/javascript">
+          $(document).ready(function(e) {
+            $("#main-banner").flexslider({
+              controlNav:true,
+              directionNav:false,
+              slideshow: true
+            });
+              $(".searchbox input").on("keyup", function(){
+              $(".searchbox small#end-search").addClass("show");
+            });
+
+             $(".searchbox small#end-search a").on("click", function(){
+                $(".searchbox input").val('');
+                $(".searchbox small#end-search").removeClass("show");
+              });
+          });
+
+        </script>
         {% block extra_css %}
         {% endblock %}
         {% render_block "css" %}
         {% render_block "js" %}
-        <script type="text/javascript" src="/static/js/jquery-1.7.min.js"></script>        
-        <script type="text/javascript" src="/static/js/custom.js"></script>
-        
+
         {% block extra_js %}
         {% endblock %}
     </head>
     <body>{% cms_toolbar %}
         <div id="container">
-            {% include 'common/header.html' %}
-            {% block page_banner %}
+          <div class="inner_wrapper">
+            {% block header %}
+              {% include 'common/header.html' %}
+            {% endblock header %}
+            {% block content %}
+
             {% endblock %}
-            <section id="contents">
-                <div class="page-width">
-                    {% block content %}
-
-                    {% endblock %}
-
-                </div>
-
-            </section>
             {% include 'common/footer.html' %}
+          </div>
         </div>
     </body>
 </html>

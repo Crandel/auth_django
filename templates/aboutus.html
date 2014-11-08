@@ -1,0 +1,102 @@
+{% extends "frontend_base.html" %}
+{% load i18n thumbnail staticfiles menu_tags generaltags %}
+{% block title %}{% trans 'Home' %}{% endblock %}
+{% block extra_js %}
+  <script type="text/javascript">
+  $(document).ready(function(e) {
+    $(".header-nav .slider").flexslider({animation: "slide", controlNav: false, slideshow:false, animationSpeed:1500,});
+  });
+</script>
+{% endblock %}
+{% block header %}
+{% get_banners as banners %}
+<header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"> <a href="#" class="lang">عربي</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+              <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+        {% show_menu 0 100 100 100  "menu/menu.html" %}
+      </ul>
+      </div>
+      <div class="header-nav one-row">
+      <div class="slider">
+        <ul class="slides">
+          <li>
+            <div class="row clearfix">
+              <div ><a href="#" class="active">Total Project  Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Design  Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Construction Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Project Control  System</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Facility Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Safety and  Quality</a></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src={% static "en/images/strip3.png" %} alt="img" />
+      </div>
+      <ul class="slides">
+        {% for banner in banners %}
+          <li>
+            <a href="{{ banner.link }}">
+              {% thumbnail banner.image "1072x405" crop="center" as im %}
+                <img src="{{ im.url }}"  alt="{{ banner.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
+              {% endthumbnail %}
+              <div class="slider-caption"><div class="page-width">{{ banner.title }}</div></div>
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+{% block content %}
+<div class="page_width innerpages clearfix">
+    <ul class="bread-crumb clearfix left">
+        {% show_breadcrumb %}
+    </ul>
+    <h1 id="page-title">Design Management</h1>
+      <div class="services">
+          <p>Kuwait United Development is an accomplishment of a great team of professonals with diversified and international expertise that provide full range of management services and solutions.</p>
+          <p>Since establishment in 2004, KUC is serving the public and private sector clients in Kuwait, GCC and World wide and are proud that 80% of our business is with repeated clients, this is a result of the quality, fliexibility and creativity of services that is provided. Long term client relationship is the main focus at KUD.</p>
+          <h5>The Scope of Services under Total Project Management include:</h5>
+          <ul>
+            <li>Design Management</li>
+            <li>Design Management</li>
+            <li>Design Management</li>
+            <li>Design Management</li>
+          </ul>
+      </div>
+ </div>
+{% endblock %}

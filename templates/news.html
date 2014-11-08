@@ -1,0 +1,283 @@
+{% extends "frontend_base.html" %}
+{% load i18n thumbnail staticfiles menu_tags generaltags %}
+{% block title %}{% trans 'Home' %}{% endblock %}
+{% block extra_js %}
+  <script type="text/javascript">
+    $(document).ready(function(e) {
+      $(".scroll-pane").jScrollPane();
+      $(".media .carousel-wrapper .jcarousel").jCarouselLite({
+        btnPrev: ".media .carousel-wrapper .arrow.prev",
+        btnNext: ".media .carousel-wrapper .arrow.next",
+        visible: 5,
+        circular: true,
+      });
+
+      $(".accordion-wrapper > h3").click(function(e){
+        if($(this).hasClass("expand")==true){
+          $(this).next().slideUp();
+          $(this).removeClass("expand");
+          return;
+        }
+        $(this).parent().find(".accordion-contents").slideUp();
+        $(this).parent().find("h3").removeClass("expand");
+
+        $(this).next().slideToggle();
+        $(this).toggleClass("expand");
+      });
+    });
+</script>
+{% endblock %}
+{% block header %}
+{% get_banners as banners %}
+<header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"> <a href="#" class="lang">عربي</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+              <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+        {% show_menu 0 100 100 100  "menu/menu.html" %}
+      </ul>
+      </div>
+      <div class="header-nav one-row">
+      <div class="slider">
+        <ul class="slides">
+          <li>
+            <div class="row clearfix">
+              <div ><a href="#" class="active">Total Project  Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Design  Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Construction Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Project Control  System</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Facility Management</a></div>
+              <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+              <div><a href="#">Safety and  Quality</a></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src={% static "en/images/strip3.png" %} alt="img" />
+      </div>
+      <ul class="slides">
+        {% for banner in banners %}
+          <li>
+            <a href="{{ banner.link }}">
+              {% thumbnail banner.image "1072x405" crop="center" as im %}
+                <img src="{{ im.url }}"  alt="{{ banner.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
+              {% endthumbnail %}
+              <div class="slider-caption"><div class="page-width">{{ banner.title }}</div></div>
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+{% block content %}
+<div class="page_width innerpages clearfix">
+          <ul class="bread-crumb clearfix left">
+            {% show_breadcrumb %}
+          </ul>
+          {% comment %}
+            <div id="bread-drop">
+              <select name=""  class="dropdown" data-settings='{"cutOff":10}'>
+                <option value="">KGL Nursery</option>
+                <option value="">Name </option>
+                <option value="">Nationality</option>
+                <option value="">Present Address</option>
+                <option value="">KGL Nursery</option>
+                <option value="">Name </option>
+                <option value="">Nationality</option>
+                <option value="">Present Address</option>
+                <option value="">KGL Nursery</option>
+                <option value="">Name </option>
+                <option value="">Nationality</option>
+                <option value="">Present Address</option>
+              </select>
+            </div>
+
+          {% endcomment %}
+          <h1 id="page-title">News</h1>
+          <div class="accordion-wrapper">
+        <h3>January 2014</h3>
+        <div class="accordion-contents">
+          <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4><div class="img-effect new-img">
+                                    <img src={% static "en/images/listing_page_img1.png" %} class="item_exp_img right" alt="img"/>
+                                      <span class="img-layer"></span>
+                                  </div>
+
+                                <p>KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+                        <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                <p>KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+        </div>
+                <h3>February 2014</h3>
+        <div class="accordion-contents">
+          <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                  <div class="img-effect new-img">
+                                    <img src={% static "en/images/listing_page_img1.png" %} class="item_exp_img right" alt="img"/>
+                                      <span class="img-layer"></span>
+                                  </div>
+
+                                <p>KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+                        <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                <p>KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+        </div>
+                <h3>March 2014</h3>
+        <div class="accordion-contents">
+          <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                  <div class="img-effect new-img">
+                                    <img src={% static "en/images/listing_page_img1.png" %} class="item_exp_img right" alt="img"/>
+                                      <span class="img-layer"></span>
+                                  </div>
+
+                                <p>KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+        </div>
+                <h3>April 2014</h3>
+        <div class="accordion-contents">
+          <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                <div class="img-effect new-img">
+                                    <img src={% static "en/images/listing_page_img1.png" %} class="item_exp_img right" alt="img"/>
+                                      <span class="img-layer"></span>
+                                  </div>
+
+                               <p> KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+        </div>
+                <h3>May 2014</h3>
+        <div class="accordion-contents">
+          <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                <p>
+                                  <div class="img-effect new-img">
+                                    <img src={% static "en/images/listing_page_img1.png" %} class="item_exp_img right" alt="img"/>
+                                      <span class="img-layer"></span>
+                                  </div>
+
+                               <p> KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+        </div>
+                <h3>June 2014</h3>
+        <div class="accordion-contents">
+          <div class="item clearfix">
+                          <div class="date left">
+                              <span>14</span>
+                                <b>jan</b>
+                            </div>
+                            <div class="item_exp right">
+
+                              <h4>International consultant Faithful & Gould</h4>
+                                <p>
+                                  <div class="img-effect new-img">
+                                    <img src={% static "en/images/listing_page_img1.png" %} class="item_exp_img right" alt="img"/>
+                                      <span class="img-layer"></span>
+                                  </div>
+
+                               <p> KUD in association with international consultant Faithful & Gould signs contract with Ministry of Public Works, Kuwait for Project Management services for MPW Projects. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+
+                            </div>
+                        </div>
+        </div>
+
+
+                <div class="clearfix"></div>
+      </div>
+
+          <div class="text-center">
+       <input type="submit" class="btn" value="Load More">
+    </div>
+        </div>
+{% endblock %}

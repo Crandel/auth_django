@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'CareerInfo.title'
         db.add_column(u'careers_careerinfo', 'title',
-                      self.gf('django.db.models.fields.CharField')(default='SITCO', max_length=255),
+                      self.gf('django.db.models.fields.CharField')(default='kud', max_length=255),
                       keep_default=False)
 
 

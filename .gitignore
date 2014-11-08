@@ -3,4 +3,4 @@ media/
 *.log
 nbproject/
 *.svn
-SITCO/local_settings.py
+kud/local_settings.py
