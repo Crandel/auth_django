@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n staticfiles %}
 <div class="logo"><a href="/kud-admin/">
-        <img src="/static/images/rsz_logo.png" alt=""></a></div>
+        <img src={% static "en/images/logo.png" %} alt=""></a></div>
 <h1 id="site-name">{% trans 'KUD administration' %}</h1>
