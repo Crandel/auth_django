@@ -37,7 +37,9 @@ register.assignment_tag(get_logo)
 
 
 def cms_navigation():
-    cms_pages = Page.objects.filter(in_navigation = True)[4:5]
+    cms_pages = Page.objects.filter(in_navigation=True, parent_id__isnull=True).distinct()
+    for page in cms_pages:
+        print page.pk
     return cms_pages
 
 register.assignment_tag(cms_navigation)

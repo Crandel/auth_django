@@ -1,5 +1,6 @@
-{% load generaltags thumbnail i18n flatpages staticfiles %}
+{% load generaltags thumbnail i18n flatpages staticfiles menu_tags %}
 {% get_banners as banners %}
+{% cms_navigation as cms_pages %}
 <header class="bluebg">
     <div class="page_width">
       <div class="header-top clearfix">
@@ -26,13 +27,7 @@
       <div id="menu" class="clearfix">
       <div class="main-menu">
       <ul class="clearfix">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Our Services</a></li>
-      <li><a href="#">Portfolio</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Careers</a></li>
-      <li><a href="#">Contact Us</a></li>
+        {% show_menu 0 100 100 100  "menu/menu.html" %}
       </ul>
       </div>
       <div id="main-banner">

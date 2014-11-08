@@ -1,13 +1,14 @@
 {% load generaltags %}
 {% load flatpages i18n %}
 <footer class="bluebg">
+{% footerset as footer %}
     <div class="page_width clearfix">
-        <div class="copyright left">&copy;2014 KUD All Rights Reserved.</div>
+        <div class="copyright left">&copy;<script>document.write(new Date().getFullYear())</script> {{ footer.copyright }}</div>
         <div class="social_icons right">
-            <p>Get In Touch</p>
+            <p>{% trans "Get In Touch" %}</p>
             <ul class="clearfix">
-                <li><a href="#" class="twt"></a></li>
-                <li><a href="#" class="linkedin"></a></li>
+            {% if not footer.hide_twi %}<li><a href="{{ footer.twit_url }}" class="twt"></a></li>{% endif %}
+            {% if not footer.hide_lin %}<li><a href="{{ footer.lin_url }}" class="linkedin"></a></li>{% endif %}
             </ul>
         </div>
     </div>

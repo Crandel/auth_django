@@ -11,22 +11,13 @@ class FooterSettings(models.Model):
     """
     site = models.ForeignKey(Site,unique=True)
     copyright = models.CharField(_('Copy Right Text'), max_length=100,)
-    copy_year = models.CharField(_('Copy Right year'),max_length=100,default=date.today().year,editable=False)
-    face_icon = models.ImageField(_('Facebook Icon'),upload_to='social_icons/')
-    face_url = models.URLField(_('Facebook Url'))
-    hide_face = models.BooleanField(_('Hide facebook icon'))
-    twit_icon = models.ImageField(_('Twitter Icon'),upload_to='social_icons/')
     twit_url = models.URLField(_('Twitter Url'))
-    hide_twi = models.BooleanField(_('Hide twitter icon'))
-    insta_icon = models.ImageField(_('Instagram Icon'),upload_to='social_icons/')
-    insta_url = models.URLField(_('Instagram Url'))
-    hide_insta = models.BooleanField(_('Hide instagram icon'))
-    you_icon = models.ImageField(_('Youtube Icon'),upload_to='social_icons/')
-    you_url = models.URLField(_('Youtube Url'))
-    hide_you = models.BooleanField(_('Hide youtube icon'))
+    hide_twi = models.BooleanField(_('Hide twitter icon'), default=False)
+    lin_url = models.URLField(_('LinkedIn Url'), null=True)
+    hide_lin = models.BooleanField(_('Hide LinkedIn icon'), default=False)
 
     def __unicode__(self):
-        return self.copy_year
+        return self.copyright
 
     class Meta:
         verbose_name = _('Footer Setting')
