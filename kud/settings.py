@@ -187,7 +187,14 @@ RECAPTCHA_USE_SSL = True
 
 
 CMS_TEMPLATES = (
-    ('contactus/contact.html', 'Contact Us'),
+    ('home.html', 'Home'),
+    ('aboutus.html', 'About US'),
+    ('ourservices.html', 'Our Services'),
+    ('portfolio.html', 'Portfolio'),
+    ('portfolio_detail.html', 'Portfolio Detail'),
+    ('career_page.html', 'Career PAge'),
+    ('news.html', 'News'),
+    ('contuct_us.html', 'Contact Us'),
     ('subsidiaries/subsidiaries.html', 'Subsidiaries'),
 
 )

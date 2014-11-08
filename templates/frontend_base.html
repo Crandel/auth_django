@@ -17,6 +17,9 @@
 
           <script type="text/javascript" src={% static "ar/js/jquery-1.8.2.min.js" %}></script>
           <script type="text/javascript" src={% static "ar/js/jquery.flexslider.js" %}></script>
+          <script src={% static "en/js/jquery.easydropdown.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jcarousellite.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jquery.jscrollpane.js" %}></script>
           <script type="text/javascript" src={% static "ar/js/custom.js" %}></script>
         {% else %}
           <link href={% static "en/css/style.css" %} rel="stylesheet" type="text/css" />
@@ -24,6 +27,9 @@
           <link media="only screen and (min-device-width: 320px) and (max-device-width: 480px)" href={% static "en/css/responsive.css" %} type= "text/css" rel="stylesheet">
 
           <script type="text/javascript" src={% static "en/js/jquery-1.8.2.min.js" %}></script>
+          <script src={% static "en/js/jquery.easydropdown.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jcarousellite.js" %}></script>
+          <script type="text/javascript" src={% static "en/js/jquery.jscrollpane.js" %}></script>
           <script type="text/javascript" src={% static "en/js/jquery.flexslider.js" %}></script>
           <script type="text/javascript" src={% static "en/js/custom.js" %}></script>
         {% endif %}
@@ -59,17 +65,9 @@
             {% block header %}
               {% include 'common/header.html' %}
             {% endblock header %}
-            {% block page_banner %}
+            {% block content %}
+
             {% endblock %}
-            <section id="contents">
-                <div class="page-width">
-                    {% block content %}
-
-                    {% endblock %}
-
-                </div>
-
-            </section>
             {% include 'common/footer.html' %}
           </div>
         </div>
