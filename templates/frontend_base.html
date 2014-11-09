@@ -33,30 +33,31 @@
           <script type="text/javascript" src={% static "en/js/jquery.flexslider.js" %}></script>
           <script type="text/javascript" src={% static "en/js/custom.js" %}></script>
         {% endif %}
-        <script type="text/javascript">
-          $(document).ready(function(e) {
-            $("#main-banner").flexslider({
-              controlNav:true,
-              directionNav:false,
-              slideshow: true
-            });
-              $(".searchbox input").on("keyup", function(){
-              $(".searchbox small#end-search").addClass("show");
-            });
-
-             $(".searchbox small#end-search a").on("click", function(){
-                $(".searchbox input").val('');
-                $(".searchbox small#end-search").removeClass("show");
+          <script type="text/javascript">
+            $(document).ready(function(e) {
+              $("#main-banner").flexslider({
+                controlNav:true,
+                directionNav:false,
+                slideshow: true
               });
-          });
+                $(".searchbox input").on("keyup", function(){
+                $(".searchbox small#end-search").addClass("show");
+              });
 
-        </script>
+               $(".searchbox small#end-search a").on("click", function(){
+                  $(".searchbox input").val('');
+                  $(".searchbox small#end-search").removeClass("show");
+                });
+            });
+
+          </script>
         {% block extra_css %}
         {% endblock %}
         {% render_block "css" %}
         {% render_block "js" %}
 
         {% block extra_js %}
+
         {% endblock %}
     </head>
     <body>{% cms_toolbar %}
