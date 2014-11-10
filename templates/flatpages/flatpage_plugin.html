@@ -5,11 +5,9 @@
 </div>
 {% if object.is_signature %}
     <div class="signature">
-        {% thumbnail object.signature_image "112x79" crop="center" as im %}
-            <img src="{{ im.url }}" alt="img" width="{{ im.width }}" height="{{ im.height }}" />
-        {% endthumbnail %}
+        <img src="{{ object.signature_image.url }}" alt="img" width="112" height="79" />
         {% if object.chairman|length %}
-            <div class="name"> {% trans "Cordially" %},<span>{{object.chairman}}</span> </div>
+            <div class="name"> {% trans "Cordially" %},<span>{{ object.chairman }}</span> </div>
         {% endif %}
     </div>
 {% endif %}
