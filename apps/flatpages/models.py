@@ -5,6 +5,10 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import get_script_prefix
 from django.utils.translation import ugettext_lazy as _
 
+from cms.models.pluginmodel import CMSPlugin
+from ckeditor.fields import RichTextField
+
+
 class FlatPage(models.Model):
     url = models.CharField(_('URL'), max_length=100, db_index=True)
     title = models.CharField(_('title'), max_length=200)
@@ -36,3 +40,21 @@ class FlatPage(models.Model):
     def get_absolute_url(self):
         # Handle script prefix manually because we bypass reverse()
         return iri_to_uri(get_script_prefix().rstrip('/') + self.url)
+
+
+class HomeFlatPagePluginModel(CMSPlugin):
+    """
+      Model for about-us page plugin
+    """
+    title = models.CharField(_('Title'), max_length=250, null=True, blank=True)
+    details = RichTextField(_('Details'))
+    is_signature = models.BooleanField(_('Signature'), default=False)
+    signature_image = models.ImageField(_('Signature Image'), upload_to='signature_image/', blank=True)
+    chairman = models.CharField(_('Chairman'), max_length=255, blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('About')
+        verbose_name_plural = _('About')
