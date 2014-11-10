@@ -1,0 +1,15 @@
+{% load thumbnail i18n %}
+<h1 id="page-title">{{ object.title }}</h1>
+<div>
+    {{ object.details|safe }}
+</div>
+{% if object.is_signature %}
+    <div class="signature">
+        {% thumbnail object.signature_image "112x79" crop="center" as im %}
+            <img src="{{ im.url }}" alt="img" width="{{ im.width }}" height="{{ im.height }}" />
+        {% endthumbnail %}
+        {% if object.chairman|length %}
+            <div class="name"> {% trans "Cordially" %},<span>{{object.chairman}}</span> </div>
+        {% endif %}
+    </div>
+{% endif %}
