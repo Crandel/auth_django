@@ -1,13 +1,4 @@
-{% load thumbnail i18n %}
 <h1 id="page-title">{{ object.title }}</h1>
-<div>
+<div class="services">
     {{ object.details|safe }}
 </div>
-{% if object.is_signature %}
-    <div class="signature">
-        <img src="{{ object.signature_image.url }}" alt="img" width="112" height="79" />
-        {% if object.chairman|length %}
-            <div class="name"> {% trans "Cordially" %},<span>{{ object.chairman }}</span> </div>
-        {% endif %}
-    </div>
-{% endif %}
