@@ -56,5 +56,20 @@ class HomeFlatPagePluginModel(CMSPlugin):
         return self.title
 
     class Meta:
-        verbose_name = _('About')
-        verbose_name_plural = _('About')
+        verbose_name = _('Home Flat page plugin')
+        verbose_name_plural = _('Home Flat pages plugin')
+
+
+class FlatPagePluginModel(CMSPlugin):
+    """
+      Model for about-us page plugin
+    """
+    title = models.CharField(_('Title'), max_length=250, null=True, blank=True)
+    details = RichTextField(_('Details'))
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Flat page plugin')
+        verbose_name_plural = _('Flat pages plugin')

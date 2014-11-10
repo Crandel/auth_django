@@ -86,3 +86,79 @@ def partition(thelist, n):
         return [thelist]
     p = len(thelist) / n
     return [thelist[p*i:p*(i+1)] for i in range(n - 1)] + [thelist[p*(i+1):]]
+
+
+def calculate_submenu(children):
+    if children:
+        main_menu = list()
+        for page in children:
+            if page.selected:
+                main_menu.append({
+                    'page': page,
+                    'selected': True})
+                sub_menu = [{
+                    'page': page,
+                    'selected': True
+                }]
+                for pg in page.children:
+                    sub_menu.append({
+                        'page': pg,
+                        'selected': False})
+            else:
+                selected = False
+                if page.children:
+                    for pg in page.children:
+                        if pg.selected:
+                            selected = True
+                            break
+                if selected:
+                    sub_menu = [{
+                        'page': page,
+                        'selected': False
+                    }]
+                    for pg in page.children:
+                        sub_menu.append({
+                            'page': pg,
+                            'selected': pg.selected})
+                main_menu.append({
+                    'page': page,
+                    'selected': selected})
+        return {'main_menu': main_menu, 'sub_menu': sub_menu}
+    return None
+
+register.assignment_tag(calculate_submenu)
+
+
+def calculate_submenu_our(children):
+    if children:
+        main_menu = list()
+        for page in children:
+            if page.selected:
+                main_menu.append({
+                    'page': page,
+                    'selected': True})
+                sub_menu = []
+                for pg in page.children:
+                    sub_menu.append({
+                        'page': pg,
+                        'selected': False})
+            else:
+                selected = False
+                if page.children:
+                    for pg in page.children:
+                        if pg.selected:
+                            selected = True
+                            break
+                if selected:
+                    sub_menu = []
+                    for pg in page.children:
+                        sub_menu.append({
+                            'page': pg,
+                            'selected': pg.selected})
+                main_menu.append({
+                    'page': page,
+                    'selected': selected})
+        return {'main_menu': main_menu, 'sub_menu': sub_menu}
+    return None
+
+register.assignment_tag(calculate_submenu_our)
