@@ -157,7 +157,10 @@
                                   {{ form.details.errors }}
                               </li>
                               <li></li>
-                              <li>{{ form.captcha }} {{ form.captcha.errors }}</li>
+                              <li>
+                                {{ form.captcha }}
+                                {{ form.captcha.errors }}
+                              </li>
                               <li></li>
                               <li><input type="submit" name="contact_submit" class="btn" value="{% trans 'Submit' %}"></li>
                                      </ul>
