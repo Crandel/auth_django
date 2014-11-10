@@ -1,0 +1,30 @@
+{% load menu_tags staticfiles generaltags %}
+<div id="menu" class="clearfix">
+      <div class="main-menu">
+
+{% calculate_submenu_our children as menu %}
+{% if children %}
+      <ul class="clearfix">
+            {% for menu in menu.main_menu %}
+
+              <li {% if menu.selected %}class="selected"{% endif %}><a href="{{ menu.page.get_absolute_url }}">{{ menu.page.get_menu_title }}</a></li>
+            {% endfor %}
+    </ul>
+      </div>
+      <div class="header-nav one-row">
+      <div class="slider">
+        <ul class="slides">
+          <li>
+            <div class="row clearfix">
+              {% for menu in menu.sub_menu %}
+                  <div><a href="{{ menu.page.get_absolute_url }}" {% if menu.selected %}class="active"{% endif %}>{{ menu.page.get_menu_title }}</a></div>
+                  {% if not forloop.last %}
+                      <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+                  {% endif %}
+              {% endfor %}
+            </div>
+            </li>
+        </ul>
+{% endif %}
+    </div>
+</div>
