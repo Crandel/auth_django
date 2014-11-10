@@ -16,7 +16,7 @@
 		this.down = false,
 		this.inFocus = false,
 		this.disabled = false,
-		this.cutOff = false,
+		this.cutOff = true,
 		this.hasLabel = false,
 		this.keyboardMode = false,
 		this.nativeTouch = true,
