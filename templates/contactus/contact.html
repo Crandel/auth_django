@@ -1,52 +1,174 @@
 {% extends "frontend_base.html" %}
-{% load thumbnail i18n l10n %}
-{% load cms_tags sekizai_tags %}
-{% load generaltags %}
+{% load thumbnail i18n l10n staticfiles menu_tags cms_tags sekizai_tags generaltags %}
 {% block title %}{% trans 'Contact Us' %}{% endblock %}
-{% block extra_css %}
-<link rel="stylesheet" href="/static/css/lightbox.css" media="screen"/>
-{% endblock %}
+
 {% block extra_js %}
-<script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
-<script>
-    $(document).ready(function(e) {
-        $("#contact-form").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone:
-                    {
-                    required: true,
-                    number: true
-                }
+    <script src={% static "en/js/validate.js" %}></script>
+    <script type="text/javascript">
+        $(document).ready(function(e) {
 
-            },
-            messages: {
-                name: "Please enter your Name",
-                telephone: "Please enter Phone Number",
-                email: "Please enter a valid email address"
+          $("#contact-form").validate({
+                 rules: {
+                    email: {
+                         required: true,
+                         email: true
+                     },
+             phone:
+             {
+               required: true,
+               number: true
+             } ,
+             name:
+             {
+               required: true,
+               text: true
+             } ,
+              company:
+             {
+               required: true,
+               text: true
+             } ,
+              subject:
+             {
+               required: true,
+               text: true
+             } ,
+              detail:
+             {
+               required: true,
+               text: true
+             },
+              applied:
+             {
+               required: true,
+               text: true
+             }
 
-            },
-            submitHandler: function(form) {
-                form.submit();
-            }
+
+                 },
+                 messages: {
+                     name: "Please enter your Name",
+                     phone: "Please enter Phone Number",
+                     date: "Please select Date",
+                     message: "Please enter Mesage",
+                     email: "Please enter a valid email address",
+                     subject: "Please enter Subject",
+                     detail: "Please enter Detail",
+                     company: "Please enter Company Name",
+                     applied: "Please enter Applied Position",
+
+                 },
+                 submitHandler: function(form) {
+                     form.submit();
+                 }
+             });
         });
-    });
-</script>
+    </script>
 {% endblock %}
 
-{% block page_banner %}
-{% get_banners as cont_banner %}
-<section class="inner-banner">
-    {% thumbnail cont_banner.cont_page '1351x211' crop='center' as thumb %}
-    <img src="{{ thumb.url }}" alt="Contact-banner">
-    {% endthumbnail %}
-</section>
+{% block header %}
+    <header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+              <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+          {% show_menu 0 100 100 100  "menu/menu.html" %}
+      </ul>
+      </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src={% static "en/images/strip3.png" %} alt="img" />
+      </div>
+        <ul class="slides">
+            <li>
+                <iframe src="https://maps.google.com/maps?q={{ google_cordinates.lati|unlocalize}},{{ google_cordinates.long|unlocalize}}&hl=es;z=14&amp;output=embed" width="1072px" height="405px" frameborder="0" style="border:0"></iframe>
+            </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+{% block content %}
+<div class="page_width innerpages clearfix">
+    <ul class="bread-crumb clearfix left">
+      {% show_breadcrumb 0 "breadcrumb.html" %}
+    </ul>
+     <h1 id="page-title">{% trans "Contact Us" %}</h1>
+     <div class="contect clearfix">
+            <div class="addresses left">
+                {% placeholder "contactaddress" %}
+            </div>
+            <div class="feedback left">
+                <h4>{% trans "Feedback Form" %}</h4>
+                <p>{% trans "Let us know how we can serve you more efficiently. Your response is very crucial to us." %}</p>
+                <form id="contact-form" method="post" action=".">
+                  {% csrf_token %}
+                  <ul class="contect_us left">
+                              <li>{% trans "Name" %}</li>
+                              <li>
+                                  {{ form.name }}
+                                  {{ form.name.errors }}
+                              </li>
+                              <li>{% trans "Company Name" %}</li>
+                              <li>
+                                  {{ form.company_name }}
+                                  {{ form.company_name.errors }}
+                              </li>
+                              <li>{% trans "Email" %}</li>
+                              <li>
+                                  {{ form.email }}
+                                  {{ form.email.errors }}
+                              </li>
+                              <li>{% trans "Telephone" %}</li>
+                              <li>
+                                  {{ form.telephone }}
+                                  {{ form.telephone.errors }}
+                              </li>
+                              <li>{% trans "Subject" %}</li>
+                              <li>
+                                  {{ form.subject }}
+                                  {{ form.subject.errors }}
+                              </li>
+                              <li>{% trans "Details" %}</li>
+                              <li>
+                                  {{ form.details }}
+                                  {{ form.details.errors }}
+                              </li>
+                              <li></li>
+                              <li>{{ form.captcha }} {{ form.captcha.errors }}</li>
+                              <li></li>
+                              <li><input type="submit" name="contact_submit" class="btn" value="{% trans 'Submit' %}"></li>
+                                     </ul>
+                </form>
+            </div>
+     </div>
+
+ </div>
 {% endblock %}
-		{% block content %}
+{% comment %}
+
 <div class="inner-contents-wrapper">
     {% if messages %}
     <ul class="messages">
@@ -69,7 +191,7 @@
             <iframe src="https://maps.google.com/maps?q={{ google_cordinates.lati|unlocalize}},{{ google_cordinates.long|unlocalize}}&hl=es;z=14&amp;output=embed" width="4008px" height="290px" frameborder="0" style="border:0"></iframe>
             </div>
             {% placeholder "contactaddress" %}
-        </div>        
+        </div>
         <div class="contact left contact-form">
             <p>{% trans 'If you have any enquires, please feel free to contact us by filling the form below.' %}</p>
             <form id="contact-form" action="." method="post">{% csrf_token %}
@@ -102,5 +224,5 @@
         </div>
     </div>
 </div>
-			{% endblock %}
+{% endcomment %}
 
