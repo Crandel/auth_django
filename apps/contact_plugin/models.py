@@ -1,18 +1,22 @@
+from __future__ import unicode_literals
 from cms.models.pluginmodel import CMSPlugin
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+
 class ContactAddress(CMSPlugin):
     """
     Model for getting kud address details in contact page.
     """
-    name = models.CharField(_('Company name'),max_length=255,)
-    line1 = models.CharField(_('Addree Line1'),max_length=255,)
-    line2 = models.CharField(_('P.O Box'),max_length=100,)
-    city = models.CharField(_('City'),max_length=100,)
-    country = models.CharField(_('Country name'),max_length=100,)
-    tele = models.CharField(_('Telephone number'),max_length=100,)
-    fax = models.CharField(_('Fax'),max_length=100,)
-    email = models.EmailField(_('Email ID'),max_length=100,)
-    web = models.CharField(_('Website'),max_length=100,)
+    # name = models.CharField(_('Company name'),max_length=255,)
+    # line1 = models.CharField(_('Addree Line1'),max_length=255,)
+    # line2 = models.CharField(_('P.O Box'),max_length=100,)
+    # city = models.CharField(_('City'),max_length=100,)
+    # country = models.CharField(_('Country name'),max_length=100,)
+    head_office = models.TextField(_('Head Office'), null=True)
+    postal_address = models.CharField(_('Adress'), null=True, max_length=1000)
+    tele = models.CharField(_('Telephone number'), max_length=100)
+    fax = models.CharField(_('Fax'), max_length=100)
+    email = models.EmailField(_('Email ID'), max_length=100)
+    # web = models.CharField(_('Website'),max_length=100,)

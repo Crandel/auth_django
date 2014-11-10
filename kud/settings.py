@@ -194,7 +194,7 @@ CMS_TEMPLATES = (
     ('portfolio_detail.html', 'Portfolio Detail'),
     ('career_page.html', 'Career PAge'),
     ('news.html', 'News'),
-    ('contuct_us.html', 'Contact Us'),
+    ('contactus/contact.html', 'Contact Us'),
     ('subsidiaries/subsidiaries.html', 'Subsidiaries'),
 
 )

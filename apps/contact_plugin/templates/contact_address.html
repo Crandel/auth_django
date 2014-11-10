@@ -1,12 +1,14 @@
 {% load cms_tags sekizai_tags i18n %}
 <div class="address">
-                                <p>{{ instance.name }}</p>
-                                <p>{{ instance.line1 }}</p>
-                                <p>{{ instance.line2 }}</p>
-                                <p>{{ instance.city }}</p>
-                                <p>{{ instance.country }} </p>
-                                <p>{% trans 'Tel.' %}: {{ instance.tele }}</p>
-                                <p>{% trans 'Fax' %}: {{ instance.fax }}</p>
-                                <p>{% trans 'Email' %}: {{ instance.email }}</p>
-                                <p>{% trans 'Website' %}: {{ instance.web }}</p>
-                            </div>
+    <h4>{% trans "Head Office" %}</h4>
+    <p>{{ instance.head_office }}</p>
+</div>
+<div class="address">
+    <h4>{% trans "Postal Address" %}</h4>
+    <p>{{ instance.postal_address }}</p>
+    <ul>
+        <li>{% trans "Tel." %} : {{ instance.tele }}</li>
+        <li>{% trans 'Fax' %} : {{ instance.fax }}</li>
+        <li>{% trans 'Email' %} : <a href="mailto:{{ instance.email }}"> {{ instance.email }} </a></li>
+    </ul>
+</div>

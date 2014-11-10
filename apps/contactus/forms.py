@@ -19,9 +19,11 @@ class ContactUsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ContactUsForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['class'] = 'input required'
-        self.fields['enquiry'].widget.attrs['class'] = 'ta'
+        self.fields['company_name'].widget.attrs['class'] = 'input required'
         self.fields['email'].widget.attrs['class'] = 'input required'
         self.fields['telephone'].widget.attrs['class'] = 'input required'
+        self.fields['subject'].widget.attrs['class'] = 'input required'
+        self.fields['details'].widget.attrs['class'] = 'bdr-none requried'
 
     def clean_telephone(self):
         tele = self.cleaned_data['telephone']
@@ -34,22 +36,35 @@ class ContactUsForm(forms.ModelForm):
     def save(self):
         instance = super(ContactUsForm, self).save(commit=False)
         current_site = Site.objects.get_current()
-        instance.site =  current_site
-        instance.date = datetime.datetime.now()
+        instance.site = current_site
         instance.save()
 
     def send_mail(self):
         current_site = Site.objects.get_current()
         admin_emails = AdminEmails.objects.get(site=current_site)
-        context={}
+        context = {}
         name = self.cleaned_data['name']
+        company_name = self.cleaned_data['company_name']
         email = self.cleaned_data['email']
-        enquiry = self.cleaned_data['enquiry']
         tele = self.cleaned_data['telephone']
-        subject= 'Thanks for contacting us!'
-        subject_admin= 'Contact details via %s'%(current_site.name)
-        context = {'name':name,'email':email,'enquiry':enquiry,'telephone':tele,'date':datetime.datetime.now(),'site':current_site,}
-        send_generic_mail(template ="contactus/contact_email_to_user.html",context_dict=context,subject=subject,to=email)
-        send_generic_mail(template ="contactus/contact_email_to_admin.html",context_dict=context,subject=subject_admin,to=admin_emails.con_email)
+        subject = self.cleaned_data['subject']
+        details = self.cleaned_data['details']
+        subject = 'Thanks for contacting us!'
+        subject_admin = 'Contact details via %s' % (current_site.name)
+        context = {
+            'name': name,
+            'company_name': company_name,
+            'email': email,
+            'subject': subject,
+            'telephone': tele,
+            'details': details,
+            'date': datetime.datetime.now(),
+            'site': current_site}
+        send_generic_mail(template="contactus/contact_email_to_user.html", context_dict=context, subject=subject, to=email)
+        send_generic_mail(
+            template="contactus/contact_email_to_admin.html",
+            context_dict=context,
+            subject=subject_admin,
+            to=admin_emails.con_email)
 
-       
+
