@@ -1,0 +1,152 @@
+{% extends "frontend_base.html" %}
+{% load thumbnail staticfiles menu_tags generaltags i18n %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block extra_css %}
+<link href={% static "en/css/dropdown.css" %} rel="stylesheet" type="text/css" />
+{% endblock extra_css %}
+{% block extra_js %}
+  <script src={% static "en/js/jquery.easydropdown.js" %}></script>
+  <script type="text/javascript">
+  $(document).ready(function(e) {
+    $("#main-banner").flexslider({controlNav:false, itemWidth: 357, animation: "slide", animationLoop: false,});
+    $(".header-nav .slider").flexslider({animation: "slide", controlNav: false, slideshow:false, animationSpeed:1500,});
+    $('#select_category').on('change', function(){
+      var value = $(this).val();
+      location.href = location.origin + value;
+    });
+  });
+</script>
+{% endblock %}
+{% block header %}
+{% get_banners as banners %}
+<header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+              <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+        {% show_menu 0 100 100 100  "menu/menu.html" %}
+      </ul>
+      </div>
+      <div class="header-nav one-row">
+      <div class="slider">
+        <ul class="slides" id="category_list">
+          {% for cat1 in category_menu %}
+            <li>
+              {% for cat2 in cat1 %}
+                <div class="row clearfix">
+                  {% for cat3 in cat2 %}
+                    <div><a href="{{ cat3.get_absolute_url }}" {% if cat3 = category %}class="active"{% endif %}>{{cat3.name}}</a></div>
+                    {% if not forloop.last %}
+                      <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                {% if forloop.first %}
+                  <div class="row middle"><div></div></div>
+                {% endif %}
+              {% endfor %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+      <div id="main-banner" class="links-carousel">
+      <div class="strip1"><img src={% static "en/images/strip3.png" %} alt="img" /></div>
+      <ul class="slides">
+        {% if object.images.count %}
+          {% for image in object.images.all %}
+            <li>
+            {% thumbnail image "1072x321" crop="center" as im %}
+              <img src="{{ im.url }}" alt="{{ im.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
+            {% endthumbnail %}
+            </li>
+          {% endfor %}
+        {% else %}
+          <li><img src={% static "en/images/banners/img4.jpg" %} alt="img" /></li>
+        {% endif %}
+      </ul>
+    </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+{% block content %}
+<div class="page_width innerpages clearfix">
+    <ul class="bread-crumb clearfix left">
+        {% show_breadcrumb 0 "breadcrumb.html" %}
+        <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
+      </ul>
+      <div id="bread-drop">
+        <form action="">
+          <select name=""  class="dropdown"  data-settings='{"cutOff":10}' id="select_category">
+            {% for project in projects %}
+              <option value="{{ project.get_absolute_url }}" {% if project = object %}selected="selected"{% endif %}>
+                {% if project.short_name|length %}
+                  {{project.short_name}}
+                {% else %}
+                  {{project.project}}
+                {% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
+     <h1 id="page-title">{{ object.project }}</h1>
+     <div class="table-view project-detail-table">
+        <div class="table-head">
+            <div class="table-row">
+              <div class="td th">{% trans "Project" %}</div>
+              <div class="td th">{{object.project}}</div>
+            </div>
+        </div>
+        <div class="table-body">
+          <div class="table-row">
+            <div class="td">{% trans "Client" %}</div>
+            <div class="td">{{object.client}}</div>
+          </div>
+        </div>
+        <div class="table-head">
+            <div class="table-row">
+              <div class="td th">{% trans "Location" %}</div>
+              <div class="td th">{{object.location}}</div>
+            </div>
+        </div>
+        <div class="table-body">
+          <div class="table-row">
+            <div class="td">{% trans "Scope" %}</div>
+            <div class="td">{{object.scope}}</div>
+          </div>
+        </div>
+        <div class="table-head">
+            <div class="table-row">
+              <div class="td th">{% trans "Description" %}</div>
+              <div class="td th">{{object.description}}</div>
+            </div>
+        </div>
+      </div>
+      <div class="text-center">
+       <input type="submit" class="btn" value="Back" onclick="history.go(-1);">
+    </div>
+ </div>
+{% endblock %}

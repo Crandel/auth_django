@@ -1,0 +1,18 @@
+{% load thumbnail i18n staticfiles %}
+{% for project in projects %}
+    <div class="item left">
+      <a href="{{ project.get_absolute_url }}">
+        {% if project.images.count %}
+          {% with project.images.all.0 as image %}
+            {% thumbnail image "270x174" crop="center" as im %}
+              <img src="{{im.url}}" alt="{{ im.title }}" width="270" height="174" />
+            {% endthumbnail %}
+          {% endwith %}
+        {% else %}
+            <img src={% static "en/images/porrfolio_img1.png" %} alt="img" />
+        {% endif %}
+        <span class="img-layer"></span>
+      </a>
+      <p><a href="{{ project.get_absolute_url }}">{{ project.project }}</a></p>
+    </div>
+{% endfor %}
