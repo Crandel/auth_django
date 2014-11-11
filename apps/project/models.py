@@ -31,7 +31,7 @@ class Project(models.Model):
         verbose_name_plural = _('Projects')
 
 
-class Images(models.Model):
+class Image(models.Model):
 
     project = models.ForeignKey(Project, verbose_name=_('Project'), related_name='images')
     title = models.CharField(_('Title'), max_length=255, blank=True, null=True)
