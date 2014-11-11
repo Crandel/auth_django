@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 from autoslug import AutoSlugField
 
 
@@ -16,6 +17,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('proj_list', kwargs={'category': self.slug})
 
 
 class Project(models.Model):
@@ -42,7 +46,6 @@ class Image(models.Model):
     project = models.ForeignKey(Project, verbose_name=_('Project'), related_name='images')
     title = models.CharField(_('Title'), max_length=255, blank=True, null=True)
     image = models.ImageField(_('Image'), upload_to='project/', max_length=255)
-    publish = models.BooleanField(_('Publish'), default=True)
 
     class Meta:
         verbose_name = _('Project Image')
