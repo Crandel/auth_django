@@ -3,6 +3,15 @@
 {% block title %}{% trans 'Home' %}{% endblock %}
 {% block extra_js %}
   <script type="text/javascript">
+    $(document).ready(function(e) {
+        $("#main-banner").flexslider({
+                controlNav:true,
+                directionNav:false,
+                slideshow: true
+              });
+    });
+    </script>
+  <script type="text/javascript">
   $(document).ready(function(e) {
     $(".header-nav .slider").flexslider({animation: "slide", controlNav: false, slideshow:false, animationSpeed:1500,});
   });

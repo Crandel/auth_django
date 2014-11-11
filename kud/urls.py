@@ -5,10 +5,23 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
+urlpatterns = patterns('',
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+    {'document_root': settings.MEDIA_ROOT,}),
+    url(r'', include('django.contrib.staticfiles.urls')),
+
+)
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+    url(r'', include('django.contrib.staticfiles.urls')),
+)
 
 admin.autodiscover()
 
-urlpatterns = i18n_patterns('',
+urlpatterns += i18n_patterns('',
     url(r'^', include('apps.home.urls')),
     url(r'^kud-admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
@@ -23,19 +36,6 @@ urlpatterns = i18n_patterns('',
     (r'^robots\.txt$', include('robots.urls')),
     url(r'^pages', include('django.contrib.flatpages.urls')),
     url(r'^', include('cms.urls')),
-)
-urlpatterns += patterns('',
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-    {'document_root': settings.MEDIA_ROOT,}),
-    url(r'', include('django.contrib.staticfiles.urls')),
-
-)
-
-if settings.DEBUG:
-    urlpatterns += patterns('',
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-    url(r'', include('django.contrib.staticfiles.urls')),
 )
 
 

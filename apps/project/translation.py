@@ -10,7 +10,7 @@ translator.register(Category, CategoryTranslationOptions)
 
 
 class ProjectTranslationOptions(TranslationOptions):
-    fields = ('project', 'client', 'location', 'scope', 'description')
+    fields = ('project', 'client', 'location', 'scope', 'description', 'short_name')
 
 translator.register(Project, ProjectTranslationOptions)
 

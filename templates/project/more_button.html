@@ -1,0 +1,5 @@
+{% load i18n %}
+{% url 'load_more_proj' category=category as more%}
+{% if load_more %}
+    <button class="btn"  onclick="load_more({{ page }}, '{{ more }}')">{% trans "Load More" %}</button>
+{% endif %}

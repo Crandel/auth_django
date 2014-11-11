@@ -26,6 +26,7 @@ class Project(models.Model):
 
     project = models.CharField(_('Project'), max_length=255)
     slug = AutoSlugField(populate_from='project', unique=True)
+    short_name = models.CharField(_('Short name'), max_length=255, null=True)
     category = models.ForeignKey(Category, verbose_name=_('category'), related_name='projects')
     client = models.CharField(_('Client'), max_length=255)
     location = models.CharField(_('Location'), max_length=255)
@@ -40,11 +41,14 @@ class Project(models.Model):
     def __str__(self):
         return self.project
 
+    def get_absolute_url(self):
+        return reverse('proj_detail', kwargs={'category': self.category.slug, 'slug': self.slug})
+
 
 class Image(models.Model):
 
     project = models.ForeignKey(Project, verbose_name=_('Project'), related_name='images')
-    title = models.CharField(_('Title'), max_length=255, blank=True, null=True)
+    title = models.CharField(_('Title'), max_length=255, null=True)
     image = models.ImageField(_('Image'), upload_to='project/', max_length=255)
 
     class Meta:
