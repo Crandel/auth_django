@@ -9,7 +9,7 @@ from apps.project.models import Category, Project, Image
 
 class CategoryAdmin(TranslationAdmin):
 
-    list_display = ('name', 'slug', 'order')
+    list_display = ('name', 'admin_thumbnail', 'slug', 'order')
     list_editable = ('order',)
 
 admin.site.register(Category, CategoryAdmin)

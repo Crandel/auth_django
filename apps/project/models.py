@@ -8,6 +8,7 @@ from autoslug import AutoSlugField
 class Category(models.Model):
     name = models.CharField(_('Name'), max_length=255)
     slug = AutoSlugField(populate_from='name', unique=True)
+    image = models.ImageField(_('Image'), upload_to='category/', max_length=255, null=True)
     order = models.PositiveSmallIntegerField(_('Ordering'), default=1)
 
     class Meta:
@@ -20,6 +21,11 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('proj_list', kwargs={'category': self.slug})
+
+    def admin_thumbnail(self):
+        return u'<img src="%s" width= "50" height="50"/>' % (self.image.url)
+    admin_thumbnail.short_description = 'Thumbnail'
+    admin_thumbnail.allow_tags = True
 
 
 class Project(models.Model):
@@ -49,7 +55,7 @@ class Image(models.Model):
 
     project = models.ForeignKey(Project, verbose_name=_('Project'), related_name='images')
     title = models.CharField(_('Title'), max_length=255, null=True)
-    image = models.ImageField(_('Image'), upload_to='project/', max_length=255)
+    image = models.ImageField(verbose_name=_('Image'), upload_to='project/', max_length=255)
 
     class Meta:
         verbose_name = _('Project Image')
