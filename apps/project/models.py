@@ -14,6 +14,9 @@ class Category(models.Model):
         verbose_name_plural = _('Categories')
         ordering = ('order',)
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
 
@@ -30,6 +33,9 @@ class Project(models.Model):
         verbose_name = _('Project')
         verbose_name_plural = _('Projects')
 
+    def __str__(self):
+        return self.project
+
 
 class Image(models.Model):
 
@@ -41,3 +47,6 @@ class Image(models.Model):
     class Meta:
         verbose_name = _('Project Image')
         verbose_name_plural = _('Project Images')
+
+    def __str__(self):
+        return self.title

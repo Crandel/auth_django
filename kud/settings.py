@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'apps.contactus',
     'apps.contact_plugin',
     'apps.flatpages',
+    'apps.project',
     'django.contrib.flatpages',
     'apps.newsevents',
     'apps.careers',
