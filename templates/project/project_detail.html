@@ -77,7 +77,7 @@
         {% if object.images.count %}
           {% for image in object.images.all %}
             <li>
-            {% thumbnail image "1072x321" crop="center" as im %}
+            {% thumbnail image.image "1072x321" crop="center" as im %}
               <img src="{{ im.url }}" alt="{{ im.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
             {% endthumbnail %}
             </li>
@@ -96,6 +96,7 @@
     <ul class="bread-crumb clearfix left">
         {% show_breadcrumb 0 "breadcrumb.html" %}
         <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
+        <li>{{object.project}}</li>
       </ul>
       <div id="bread-drop">
         <form action="">

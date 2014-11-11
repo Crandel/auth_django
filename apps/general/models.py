@@ -100,3 +100,8 @@ class BannerImages(models.Model):
     @classmethod
     def get_published_banners(cls):
         return cls.objects.filter(published=True)
+
+    def admin_thumbnail(self):
+        return u'<img src="%s" width= "50" height="50"/>' % (self.image.url)
+    admin_thumbnail.short_description = 'Thumbnail'
+    admin_thumbnail.allow_tags = True

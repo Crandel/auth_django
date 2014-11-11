@@ -1,6 +1,6 @@
 {% extends "frontend_base.html" %}
-{% load i18n thumbnail staticfiles menu_tags generaltags %}
-{% block title %}{{ category.name }}{% endblock %}
+{% load i18n thumbnail staticfiles menu_tags generaltags cms_tags %}
+{% block title %}{% page_attribute "page_title" %}{% endblock %}
 {% block extra_css %}
 <link href={% static "en/css/dropdown.css" %} rel="stylesheet" type="text/css" />
 {% endblock extra_css %}
@@ -25,7 +25,7 @@
   });
   function load_more(page, url){
     $.get(url, {page: page}, function(data){
-      $("#projects").append(data.items);
+      $("#portfolio").append(data.items);
       $("#load_more").html(data.more)
     })
   }
@@ -70,7 +70,7 @@
               {% for cat2 in cat1 %}
                 <div class="row clearfix">
                   {% for cat3 in cat2 %}
-                    <div><a href="{{ cat3.get_absolute_url }}" {% if cat3 = category %}class="active"{% endif %}>{{cat3.name}}</a></div>
+                    <div><a href="{{ cat3.get_absolute_url }}">{{cat3.name}}</a></div>
                     {% if not forloop.last %}
                       <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
                     {% endif %}
@@ -111,49 +111,32 @@
 {% block content %}
 <div class="page_width innerpages clearfix">
     <ul class="bread-crumb clearfix left">
-        {% show_breadcrumb 0 "breadcrumb.html" %}
-        <li>{{category.name}}</li>
-      </ul>
-      <div id="bread-drop">
-        <form action="">
-          <select name=""  class="dropdown"  data-settings='{"cutOff":10}' id="select_category">
-            {% for cat in categories %}
-              <option value="{{ cat.get_absolute_url }}" {% if cat = category %}selected="selected"{% endif %}>{{cat.name}}</option>
-            {% endfor %}
-          </select>
-        </form>
-      </div>
-     <h1 id="page-title">{{category.name}}</h1>
-     <div class="item_list clearfix" id="projects">
-        {% if not projects|length %}
+      {% show_breadcrumb 0 "breadcrumb_act.html" %}
+    </ul>
+     <h1 id="page-title">{% page_attribute "page_title" %}</h1>
+     <div class="item_list clearfix" id="portfolio">
+      {% if not categories|length %}
           <center>
-            <h3>{% trans "Empty category" %}</h3>
+            <h3>{% trans "Empty content" %}</h3>
           </center>
-        {% endif %}
-        {% for project in projects %}
-          <div class="item left">
-              <a href="{{ project.get_absolute_url }}">
-                {% if project.images.count %}
-                  {% with project.images.all.0.image as image %}
-                    {% thumbnail image "270x174" crop="center" as im %}
-                      <img src="{{im.url}}" alt="{{ im.title }}" width="270" height="174" />
-                    {% endthumbnail %}
-                  {% endwith %}
-                {% else %}
-                    <img src={% static "en/images/porrfolio_img1.png" %} alt="img" />
-                {% endif %}
-                <span class="img-layer"></span>
-              </a>
-              <p><a href="{{ project.get_absolute_url }}">{{ project.project }}</a></p>
-          </div>
-        {% endfor %}
+      {% endif %}
+      {% for category in categories %}
+        <div class="item left">
+          <a href="{{ category.get_absolute_url }}">
+            {% thumbnail category.image "270x174" crop="center" as im %}
+              <img src="{{ im.url }}" alt="{{ category.name }}" width="270" height="174" />
+            {% endthumbnail %}
+            <span class="img-layer"></span>
+          </a>
+            <p><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></p>
+        </div>
+      {% endfor %}
      </div>
-
-    {% if is_paginated %}
+      {% if is_paginated %}
         <div class="text-center" id="load_more">
-        {% url 'load_more_proj' category=category.slug as more%}
+        {% url 'load_more_cat' as more%}
           <button class="btn"  onclick="load_more({{ page_obj.number }}, '{{ more }}')">{% trans "Load More" %}</button>
         </div>
     {% endif %}
  </div>
-{% endblock %}
+{% endblock content %}
