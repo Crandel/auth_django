@@ -3,8 +3,8 @@
     <div class="item left">
       <a href="{{ project.get_absolute_url }}">
         {% if project.images.count %}
-          {% with project.images.all.0 as image %}
-            {% thumbnail image "270x174" crop="center" as im %}
+          {% with project.images.all.0.image as image %}
+            {% thumbnail image.image "270x174" crop="center" as im %}
               <img src="{{im.url}}" alt="{{ im.title }}" width="270" height="174" />
             {% endthumbnail %}
           {% endwith %}
