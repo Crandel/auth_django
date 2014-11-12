@@ -2,7 +2,25 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 from autoslug import AutoSlugField
+
+
+class PortfolioInfo(models.Model):
+    """
+    Model for managing career vaccancy listing.
+
+    """
+    site = models.ForeignKey(Site, unique=True)
+    title = models.CharField(_('Title'), max_length=255,)
+    image = models.ImageField(_('Image'), max_length=255, upload_to="project/", null=True)
+
+    def __unicode__(self):
+        return "Portfolio information for %s" % self.site.name
+
+    class Meta:
+        verbose_name = _('Portfolio Information')
+        verbose_name_plural = _('Portfolio Informations')
 
 
 class Category(models.Model):
@@ -56,10 +74,12 @@ class Image(models.Model):
     project = models.ForeignKey(Project, verbose_name=_('Project'), related_name='images')
     title = models.CharField(_('Title'), max_length=255, null=True)
     image = models.ImageField(verbose_name=_('Image'), upload_to='project/', max_length=255)
+    order = models.BooleanField(_('Order'), default=1)
 
     class Meta:
         verbose_name = _('Project Image')
         verbose_name_plural = _('Project Images')
+        ordering = ('order',)
 
     def __str__(self):
         return self.title

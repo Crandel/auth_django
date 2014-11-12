@@ -4,14 +4,14 @@ from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
 
 
-
 class CareerInfo(models.Model):
     """
     Model for managing career vaccancy listing.
 
     """
-    site = models.ForeignKey(Site,unique=True)
+    site = models.ForeignKey(Site, unique=True)
     title = models.CharField(_('Title'), max_length=255,)
+    image = models.ImageField(_('Image'), max_length=255, upload_to="careers/", null=True)
     description = RichTextField()
 
     def __unicode__(self):
@@ -20,7 +20,6 @@ class CareerInfo(models.Model):
     class Meta:
         verbose_name = _('Career Information')
         verbose_name_plural = _('Career Informations')
-        
 
 
 class JobCategory(models.Model):
@@ -90,4 +89,4 @@ class AppliedJobs(models.Model):
             return "No attachment"
 
     upload_file_link.allow_tags = True
-        
+

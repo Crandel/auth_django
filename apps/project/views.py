@@ -5,7 +5,8 @@ from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.template.loader import render_to_string
 from django.template import RequestContext
-from apps.project.models import Category, Project
+from django.contrib.sites.models import Site
+from apps.project.models import Category, Project, PortfolioInfo
 
 
 class PortfolioPage(ListView):
@@ -24,6 +25,8 @@ class PortfolioPage(ListView):
         for cat in cat_list:
             category_list.append([cat[0:5], cat[5:]])
         context['category_menu'] = category_list
+        current_site = Site.objects.get_current
+        context['info'] = PortfolioInfo.objects.get(site=current_site)
         return context
 
 

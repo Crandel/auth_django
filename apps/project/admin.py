@@ -4,7 +4,13 @@ from django.contrib import admin
 
 from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
-from apps.project.models import Category, Project, Image
+from apps.project.models import Category, Project, Image, PortfolioInfo
+
+
+class PortfolioInfoAdmin(TranslationAdmin):
+    list_display = ('site', 'title')
+
+admin.site.register(PortfolioInfo, PortfolioInfoAdmin)
 
 
 class CategoryAdmin(TranslationAdmin):
