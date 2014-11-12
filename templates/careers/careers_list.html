@@ -1,38 +1,30 @@
 {% extends "frontend_base.html" %}
 {% load i18n thumbnail staticfiles menu_tags generaltags cms_tags %}
-{% block title %}{{ info.title }}{% endblock %}
+{% block title %}{{info.title}}{% endblock %}
 {% block extra_css %}
 <link href={% static "en/css/dropdown.css" %} rel="stylesheet" type="text/css" />
 {% endblock extra_css %}
 {% block extra_js %}
-  <script src={% static "en/js/jquery.easydropdown.js" %}></script>
-  <script type="text/javascript">
-    $(document).ready(function(e) {
-        $("#main-banner").flexslider({
-                controlNav:true,
-                directionNav:false,
-                slideshow: true
-              });
-    });
-    </script>
   <script type="text/javascript">
   $(document).ready(function(e) {
-    $(".header-nav .slider").flexslider({animation: "slide", controlNav: false, slideshow:false, animationSpeed:1500,});
-    $('#select_category').on('change', function(){
-      var value = $(this).val();
-      location.href = location.origin + value;
+    $("input.upload").click(function(){
+       $("input[type=file]").trigger("click");
     });
+    $(".browse-btn input.input").click(function(){
+       $("input[type=file]").trigger("click");
+    });
+
   });
   function load_more(page, url){
     $.get(url, {page: page}, function(data){
-      $("#portfolio").append(data.items);
+      $("#vacancy").append(data.items);
       $("#load_more").html(data.more)
-    })
+    });
   }
+</script>
 </script>
 {% endblock %}
 {% block header %}
-{% get_banners as banners %}
 <header class="bluebg">
     <div class="page_width">
       <div class="header-top clearfix">
@@ -62,36 +54,13 @@
         {% show_menu 0 100 100 100  "menu/menu.html" %}
       </ul>
       </div>
-      <div class="header-nav one-row">
-      <div class="slider">
-        <ul class="slides" id="category_list">
-          {% for cat1 in category_menu %}
-            <li>
-              {% for cat2 in cat1 %}
-                <div class="row clearfix">
-                  {% for cat3 in cat2 %}
-                    <div><a href="{{ cat3.get_absolute_url }}">{{cat3.name}}</a></div>
-                    {% if not forloop.last %}
-                      <div class="devider"><img src={% static "en/images/nav-devider.png" %} alt=""></div>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-                {% if forloop.first %}
-                  <div class="row middle"><div></div></div>
-                {% endif %}
-              {% endfor %}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
       <div id="main-banner">
       <div class="strip1">
       <img src={% static "en/images/strip3.png" %} alt="img" />
       </div>
       <ul class="slides">
             <li>
-                {% thumbnail info.image "1072x321" crop="center" as im %}
+                {% thumbnail info.image "1072x405" crop="center" as im %}
                   <img src="{{ im.url }}"  alt="{{ info.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
                 {% endthumbnail %}
             </li>
@@ -102,34 +71,47 @@
   </header>
 {% endblock header %}
 {% block content %}
-<div class="page_width innerpages clearfix">
-    <ul class="bread-crumb clearfix left">
+  <div class="page_width innerpages career clearfix">
+    <ul class="bread-crumb clearfix">
       {% show_breadcrumb 0 "breadcrumb_act.html" %}
     </ul>
-     <h1 id="page-title">{% page_attribute "page_title" %}</h1>
-     <div class="item_list clearfix" id="portfolio">
-      {% if not categories|length %}
-          <center>
-            <h3>{% trans "Empty content" %}</h3>
-          </center>
-      {% endif %}
-      {% for category in categories %}
-        <div class="item left">
-          <a href="{{ category.get_absolute_url }}">
-            {% thumbnail category.image "270x174" crop="center" as im %}
-              <img src="{{ im.url }}" alt="{{ category.name }}" width="270" height="174" />
-            {% endthumbnail %}
-            <span class="img-layer"></span>
-          </a>
-            <p><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></p>
-        </div>
-      {% endfor %}
-     </div>
-      {% if is_paginated %}
+    <h1 id="page-title">{{info.title}}</h1>
+    <p>{{info.description|safe}}</p>
+    <ul class="form-style w505 clearfix">
+      <li>Upload  CV</li>
+      <li class="browse-btn"><input type="text" class="input"><input type="file"> <input type="button" class="btn upload" value="Browse"></li>
+      <li></li>
+      <li><input type="submit" class="btn"></li>
+    </ul>
+    <strong>{% trans "Career – Current Vacancies" %}</strong>
+    <div class="table-view career-table">
+      <div class="table-head">
+          <div class="table-row">
+            <div class="td th">{% trans "Sr. No." %}</div>
+            <div class="td th">{% trans "Position" %}</div>
+            <div class="td th">{% trans "Requirements" %}</div>
+            <div class="td th">{% trans "Last Date" %}</div>
+          </div>
+      </div>
+      <div class="table-body" id="vacancy">
+        {% for item in vacancies %}
+          <div class="table-row">
+            <div class="td">{{forloop.counter}}</div>
+            <div class="td">{{item.position}} <small>{{item.id}}</small></div>
+            <div class="td">
+              {{ item.requirement|safe }}
+            </div>
+            <div class="td">{{item.last_date|date:"d/m/Y"}} <input type="submit" class="btn" value="Apply"></div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if is_paginated %}
         <div class="text-center" id="load_more">
-        {% url 'load_more_cat' as more%}
+        {% url 'load_more_vac' as more%}
           <button class="btn"  onclick="load_more({{ page_obj.number }}, '{{ more }}')">{% trans "Load More" %}</button>
         </div>
     {% endif %}
- </div>
+
+  </div>
 {% endblock content %}

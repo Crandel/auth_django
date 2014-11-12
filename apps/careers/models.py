@@ -1,7 +1,10 @@
+from __future__ import unicode_literals
+import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 from ckeditor.fields import RichTextField
+from model_utils.models import TimeStampedModel
 
 
 class CareerInfo(models.Model):
@@ -20,6 +23,32 @@ class CareerInfo(models.Model):
     class Meta:
         verbose_name = _('Career Information')
         verbose_name_plural = _('Career Informations')
+
+
+class SVModel(TimeStampedModel):
+    cv = models.FileField(_('Resume'), upload_to='resume/', max_length=1000)
+
+    class Meta:
+        verbose_name = _('Resume')
+        verbose_name = _('Resumes')
+        ordering = ('created',)
+
+
+class Vacancy(TimeStampedModel):
+    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    position = models.CharField(_('Job Position'), max_length=1000)
+    requirement = RichTextField(_('Requirement'))
+    last_date = models.DateField(_('Last Date'), default=datetime.datetime.now())
+    is_published = models.BooleanField(_('Is Published'), default=True)
+    sort = models.PositiveSmallIntegerField(_('Sort Order'), default=1)
+
+    class Meta:
+        verbose_name = _('Vacancy')
+        verbose_name_plural = _('Vacancies')
+        ordering = ('sort', '-created')
+
+    def __str__(self):
+        return self.position
 
 
 class JobCategory(models.Model):

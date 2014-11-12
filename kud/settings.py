@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'robots',
     'django_mailer',
     'endless_pagination',
+    'django_extensions',
 #    'mailer',
     'apps.home',
     'apps.general',

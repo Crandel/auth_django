@@ -9,7 +9,7 @@ from import_export.formats import base_formats
 from modeltranslation.admin import TranslationAdmin
 from import_export import resources
 
-from apps.careers.models import JobCategory,Career,AppliedJobs,CareerInfo
+from apps.careers.models import JobCategory, Career, AppliedJobs, CareerInfo, SVModel, Vacancy
 from forms import CareerAdminForm
 
 DEFAULT_FORMATS = (
@@ -41,10 +41,10 @@ class Jobstatus(admin.SimpleListFilter):
         `self.value()`.
         """
         if self.value() == 'expired':
-            return queryset.filter(cl_time__lte=datetime.datetime.now())                                   
+            return queryset.filter(cl_time__lte=datetime.datetime.now())
         if self.value() == 'non_expired':
             return queryset.filter(cl_time__gte=datetime.datetime.now())
-                                   
+
 
 
 class CareerAdmin(TranslationAdmin):
@@ -52,7 +52,7 @@ class CareerAdmin(TranslationAdmin):
     Career admin to view manage career vaccancy.
     """
     form = CareerAdminForm
-    model=Career    
+    model=Career
     list_display = ['designation','is_published','sort_order']
     list_filter = ['job_cat','is_published',Jobstatus,'date','cl_time',]
     search_fields = ['job_cat']
@@ -80,10 +80,24 @@ class JobCategoryAdmin(TranslationAdmin):
 
 class CareerInfoAdmin(TranslationAdmin):
     model = CareerInfo
+    list_display = ('site', 'title')
+
+class CVModelAdmin(admin.ModelAdmin):
+    list_display = ('created',)
+    date_hierarchy = 'created'
+
+
+class VacancyAdmin(TranslationAdmin):
+    list_display = ('position', 'id', 'last_date', 'is_published', 'sort')
+    list_editable = ('is_published', 'sort')
+    list_filter = ['is_published', 'last_date']
+    search_fields = ('position',)
+    date_hierarchy = 'created'
 
 
 admin.site.register(Career,CareerAdmin)
 admin.site.register(JobCategory,JobCategoryAdmin)
 admin.site.register(AppliedJobs,AppliedAdmin)
 admin.site.register(CareerInfo,CareerInfoAdmin)
-
+admin.site.register(SVModel, CVModelAdmin)
+admin.site.register(Vacancy, VacancyAdmin)
