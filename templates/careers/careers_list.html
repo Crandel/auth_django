@@ -5,24 +5,8 @@
 <link href={% static "en/css/dropdown.css" %} rel="stylesheet" type="text/css" />
 {% endblock extra_css %}
 {% block extra_js %}
-  <script type="text/javascript">
-  $(document).ready(function(e) {
-    $("input.upload").click(function(){
-       $("input[type=file]").trigger("click");
-    });
-    $(".browse-btn input.input").click(function(){
-       $("input[type=file]").trigger("click");
-    });
-
-  });
-  function load_more(page, url){
-    $.get(url, {page: page}, function(data){
-      $("#vacancy").append(data.items);
-      $("#load_more").html(data.more)
-    });
-  }
-</script>
-</script>
+  <script type="text/javascript" src={% static "en/js/jquery.form.min.js" %}></script>
+  <script type="text/javascript" src={% static "en/js/careers.js" %}></script>
 {% endblock %}
 {% block header %}
 <header class="bluebg">
@@ -77,12 +61,14 @@
     </ul>
     <h1 id="page-title">{{info.title}}</h1>
     <p>{{info.description|safe}}</p>
-    <ul class="form-style w505 clearfix">
-      <li>Upload  CV</li>
-      <li class="browse-btn"><input type="text" class="input"><input type="file"> <input type="button" class="btn upload" value="Browse"></li>
-      <li></li>
-      <li><input type="submit" class="btn"></li>
-    </ul>
+    <form id="cv-form" action="{% url 'send_cv' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <ul class="form-style w505 clearfix">
+        <li>Upload  CV</li>
+        <li class="browse-btn"><input type="text" class="input"><input type="file" name='cv' id='id_cv' > <input type="button" class="btn upload" value="Browse"></li>
+        <li></li>
+        <li><input type="submit" class="btn"></li>
+      </ul>
+    </form>
     <strong>{% trans "Career – Current Vacancies" %}</strong>
     <div class="table-view career-table">
       <div class="table-head">

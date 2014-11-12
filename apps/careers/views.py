@@ -2,11 +2,11 @@ import json
 import datetime
 
 from django.utils import timezone
-from django.views.generic import TemplateView, ListView, View
+from django.views.generic import TemplateView, ListView, View, CreateView
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
-from forms import CareerForm
+from forms import CareerForm, CVForm
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 
 from apps.general.models import AdminEmails
 from apps.utility_files.shortcuts import send_generic_mail
-from apps.careers.models import Career, JobCategory, CareerInfo, Vacancy
+from apps.careers.models import Career, JobCategory, CareerInfo, Vacancy, SVModel
 
 
 class VacancyList(ListView):
@@ -62,6 +62,23 @@ class LoadMoreVacancy(View):
 
         return HttpResponse(
             json.dumps({'items': html, 'more': more}),
+            content_type='application/json')
+
+
+class SendCV(CreateView):
+    model = SVModel
+    form_class = CVForm
+
+    def form_valid(self, form):
+        cv = form.save(commit=False)
+        cv.save()
+        return HttpResponse(
+            json.dumps({'success': True}),
+            content_type='application/json')
+
+    def form_invalid(self, form):
+        return HttpResponse(
+            json.dumps({'success': False}),
             content_type='application/json')
 
 
