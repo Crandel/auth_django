@@ -90,18 +90,12 @@
       <img src={% static "en/images/strip3.png" %} alt="img" />
       </div>
       <ul class="slides">
-        {% for banner in banners %}
-          {% if forloop.first %}
             <li>
-              <a href="{{ banner.link }}">
-                {% thumbnail banner.image "1072x321" crop="center" as im %}
+                {% thumbnail category.image "1072x321" crop="center" as im %}
                   <img src="{{ im.url }}"  alt="{{ banner.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
                 {% endthumbnail %}
                 <div class="slider-caption"><div class="page-width">{{ banner.title }}</div></div>
-              </a>
             </li>
-          {% endif %}
-        {% endfor %}
         </ul>
       </div>
       </div>

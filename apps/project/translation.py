@@ -1,6 +1,12 @@
 from __future__ import unicode_literals
 from modeltranslation.translator import translator, TranslationOptions
-from apps.project.models import Category, Project, Image
+from apps.project.models import Category, Project, Image, PortfolioInfo
+
+
+class PortfolioInfoTranslationOptions(TranslationOptions):
+    fields = ('title', )
+
+translator.register(PortfolioInfo, PortfolioInfoTranslationOptions)
 
 
 class CategoryTranslationOptions(TranslationOptions):
