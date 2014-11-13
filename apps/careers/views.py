@@ -118,7 +118,9 @@ class VacancyApplyView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        return self.render_to_response({'success': True})
+        form.send_mail()
+        info = CareerInfo.objects.get(site=self.site)
+        return self.render_to_response({'success': True, 'info': info})
 
 
 class SelectNationality(View):

@@ -1,4 +1,6 @@
-
+from __future__ import unicode_literals
+import re
+import datetime
 from django.utils import timezone
 from django import forms
 from captcha.fields import ReCaptchaField
@@ -8,6 +10,7 @@ from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.template import Context, loader
 from django.core.urlresolvers import reverse_lazy
+from apps.utility_files.shortcuts import send_generic_mail
 from apps.general.models import AdminEmails
 from apps.careers.models import AppliedJobs,Career, SVModel, VacancyApply
 
@@ -100,3 +103,47 @@ class VacancyApplyForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'required'}),
             'email': forms.TextInput(attrs={'class': 'required'}),
         }
+
+    def clean_phone(self):
+        '''
+        Checks phone number field against a regular expression.
+
+        :return: string
+        :type: forms.CharField
+        :except: ValidationError
+        '''
+        phone_digits = re.compile(r'^[0-9\-\+]{9,15}$')
+        value = self.cleaned_data.get("phone")
+        match = phone_digits.match(value)
+        if match:
+            return value
+        raise forms.ValidationError(
+            _('Phone numbers must be in +{XXX} XXX XXX-XX-XX,\
+            XXX-XXX-XX-XX, or (XXX) XXX-XX-XX format or other phone format.'),
+        )
+
+    def send_mail(self):
+        current_site = Site.objects.get_current()
+        admin_emails = AdminEmails.objects.get(site=current_site)
+        context = {}
+        company_name = self.cleaned_data['position']
+        name = self.cleaned_data['name']
+        email = self.cleaned_data['email']
+        phone = self.cleaned_data['phone']
+        address = self.cleaned_data['address']
+        subject = 'Thanks for contacting us!'
+        subject_admin = 'Contact details via %s' % (current_site.name)
+        context = {
+            'name': name,
+            'company_name': company_name,
+            'email': email,
+            'address': address,
+            'phone': phone,
+            'date': datetime.datetime.now(),
+            'site': current_site}
+        send_generic_mail(template="careers/career_to_user.html", context_dict=context, subject=subject, to=email)
+        send_generic_mail(
+            template="careers/career_email_to_admin.html",
+            context_dict=context,
+            subject=subject_admin,
+            to=admin_emails.con_email)
