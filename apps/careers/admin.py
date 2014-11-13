@@ -9,7 +9,7 @@ from import_export.formats import base_formats
 from modeltranslation.admin import TranslationAdmin
 from import_export import resources
 
-from apps.careers.models import JobCategory, Career, AppliedJobs, CareerInfo, SVModel, Vacancy
+from apps.careers.models import JobCategory, Career, AppliedJobs, CareerInfo, SVModel, Vacancy, Nationality, VacancyApply
 from forms import CareerAdminForm
 
 DEFAULT_FORMATS = (
@@ -82,8 +82,9 @@ class CareerInfoAdmin(TranslationAdmin):
     model = CareerInfo
     list_display = ('site', 'title')
 
+
 class CVModelAdmin(admin.ModelAdmin):
-    list_display = ('created',)
+    list_display = ('created', 'cv_file_link',)
     date_hierarchy = 'created'
 
 
@@ -95,9 +96,22 @@ class VacancyAdmin(TranslationAdmin):
     date_hierarchy = 'created'
 
 
+class NationalityAdmin(TranslationAdmin):
+    list_display = ('nationality',)
+
+
+class VacancyApplyAdmin(admin.ModelAdmin):
+    list_display = ('site', 'vacancy', 'created', 'name', 'email', 'cv_file_link')
+    list_filter = ['vacancy', 'site', 'created']
+    search_fields = ('position',)
+    date_hierarchy = 'created'
+
+
 admin.site.register(Career,CareerAdmin)
 admin.site.register(JobCategory,JobCategoryAdmin)
 admin.site.register(AppliedJobs,AppliedAdmin)
 admin.site.register(CareerInfo,CareerInfoAdmin)
 admin.site.register(SVModel, CVModelAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
+admin.site.register(Nationality, NationalityAdmin)
+admin.site.register(VacancyApply, VacancyApplyAdmin)

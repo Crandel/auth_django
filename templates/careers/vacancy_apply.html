@@ -1,0 +1,132 @@
+{% extends "frontend_base.html" %}
+{% load i18n thumbnail staticfiles menu_tags generaltags cms_tags %}
+{% block title %}{{info.title}}{% endblock %}
+{% block extra_css %}
+<link href={% static "en/css/dropdown.css" %} rel="stylesheet" type="text/css" />
+{% endblock extra_css %}
+{% block extra_js %}
+  <script type="text/javascript" src={% static "en/js/jquery.form.min.js" %}></script>
+  <script type="text/javascript" src={% static "en/js/careers.js" %}></script>
+{% endblock %}
+{% block header %}
+<header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+              <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+        {% show_menu 0 100 100 100  "menu/menu.html" %}
+      </ul>
+      </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src={% static "en/images/strip3.png" %} alt="img" />
+      </div>
+      <ul class="slides">
+            <li>
+                {% thumbnail info.image "1072x405" crop="center" as im %}
+                  <img src="{{ im.url }}"  alt="{{ info.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
+                {% endthumbnail %}
+            </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+{% block content %}
+  <div class="page_width innerpages career clearfix">
+
+    <ul class="bread-crumb clearfix">
+      <li><a href="#">Home</a></li>
+        <li><a href="#">Our Services </a></li>
+        <li><a href="#">Design Management</a></li>
+    </ul>
+    <p class="height0">&nbsp;</p>
+    <h1 id="page-title">Careers</h1>
+    <div class="table-view career-table">
+      <div class="table-body">
+        <div class="career clearfix">
+            <form id="contact-form" method="post" action="" enctype="multipart/form-data">{% csrf_token %}
+                {{ form.vacancy }}
+                {{ form.site }}
+                <div class="contect_us_half left">
+                  <ul class="contect_us ">
+                    <li>{% trans "Position Applied For" %}</li>
+                    <li>
+                        {{ form.position }}
+                        {{ form.position.errors }}
+                    </li>
+                    <li>{% trans "Name" %} </li>
+                    <li>
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                    </li>
+                    <li>{% trans "Nationality" %}</li>
+                    <li class="form-dropdown requried">
+                       <!-- <input type="text" />-->
+                       <div id="bread-drop" >
+                            {{ form.nationality }}
+                            {{ form.nationality.errors }}
+                        </div>
+                    </li>
+
+                    <li>{% trans "Present Address" %}</li>
+                    <li>
+                        {{ form.address }}
+                        {{ form.address.errors }}
+                    </li>
+               </ul>
+                  </div>
+                  <div class="contect_us_half left">
+                    <ul class="contect_us left">
+                    <li>{% trans "Telephone Number" %}</li>
+                    <li>
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                    </li>
+                    <li>{% trans "Email" %}</li>
+                    <li>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </li>
+                    <li>{% trans "CV" %}</li>
+                    <li class="browse-btn"><input type="text" class="input requried" name="cv"><input type="file" name='cv' id="id_cv"> <input type="button" class="btn upload" value="Browse"></li>
+
+                        <!--<li class="browse-btn"><input type="text" class="input"><input type="file"> <input type="button" class="btn upload" value="Browse"></li>-->
+
+                    <li></li>
+                    <li>{{ form.captcha }}
+                        {{ form.captcha.errors }}</li>
+                    <li></li>
+                    <li><input type="submit" value="Submit" class="btn"></li>
+                    </ul>
+                 </div>
+
+            </form>
+
+     </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

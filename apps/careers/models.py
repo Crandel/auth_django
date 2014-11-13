@@ -33,6 +33,14 @@ class SVModel(TimeStampedModel):
         verbose_name = _('Resumes')
         ordering = ('created',)
 
+    def cv_file_link(self):
+        if self.cv:
+            return "<a href='%s'>download cv</a>" % (self.cv.url,)
+        else:
+            return "No attachment"
+
+    cv_file_link.allow_tags = True
+
 
 class Vacancy(TimeStampedModel):
     site = models.ForeignKey(Site, verbose_name=_('Site'))
@@ -49,6 +57,48 @@ class Vacancy(TimeStampedModel):
 
     def __str__(self):
         return self.position
+
+
+class Nationality(models.Model):
+
+    nationality = models.CharField(_('Nationality'), max_length=1000)
+
+    class Meta:
+        verbose_name = _('Nationality')
+        verbose_name_plural = _('Nationality')
+        ordering = ('nationality',)
+
+    def __str__(self):
+        return self.nationality
+
+
+class VacancyApply(TimeStampedModel):
+    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    vacancy = models.ForeignKey(Vacancy, verbose_name=_('Vacancy'))
+    position = models.CharField(_('Position Applied For'), max_length=1000)
+    name = models.CharField(_('Name'), max_length=1000)
+    nationality = models.ForeignKey(Nationality, verbose_name=_('Nationality'))
+    address = models.TextField(_('Present Address'))
+    phone = models.CharField(_('Telephone Number'), max_length=16)
+    email = models.EmailField(_('Email'), max_length=255)
+    cv = models.FileField(_('CV'), upload_to='resume/', max_length=255)
+
+    class Meta:
+        verbose_name = _('Vacancy Apply')
+        verbose_name_plural = _('Vacancies Apply')
+        ordering = ('-created',)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.created, self.position)
+
+    def cv_file_link(self):
+        if self.cv:
+            return "<a href='%s'>download cv</a>" % (self.cv.url,)
+        else:
+            return "No attachment"
+
+    cv_file_link.allow_tags = True
+
 
 
 class JobCategory(models.Model):
@@ -93,7 +143,6 @@ class Career(models.Model):
 class AppliedJobs(models.Model):
     """
     Model for managing Applied jobs.
-
     """
     site = models.ForeignKey(Site)
     designation = models.CharField(_('Designation'), max_length=255,)

@@ -30,7 +30,6 @@ class PortfolioPage(ListView):
         return context
 
 
-
 class ProjectListDetail(ListView):
     template = 'project/project_list.html'
     model = Project

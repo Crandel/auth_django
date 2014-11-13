@@ -6,7 +6,6 @@ from django.views.generic import TemplateView, ListView, View, CreateView
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
-from forms import CareerForm, CVForm
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -16,7 +15,8 @@ from django.template.loader import render_to_string
 
 from apps.general.models import AdminEmails
 from apps.utility_files.shortcuts import send_generic_mail
-from apps.careers.models import Career, JobCategory, CareerInfo, Vacancy, SVModel
+from apps.careers.forms import CareerForm, CVForm, VacancyApplyForm
+from apps.careers.models import Career, JobCategory, CareerInfo, Vacancy, SVModel, VacancyApply
 
 
 class VacancyList(ListView):
@@ -70,6 +70,8 @@ class SendCV(CreateView):
     form_class = CVForm
 
     def form_valid(self, form):
+        if not self.request.is_ajax():
+            raise Http404
         cv = form.save(commit=False)
         cv.save()
         return HttpResponse(
@@ -77,9 +79,61 @@ class SendCV(CreateView):
             content_type='application/json')
 
     def form_invalid(self, form):
+        if not self.request.is_ajax():
+            raise Http404
         return HttpResponse(
             json.dumps({'success': False}),
             content_type='application/json')
+
+
+class VacancyApplyView(CreateView):
+    form_class = VacancyApplyForm
+    model = VacancyApply
+    template_name = "careers/vacancy_apply.html"
+    site = Site.objects.get_current()
+
+    def get_form_kwargs(self):
+        kwargs = super(VacancyApplyView, self).get_form_kwargs()
+        pk = self.kwargs.get('pk', None)
+        if not pk:
+            raise Http404
+        position = Vacancy.objects.get(pk=pk)
+        posit_dict = {
+            'vacancy': position.id,
+            'position': position.position,
+            'site': self.site.pk
+        }
+        kwargs['initial'].update(posit_dict)
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(VacancyApplyView, self).get_context_data(**kwargs)
+        context['info'] = CareerInfo.objects.get(site=self.site)
+        return context
+
+    def form_valid(self, form):
+        if not self.request.is_ajax():
+            raise Http404
+        form.save()
+        return HttpResponse(
+            json.dumps({'success': True}),
+            content_type='application/json')
+
+    def form_invalid(self, form):
+        if not self.request.is_ajax():
+            raise Http404
+        error_list = []
+        for k, v in form.errors.items():
+            error_list.append([k, v[0]])
+
+        if self.request.is_ajax():
+            to_json_responce = dict()
+            to_json_responce['success'] = False
+            to_json_responce['messages'] = error_list
+        return HttpResponse(
+            json.dumps(to_json_responce),
+            content_type='application/json')
+
 
 
 class CareerView(TemplateView):

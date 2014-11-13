@@ -1,7 +1,6 @@
 
 from django.utils import timezone
 from django import forms
-from models import AppliedJobs,Career, SVModel
 from captcha.fields import ReCaptchaField
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +8,7 @@ from django.contrib.sites.models import Site
 from django.core.mail import EmailMessage
 from django.template import Context, loader
 from apps.general.models import AdminEmails
+from apps.careers.models import AppliedJobs,Career, SVModel, VacancyApply
 
 
 class CareerForm(forms.ModelForm):
@@ -80,3 +80,20 @@ class CVForm(forms.ModelForm):
                 email.attach(f.name, f.read(), f.content_type)
             email.send()
         return super(CVForm, self).save(self)
+
+
+class VacancyApplyForm(forms.ModelForm):
+    captcha = ReCaptchaField()
+
+    class Meta:
+        model = VacancyApply
+        widgets = {
+            'vacancy': forms.HiddenInput(),
+            'site': forms.HiddenInput(),
+            'position': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'nationality': forms.Select(attrs={'class': 'dropdown required', 'data-settings': '{"cutOff":10}'}),
+            'name': forms.TextInput(attrs={'class': 'required'}),
+            'address': forms.Textarea(attrs={'class': 'required'}),
+            'phone': forms.TextInput(attrs={'class': 'required'}),
+            'email': forms.TextInput(attrs={'class': 'required'}),
+        }

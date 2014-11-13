@@ -12,6 +12,24 @@ $(document).ready(function(e) {
         var form = $(this);
         form.ajaxSubmit({
             success: function (resp) {
+                $(".browse-btn input.input").val("")
+                alert('Send success')
+                return false;
+
+            },
+            error: function (resp) {
+                alert('error');
+            }
+        });
+        e.preventDefault();
+        return false;
+    });
+
+    $('body').on('submit', '#contact-form', function (e) {
+        var form = $(this);
+        form.ajaxSubmit({
+            success: function (resp) {
+                $(".browse-btn input.input").val("")
                 alert('Send success')
                 return false;
 
