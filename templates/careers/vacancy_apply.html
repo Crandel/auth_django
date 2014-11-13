@@ -7,6 +7,7 @@
 {% block extra_js %}
   <script type="text/javascript" src={% static "en/js/jquery.form.min.js" %}></script>
   <script type="text/javascript" src={% static "en/js/careers.js" %}></script>
+  <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 {% endblock %}
 {% block header %}
 <header class="bluebg">
@@ -59,11 +60,10 @@
 
     <ul class="bread-crumb clearfix">
       <li><a href="#">Home</a></li>
-        <li><a href="#">Our Services </a></li>
-        <li><a href="#">Design Management</a></li>
+        {% show_breadcrumb 0 "breadcrumb.html" %}
     </ul>
     <p class="height0">&nbsp;</p>
-    <h1 id="page-title">Careers</h1>
+    <h1 id="page-title">{% trans "Careers" %}</h1>
     <div class="table-view career-table">
       <div class="table-body">
         <div class="career clearfix">
@@ -111,11 +111,11 @@
                         {{ form.email.errors }}
                     </li>
                     <li>{% trans "CV" %}</li>
-                    <li class="browse-btn"><input type="text" class="input requried" name="cv"><input type="file" name='cv' id="id_cv"> <input type="button" class="btn upload" value="Browse"></li>
+                    <li class="browse-btn"><input type="text" class="input requried" name="cv"><input type="file" name='cv' id="id_cv" class="required">  <input type="button" class="btn upload" value="Browse"> {{ form.captcha.errors }}</li>
 
                         <!--<li class="browse-btn"><input type="text" class="input"><input type="file"> <input type="button" class="btn upload" value="Browse"></li>-->
 
-                    <li></li>
+                    <li>{{ form.cv.errors }}</li>
                     <li>{{ form.captcha }}
                         {{ form.captcha.errors }}</li>
                     <li></li>

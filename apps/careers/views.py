@@ -111,30 +111,6 @@ class VacancyApplyView(CreateView):
         context['info'] = CareerInfo.objects.get(site=self.site)
         return context
 
-    def form_valid(self, form):
-        if not self.request.is_ajax():
-            raise Http404
-        form.save()
-        return HttpResponse(
-            json.dumps({'success': True}),
-            content_type='application/json')
-
-    def form_invalid(self, form):
-        if not self.request.is_ajax():
-            raise Http404
-        error_list = []
-        for k, v in form.errors.items():
-            error_list.append([k, v[0]])
-
-        if self.request.is_ajax():
-            to_json_responce = dict()
-            to_json_responce['success'] = False
-            to_json_responce['messages'] = error_list
-        return HttpResponse(
-            json.dumps(to_json_responce),
-            content_type='application/json')
-
-
 
 class CareerView(TemplateView):
     template_name = "careers/career.html"
