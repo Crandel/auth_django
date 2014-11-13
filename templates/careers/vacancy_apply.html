@@ -60,12 +60,11 @@
 
     <ul class="bread-crumb clearfix">
         {% show_breadcrumb 0 "breadcrumb.html" %}
+        <li>{% trans "Vacancy" %}</li>
     </ul>
     <p class="height0">&nbsp;</p>
     {% if not success %}
     <h1 id="page-title">{% trans "Careers" %}</h1>
-    {% else %}
-      <h1 id="page-title">{% trans "Thank you for submitting your resume" %}</h1>
 
     <div class="table-view career-table">
       <div class="table-body">
@@ -136,6 +135,8 @@
      </div>
       </div>
     </div>
+    {% else %}
+      <h1 id="page-title">{% trans "Thank you for submitting your resume" %}</h1>
     {% endif %}
   </div>
 {% endblock content %}
