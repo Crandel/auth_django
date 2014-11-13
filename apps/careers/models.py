@@ -33,6 +33,14 @@ class SVModel(TimeStampedModel):
         verbose_name = _('Resumes')
         ordering = ('created',)
 
+    def cv_file_link(self):
+        if self.cv:
+            return "<a href='%s'>download cv</a>" % (self.cv.url,)
+        else:
+            return "No attachment"
+
+    cv_file_link.allow_tags = True
+
 
 class Vacancy(TimeStampedModel):
     site = models.ForeignKey(Site, verbose_name=_('Site'))
@@ -51,71 +59,42 @@ class Vacancy(TimeStampedModel):
         return self.position
 
 
-class JobCategory(models.Model):
-    """
-    Model for managing Job categories listing.
-    """
-    catog = models.CharField(_('Job Category'), max_length=255,)
-    sort_order = models.PositiveSmallIntegerField(_('Sort Order'),default=0)
+class Nationality(models.Model):
 
-    def __unicode__(self):
-        return self.catog
+    nationality = models.CharField(_('Nationality'), max_length=1000)
 
     class Meta:
-        verbose_name = _('Job Category')
-        verbose_name_plural = _('Job Categories')
-        ordering = ('sort_order',)
+        verbose_name = _('Nationality')
+        verbose_name_plural = _('Nationality')
+        ordering = ('nationality',)
 
-class Career(models.Model):
-    """
-    Model for managing career vaccancy listing.
+    def __str__(self):
+        return self.nationality
 
-    """
-    site = models.ForeignKey(Site)
-    job_cat = models.ForeignKey(JobCategory,verbose_name=_('Job Category'))
-    designation = models.CharField(_('Designation'), max_length=255,)
-    short_desc = RichTextField(_('Short Description'))
-    date = models.DateTimeField(_('Created Date/Time'))
-    cl_time = models.DateTimeField(_('Closing Date/Time'))
-    is_published = models.BooleanField(_('Is Published'))
-    sort_order = models.PositiveSmallIntegerField(_('Sort Order'),default=0)
 
-    def __unicode__(self):
-        return "%s vaccancy from %s" %(self.designation,self.site.name)
+class VacancyApply(TimeStampedModel):
+    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    vacancy = models.ForeignKey(Vacancy, verbose_name=_('Vacancy'))
+    position = models.CharField(_('Position Applied For'), max_length=1000)
+    name = models.CharField(_('Name'), max_length=1000)
+    nationality = models.ForeignKey(Nationality, verbose_name=_('Nationality'))
+    address = models.TextField(_('Present Address'))
+    phone = models.CharField(_('Telephone Number'), max_length=16)
+    email = models.EmailField(_('Email'), max_length=255)
+    cv = models.FileField(_('CV'), upload_to='resume/', max_length=255)
 
     class Meta:
-        verbose_name = _('Job vacancy')
-        verbose_name_plural = _('Job vacancies')
-        ordering = ('-sort_order',)
+        verbose_name = _('Vacancy Apply')
+        verbose_name_plural = _('Vacancies Apply')
+        ordering = ('-created',)
 
+    def __str__(self):
+        return "{0} - {1}".format(self.created, self.position)
 
-
-class AppliedJobs(models.Model):
-    """
-    Model for managing Applied jobs.
-
-    """
-    site = models.ForeignKey(Site)
-    designation = models.CharField(_('Designation'), max_length=255,)
-    job_cat = models.ForeignKey(JobCategory,verbose_name=_('Job Category'),null=True,blank=True)
-    name = models.CharField(_('Name of Applicant'), max_length=255,)
-    email = models.EmailField(_('Email Address'), max_length=255,)
-    tele = models.CharField(_('Telephone'), max_length=100,)
-    upload_file = models.FileField(_('Uploaded CV'),upload_to='upload_cvs/')
-    date = models.DateTimeField(_('Applied date'))
-
-    def __unicode__(self):
-        return self.designation
-
-    class Meta:
-        verbose_name = _('Applied Jobs')
-        verbose_name_plural = _('Applied Jobs')
-
-    def upload_file_link(self):
-        if self.upload_file:
-            return "<a href='%s'>download cv</a>" % (self.upload_file.url,)
+    def cv_file_link(self):
+        if self.cv:
+            return "<a href='%s'>download cv</a>" % (self.cv.url,)
         else:
             return "No attachment"
 
-    upload_file_link.allow_tags = True
-
+    cv_file_link.allow_tags = True

@@ -63,7 +63,7 @@
     <p>{{info.description|safe}}</p>
     <form id="cv-form" action="{% url 'send_cv' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
       <ul class="form-style w505 clearfix">
-        <li>Upload  CV</li>
+        <li>{% trans "Upload  CV" %}</li>
         <li class="browse-btn"><input type="text" class="input"><input type="file" name='cv' id='id_cv' > <input type="button" class="btn upload" value="Browse"></li>
         <li></li>
         <li><input type="submit" class="btn"></li>
@@ -87,7 +87,8 @@
             <div class="td">
               {{ item.requirement|safe }}
             </div>
-            <div class="td">{{item.last_date|date:"d/m/Y"}} <input type="submit" class="btn" value="Apply"></div>
+            <div class="td">{{item.last_date|date:"d/m/Y"}} <a href="{% url 'vacancy_apply' item.id %}" class="btn" >{% trans "Apply" %}</a></div>
+
           </div>
         {% endfor %}
       </div>

@@ -12,7 +12,12 @@ $(document).ready(function(e) {
         var form = $(this);
         form.ajaxSubmit({
             success: function (resp) {
-                alert('Send success')
+                if (resp.success) {
+                    $(".browse-btn input.input").val("");
+                    alert('Thank you for submitting your resume');
+                } else {
+                    alert('Please attach file');
+                }
                 return false;
 
             },
@@ -23,6 +28,68 @@ $(document).ready(function(e) {
         e.preventDefault();
         return false;
     });
+    $('body').on('keyup', '#id_nationality_name', function(e){
+        var val = $(this).val();
+        var url = $(this).data('url');
+        $.get(url, {str: val}, function(data){
+            $("#drop-box").children().removeAttr("style");
+            var list = "";
+            if (data.length) {
+                var i = 0;
+                var len = data.length;
+                for (; i<len; i++){
+                    list += "<li data-id='"+data[i]['id']+"' class='nat_list'>"+data[i]['name']+"</li>";
+                }
+                if (data.length < 4) {
+                    $("#drop-box").children().attr('style', 'min-height: ' + 40 * data.length + 'px');
+                }
+
+                $("#select-nationality").html(list);
+            }
+            $("#drop-box").show().addClass("open");
+        })
+    })
+    $('body').on('click', "#select-nationality .nat_list", function(){
+        var id = $(this).data('id');
+        $('#id_nationality_name').val($(this).html())
+        $('#id_nationality').val(id);
+        $("#drop-box").hide().removeClass("open");
+    })
+    // $('body').on('submit', '#contact-form', function (e) {
+    //     var form = $(this);
+    //     form.ajaxSubmit({
+    //         success: function (resp) {
+    //             if (resp.success){
+    //                 $(".browse-btn input.input").val("")
+    //                 alert("Thank you for submitting your resume");
+    //                 $(".required").each(function(el){
+    //                     this.value = "";
+    //                 });
+    //                 Recaptcha.reload();
+    //             }else{
+    //                 var errors = resp.messages;
+    //                 var i=0;
+    //                 var len = errors.length;
+    //                 var code = ""
+    //                 for(;i<len;i++){
+    //                     code = errors[i][0];
+    //                     if code ==="nationality"{
+    //                         var el =$(".required[name="+ code +"]").next('.error');
+
+    //                     }
+    //                     el.show();
+    //                     el.html(errors[i][1])
+    //                 }
+    //             }
+
+    //         },
+    //         error: function (resp) {
+    //             alert('error');
+    //         }
+    //     });
+    //     e.preventDefault();
+    //     return false;
+    // });
 
 
   });

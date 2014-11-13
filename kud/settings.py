@@ -31,6 +31,7 @@ SITE_ID=1
 
 THUMBNAIL_DEBUG=True
 
+CAPTCHA_AJAX = True
 
 
 ROOT_URLCONF = 'kud.urls'
