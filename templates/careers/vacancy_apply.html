@@ -59,11 +59,14 @@
   <div class="page_width innerpages career clearfix">
 
     <ul class="bread-crumb clearfix">
-      <li><a href="#">Home</a></li>
         {% show_breadcrumb 0 "breadcrumb.html" %}
     </ul>
     <p class="height0">&nbsp;</p>
+    {% if not success %}
     <h1 id="page-title">{% trans "Careers" %}</h1>
+    {% else %}
+      <h1 id="page-title">{% trans "Thank you for submitting your resume" %}</h1>
+
     <div class="table-view career-table">
       <div class="table-body">
         <div class="career clearfix">
@@ -86,7 +89,7 @@
                     <li class="form-dropdown requried">
                        <!-- <input type="text" />-->
                             {{ form.nationality }}
-                            <input type="text" name="nationality_name" id="id_nationality_name" data-url="{% url 'select_nat' %}" value="{{ form.nationality_name.value }}">
+                            <input type="text" name="nationality_name" id="id_nationality_name" data-url="{% url 'select_nat' %}" value="{{ form.nationality_name.value|default:'' }}" autocomplete="off">
                             <div class="dropdown scrollable" style="display: none" id="drop-box">
                               <div>
                                 <ul id="select-nationality">
@@ -133,5 +136,6 @@
      </div>
       </div>
     </div>
+    {% endif %}
   </div>
 {% endblock content %}

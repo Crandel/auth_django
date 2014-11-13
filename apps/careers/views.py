@@ -4,6 +4,7 @@ import datetime
 from django.utils import timezone
 from django.views.generic import TemplateView, ListView, View, CreateView
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext_lazy as _
@@ -94,7 +95,6 @@ class VacancyApplyView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(VacancyApplyView, self).get_form_kwargs()
-        print kwargs.get('data', None)
         pk = self.kwargs.get('pk', None)
         if not pk:
             raise Http404
@@ -111,6 +111,14 @@ class VacancyApplyView(CreateView):
         context = super(VacancyApplyView, self).get_context_data(**kwargs)
         context['info'] = CareerInfo.objects.get(site=self.site)
         return context
+
+    def get_success_url(self):
+        pk = self.kwargs.get('pk', None)
+        return reverse('vacancy_apply', kwargs={'pk': pk})
+
+    def form_valid(self, form):
+        form.save()
+        return self.render_to_response({'success': True})
 
 
 class SelectNationality(View):
