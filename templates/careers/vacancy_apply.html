@@ -85,10 +85,15 @@
                     <li>{% trans "Nationality" %}</li>
                     <li class="form-dropdown requried">
                        <!-- <input type="text" />-->
-                       <div id="bread-drop" >
                             {{ form.nationality }}
+                            <input type="text" name="nationality_name" id="id_nationality_name" data-url="{% url 'select_nat' %}" value="{{ form.nationality_name.value }}">
+                            <div class="dropdown scrollable" style="display: none" id="drop-box">
+                              <div>
+                                <ul id="select-nationality">
+                                </ul>
+                              </div>
+                            </div>
                             {{ form.nationality.errors }}
-                        </div>
                     </li>
 
                     <li>{% trans "Present Address" %}</li>

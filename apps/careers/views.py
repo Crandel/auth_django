@@ -16,7 +16,7 @@ from django.template.loader import render_to_string
 from apps.general.models import AdminEmails
 from apps.utility_files.shortcuts import send_generic_mail
 from apps.careers.forms import CareerForm, CVForm, VacancyApplyForm
-from apps.careers.models import Career, JobCategory, CareerInfo, Vacancy, SVModel, VacancyApply
+from apps.careers.models import Career, JobCategory, CareerInfo, Vacancy, SVModel, VacancyApply, Nationality
 
 
 class VacancyList(ListView):
@@ -94,6 +94,7 @@ class VacancyApplyView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(VacancyApplyView, self).get_form_kwargs()
+        print kwargs.get('data', None)
         pk = self.kwargs.get('pk', None)
         if not pk:
             raise Http404
@@ -110,6 +111,22 @@ class VacancyApplyView(CreateView):
         context = super(VacancyApplyView, self).get_context_data(**kwargs)
         context['info'] = CareerInfo.objects.get(site=self.site)
         return context
+
+
+class SelectNationality(View):
+
+    def get(self, request, *args, **kwargs):
+        str_req = request.GET.get('str', None)
+        if not request.is_ajax():
+            raise Http404
+        nat = list()
+        for n in Nationality.objects.filter(nationality__icontains=str_req):
+            nat.append({
+                'id': n.pk,
+                'name': n.nationality})
+        return HttpResponse(
+            json.dumps(nat),
+            content_type='application/json')
 
 
 class CareerView(TemplateView):

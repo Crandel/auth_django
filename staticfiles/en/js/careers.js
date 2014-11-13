@@ -28,7 +28,33 @@ $(document).ready(function(e) {
         e.preventDefault();
         return false;
     });
+    $('body').on('keyup', '#id_nationality_name', function(e){
+        var val = $(this).val();
+        var url = $(this).data('url');
+        $.get(url, {str: val}, function(data){
+            $("#drop-box").children().removeAttr("style");
+            var list = "";
+            if (data.length) {
+                var i = 0;
+                var len = data.length;
+                for (; i<len; i++){
+                    list += "<li data-id='"+data[i]['id']+"' class='nat_list'>"+data[i]['name']+"</li>";
+                }
+                if (data.length < 4) {
+                    $("#drop-box").children().attr('style', 'min-height: ' + 40 * data.length + 'px');
+                }
 
+                $("#select-nationality").html(list);
+            }
+            $("#drop-box").show().addClass("open");
+        })
+    })
+    $('body').on('click', "#select-nationality .nat_list", function(){
+        var id = $(this).data('id');
+        $('#id_nationality_name').val($(this).html())
+        $('#id_nationality').val(id);
+        $("#drop-box").hide().removeClass("open");
+    })
     // $('body').on('submit', '#contact-form', function (e) {
     //     var form = $(this);
     //     form.ajaxSubmit({
