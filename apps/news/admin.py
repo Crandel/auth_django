@@ -7,7 +7,7 @@ from apps.news.models import News, NewsInfo
 
 
 class NewsInfoAdmin(TranslationAdmin):
-    fields = ('site', 'title',)
+    list_display = ('site', 'title',)
 
 admin.site.register(NewsInfo, NewsInfoAdmin)
 
@@ -28,11 +28,10 @@ class YearFilter(SimpleListFilter):
 
 
 class NewsAdmin(TranslationAdmin):
-    list_display = ('title', 'date_time', 'is_published', 'sort_order')
+    list_display = ('title', 'date_time', 'is_published', )
     search_fields = ('title', )
-    # date_hierarchy = 'date_time'
     list_filter = ('is_published', YearFilter)
-    list_editable = ('is_published', 'sort_order')
+    list_editable = ('is_published', )
 
 admin.site.register(News, NewsAdmin)
 

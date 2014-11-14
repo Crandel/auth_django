@@ -92,7 +92,7 @@
       <ul class="slides">
             <li>
                 {% thumbnail info.image "1072x321" crop="center" as im %}
-                  <img src="{{ im.url }}"  alt="{{ info.title }}" width="{{ im.width }}" height="{{ im.heigth }}" />
+                  <img src="{{ im.url }}"  alt="{{ info.title }}" width="1072" height="321" />
                 {% endthumbnail %}
             </li>
         </ul>
@@ -106,7 +106,7 @@
     <ul class="bread-crumb clearfix left">
       {% show_breadcrumb 0 "breadcrumb_act.html" %}
     </ul>
-     <h1 id="page-title">{% page_attribute "page_title" %}</h1>
+     <h1 id="page-title">{{info.title}}</h1>
      <div class="item_list clearfix" id="portfolio">
       {% if not categories|length %}
           <center>

@@ -1,0 +1,141 @@
+{% extends "frontend_base.html" %}
+{% load i18n thumbnail staticfiles menu_tags generaltags cms_tags %}
+{% block title %}{{ info.title }}{% endblock %}
+{% block extra_css %}
+<link href={% static "en/css/dropdown.css" %} rel="stylesheet" type="text/css" />
+{% endblock extra_css %}
+{% block extra_js %}
+  <script src={% static "en/js/jquery.easydropdown.js" %}></script>
+  <script type="text/javascript">
+    $(document).ready(function(e) {
+      $(".scroll-pane").jScrollPane();
+      $(".media .carousel-wrapper .jcarousel").jCarouselLite({
+        btnPrev: ".media .carousel-wrapper .arrow.prev",
+        btnNext: ".media .carousel-wrapper .arrow.next",
+        visible: 5,
+        circular: true,
+      });
+      $("body").on("click", ".accordion-wrapper > h3", function(e){
+        if($(this).hasClass("expand")==true){
+          $(this).next().slideUp();
+          $(this).removeClass("expand");
+          return;
+        }
+        $(this).parent().find(".accordion-contents").slideUp();
+        $(this).parent().find("h3").removeClass("expand");
+
+        $(this).next().slideToggle();
+        $(this).toggleClass("expand");
+      });
+      $('#select_news').on('change', function(){
+        var value = $(this).val();
+        location.href = location.origin + value;
+      });
+      $('.accordion-wrapper > h3:first').trigger('click');
+
+    });
+    function load_more(year, url){
+      $.get(url, {year: year}, function(data){
+        $("#news").append(data.items);
+        $("#load_more").html("");
+      })
+    }
+  </script>
+{% endblock %}
+{% block header %}
+<header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+              <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+        {% show_menu 0 100 100 100  "menu/menu.html" %}
+      </ul>
+      </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src={% static "en/images/strip3.png" %} alt="img" />
+      </div>
+      <ul class="slides">
+            <li>
+                {% thumbnail info.image "1072x405" crop="center" as im %}
+                  <img src="{{ im.url }}"  alt="{{ info.title }}" width="1072" height="405" />
+                {% endthumbnail %}
+            </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+  </header>
+{% endblock header %}
+{% block content %}
+<div class="page_width innerpages clearfix">
+          <ul class="bread-crumb clearfix left">
+            {% show_breadcrumb 0 "breadcrumb_act.html" %}
+          </ul>
+          <div id="bread-drop">
+            <select name=""  class="dropdown" data-settings='{"cutOff":10}' id="select_news">
+              {% for y in years %}
+                <option value="{% url 'news_by_year' y %}" {% if y = year %}selected="selected"{% endif %}>{{ y }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <h1 id="page-title">{{ info.title }}</h1>
+          <div class="accordion-wrapper" id="news">
+          {% for n in news %}
+            <h3>{{ n.date|date:"F Y"}}</h3>
+            <div class="accordion-contents">
+              {% for item in n.news %}
+                <div class="item clearfix">
+                    <div class="date left">
+                        <span>{{item.date_time|date:"j"}}</span>
+                          <b>{{item.date_time|date:"N"}}</b>
+                      </div>
+                      <div class="item_exp right">
+
+                        <h4>{{item.title}}</h4>
+                        {% if item.image %}
+                          <div class="img-effect new-img">
+                              {% thumbnail item.image "270x174" crop="center" as im %}
+                                  <img src="{{ im.url }}" class="item_exp_img right" alt="{{ item.title }}" width="270" height="174" />
+                              {% endthumbnail %}
+                                  <span class="img-layer"></span>
+                              </div>
+                        {% endif %}
+                          <p>{{item.description|safe}}</p>
+                      </div>
+                  </div>
+
+              {% endfor %}
+            </div>
+          {% endfor %}
+          <div class="clearfix"></div>
+      </div>
+    {% if more %}
+      <div class="text-center" id="load_more">
+        {% url 'load_more_news' as more%}
+          <button class="btn"  onclick="load_more({{ year }}, '{{ more }}')">{% trans "Load More" %}</button>
+        </div>
+    {% endif %}
+        </div>
+{% endblock content %}

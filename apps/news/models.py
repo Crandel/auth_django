@@ -32,9 +32,8 @@ class News(models.Model):
     title = models.CharField(_('News Title'), max_length=100,)
     date_time = models.DateTimeField(_('News Date and Time'))
     description = RichTextField(_('News Description'))
-    image = models.ImageField(_('News Image'), upload_to='news/')
-    is_published = models.BooleanField(_('Is published'))
-    sort_order = models.PositiveSmallIntegerField(_('Sort Order'), default=0)
+    image = models.ImageField(_('News Image'), upload_to='news/', blank=True)
+    is_published = models.BooleanField(_('Is published'), default=True)
 
     def __unicode__(self):
         return self.title
@@ -42,4 +41,4 @@ class News(models.Model):
     class Meta:
         verbose_name = _('News')
         verbose_name_plural = _('News')
-        ordering = ['-sort_order']
+        ordering = ['-date_time']
