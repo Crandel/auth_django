@@ -58,7 +58,6 @@ class LoadMoreNews(View):
         news = News.objects.filter(is_published=True, site=self.site, date_time__year=year).order_by('-date_time')
         year = int(year)
         monthes = sorted(list(set([m.date_time.month for m in news])))
-        print monthes
         news_list = []
         for m in monthes[6:]:
             last_day_of_month = calendar.monthrange(year, 11)[1]
@@ -67,7 +66,6 @@ class LoadMoreNews(View):
             month_news = [n for n in news.filter(date_time__gte=first_day, date_time__lte=last_day)]
             if len(month_news):
                 news_list.append({'date': first_day, 'news': month_news})
-        print news_list
         html = render_to_string('news/more_news.html', {'news': news_list},
                                 context_instance=RequestContext(request))
 
