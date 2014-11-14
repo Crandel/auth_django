@@ -2,7 +2,7 @@
 from settings import  *
 DEBUG=False
 
-ALLOWED_HOSTS = ['kuddevurl.mykuwaitnet.net']
+ALLOWED_HOSTS = ['kuddevurl.mykuwaitnet.net','159.253.153.37']
 ADMINS = (
      ('Rajesh B K', 'rajeshbk042@gmail.com'),
 )
