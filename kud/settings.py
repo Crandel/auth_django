@@ -29,8 +29,6 @@ ALLOWED_HOSTS = []
 
 SITE_ID=1
 
-THUMBNAIL_DEBUG=True
-
 CAPTCHA_AJAX = True
 
 
@@ -103,12 +101,11 @@ INSTALLED_APPS = (
     'apps.home',
     'apps.general',
     'apps.project',
-    'apps.news',
     'apps.contactus',
     'apps.contact_plugin',
     'apps.flatpages',
     'django.contrib.flatpages',
-    'apps.newsevents',
+    'apps.news',
     'apps.careers',
     'apps.gallery_plugin',
     'apps.xmlsitemap',
