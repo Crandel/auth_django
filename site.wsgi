@@ -28,7 +28,7 @@ sys.path[:0] = new_sys_path
 
 sys.path.insert(0, '/home/kuddevurl')
 sys.path.insert(0, '/home/kuddevurl/sitco')
-os.environ['DJANGO_SETTINGS_MODULE'] = 'SITCO.server_settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'kud.server_settings'
 os.environ['PYTHON_EGG_CACHE'] = '/home/kuddevurl/.python-eggs'
 
 

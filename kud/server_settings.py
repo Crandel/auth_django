@@ -32,5 +32,5 @@ EMAIL_BACKEND = "django_mailer.smtp_queue.EmailBackend"
 
 try:
     from local_settings import *
-except e:
+except:
     pass
