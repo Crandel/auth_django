@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 from model_utils.models import TimeStampedModel
 
@@ -57,6 +58,9 @@ class Vacancy(TimeStampedModel):
 
     def __str__(self):
         return self.position
+
+    def get_absolute_url(self):
+        return reverse('vacancy_apply', kwargs={'pk': self.pk})
 
 
 class Nationality(models.Model):

@@ -105,3 +105,15 @@ class BannerImages(models.Model):
         return u'<img src="%s" width= "50" height="50"/>' % (self.image.url)
     admin_thumbnail.short_description = 'Thumbnail'
     admin_thumbnail.allow_tags = True
+
+
+class TopMenuUrl(models.Model):
+    site = models.ForeignKey(Site)
+    name = models.CharField(_('Link name'), max_length=255)
+    url = models.URLField(_('Url'), max_length=1000)
+    sort = models.PositiveSmallIntegerField(_('Order'), default=1)
+
+    class Meta:
+        verbose_name = _('Top Menu Url')
+        verbose_name_plural = _('Top Menu Urls')
+        ordering = ('-sort',)

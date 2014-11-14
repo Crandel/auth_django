@@ -93,21 +93,20 @@ INSTALLED_APPS = (
     'captcha',
     'inline_ordering',
     'import_export',
-    'haystack',
     'robots',
     'django_mailer',
     'endless_pagination',
     # 'mailer',
+    'haystack',
     'apps.home',
     'apps.general',
     'apps.project',
-    'apps.contactus',
     'apps.contact_plugin',
+    'apps.contactus',
     'apps.flatpages',
     'django.contrib.flatpages',
     'apps.news',
     'apps.careers',
-    'apps.gallery_plugin',
     'apps.xmlsitemap',
 )
 
@@ -190,12 +189,10 @@ CMS_TEMPLATES = (
     ('home.html', 'Home'),
     ('aboutus.html', 'About US'),
     ('ourservices.html', 'Our Services'),
-    ('portfolio.html', 'Portfolio'),
-    ('portfolio_detail.html', 'Portfolio Detail'),
-    ('career_page.html', 'Career PAge'),
-    ('news.html', 'News'),
+    ('project/portfolio.html', 'Portfolio'),
+    ('careers/careers_list.html', 'Career PAge'),
+    ('news/news_list.html', 'News'),
     ('contactus/contact.html', 'Contact Us'),
-    ('subsidiaries/subsidiaries.html', 'Subsidiaries'),
 
 )
 
@@ -216,11 +213,11 @@ CMS_PLACEHOLDER_CONF = {
 ACCEPTED_CV_FORMATS=['doc','pdf','jpg','jpeg',]
 #CKEDITOR_IMAGE_BACKEND='pillow'
 
+#haystack settings
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
 }
 
-
-HAYSTACK_SEARCH_RESULTS_PER_PAGE=1
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5

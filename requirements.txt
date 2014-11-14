@@ -22,3 +22,5 @@ django-endless-pagination==2.0
 django-robots==1.0
 django-autoslug==1.7.1
 django-model-utils==2.0.3
+-e git+https://github.com/toastdriven/django-haystack.git@94621995d4994765f10eb7b17863f8899b5563a4#egg=django_haystack-master
+

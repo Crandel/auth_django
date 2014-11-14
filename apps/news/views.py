@@ -35,12 +35,19 @@ class NewsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsView, self).get_context_data(**kwargs)
-        context['info'] = NewsInfo.objects.get(site=self.site)
+        try:
+            context['info'] = NewsInfo.objects.get(site=self.site)
+        except:
+            context['info'] = None
         news = News.objects.filter(is_published=True, site=self.site).order_by('-date_time')
         context['years'] = sorted(list(set([y.date_time.year for y in news])), reverse=True)
         year = self.kwargs.get('year', None)
         if not year:
-            year = context['years'][0]
+            if len(context['years']):
+                year = context['years'][0]
+            else:
+                year = datetime.datetime.now().year
+
         context['year'] = int(year)
         context['news'] = self.group_news(news, year)
         context['more'] = self.news_more
