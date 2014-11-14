@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
-from models import FooterSettings, BannerImages
+from models import FooterSettings, BannerImages, TopMenuUrl
 
 
 class FooterSettingsTranslationOptions(TranslationOptions):
@@ -12,3 +12,9 @@ class BannerImagesTranslationOptions(TranslationOptions):
     fields = ('title',)
 
 translator.register(BannerImages, BannerImagesTranslationOptions)
+
+
+class TopMenuUrlTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+translator.register(TopMenuUrl, TranslationOptions)

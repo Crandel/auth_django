@@ -4,7 +4,7 @@ from django.utils.translation import get_language
 
 from cms.models.pagemodel import Page
 
-from apps.general.models import FooterSettings,CommonSettings, BannerImages
+from apps.general.models import FooterSettings,CommonSettings, BannerImages, TopMenuUrl
 from apps.flatpages.models import FlatPage
 
 register = template.Library()
@@ -47,6 +47,13 @@ def get_banners():
     banner = BannerImages.objects.filter(published=True)
     return banner
 register.assignment_tag(get_banners)
+
+
+def get_top_menu():
+    menu = TopMenuUrl.objects.all()
+    return menu
+register.assignment_tag(get_top_menu)
+
 
 
 @register.filter

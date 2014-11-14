@@ -16,11 +16,12 @@
           </div>
           <div class="links">
             <ul class="toplinks clearfix">
-              <li><a href="/sitemap/">Sitemap</a></li>
-              <li class="sep">|</li>
-              <li><a href="#">Email Login</a></li>
-              <li class="sep">|</li>
-              <li><a href="#">FTP Login</a></li>
+              <li><a href="/sitemap/">{% trans "Sitemap" %}</a></li>
+              {% get_top_menu as top_menu %}
+              {% for m in top_menu %}
+                <li class="sep">|</li>
+                <li><a href="{{ m.url }}">{{m.name}}</a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>

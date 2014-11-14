@@ -26,8 +26,8 @@
         <div class="search">
           <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
             <div class="searchbox">
-            <form action="/search/" method="GET" id="search_form">
-              <input type="text" name="search" placeholder="Search..." />
+            <form action="/search/" method="get" id="search_form" name="search_form">
+              <input type="text" name="q" placeholder="Search..." />
               <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
               <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
             </form>
@@ -35,11 +35,12 @@
           </div>
           <div class="links">
             <ul class="toplinks clearfix">
-              <li><a href="#">Sitemap</a></li>
-              <li class="sep">|</li>
-              <li><a href="#">Email Login</a></li>
-              <li class="sep">|</li>
-              <li><a href="#">FTP Login</a></li>
+              <li><a href="/sitemap/">{% trans "Sitemap" %}</a></li>
+              {% get_top_menu as top_menu %}
+              {% for m in top_menu %}
+                <li class="sep">|</li>
+                <li><a href="{{ m.url }}">{{m.name}}</a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
