@@ -4,9 +4,6 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-
-
-
 admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
@@ -19,7 +16,7 @@ urlpatterns = i18n_patterns('',
     url(r'^portfolio/', include('apps.project.urls')),
     url(r'^kud-site/', include('apps.htmlsitemap.urls')),
     url(r'^', include('apps.xmlsitemap.urls')),
-#    url(r'^search/', include('apps.search.urls')),
+    # url(r'^search/', include('apps.search.urls')),
     (r'^search/', include('haystack.urls')),
     (r'^robots\.txt$', include('robots.urls')),
     url(r'^pages', include('django.contrib.flatpages.urls')),

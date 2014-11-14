@@ -1,2 +1,0 @@
-{{ object.event_title }}
-{{ object.event_desc}}

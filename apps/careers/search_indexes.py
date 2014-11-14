@@ -1,15 +1,16 @@
+import datetime
 from haystack import indexes
-from models import Career
+from apps.careers.models import Vacancy
 
 
-class CareerIndex(indexes.SearchIndex, indexes.Indexable):
+class VacancyIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    designation = indexes.CharField(model_attr='designation')
-    short_desc = indexes.CharField(model_attr='short_desc')
+    position = indexes.CharField(model_attr='position')
+    requirement = indexes.CharField(model_attr='requirement')
 
     def get_model(self):
-        return Career
+        return Vacancy
 
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
-        return self.get_model().objects.all()
+        return self.get_model().objects.filter(is_published=True, last_date__gte=datetime.datetime.now())

@@ -162,3 +162,12 @@ def calculate_submenu_our(children):
     return None
 
 register.assignment_tag(calculate_submenu_our)
+
+
+@register.filter
+def search_include(result):
+    try:
+        template = result.object.search_template()
+    except AttributeError:
+        template = 'search/include/dummy.html'
+    return template

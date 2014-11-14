@@ -1,2 +1,0 @@
-{{ object.designation }}
-{{ object.short_desc }}

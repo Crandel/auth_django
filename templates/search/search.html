@@ -1,77 +1,60 @@
 {% extends 'frontend_base.html' %}
 {% load thumbnail i18n %}
-{% load cms_tags sekizai_tags endless %}
+{% load cms_tags sekizai_tags endless menu_tags %}
 {% load generaltags %}
 {% block title %}{% trans 'Search' %} {% endblock %}
 {% block extra_js %}
-<script>
-
-
-           function goToNewsection(current){
-                window.location.href = "/news_events/events/.?sitco_news_id=" + current;
-
-
-            }
-
-</script>
-{% endblock %}
-{% block page_banner %}
-{% get_banners as search_banner %}
-<section class="inner-banner">
-    {% thumbnail search_banner.search_page '1351x211' crop='center' as thumb %}
-    <img src="{{ thumb.url }}" alt="">
-    {% endthumbnail %}
-</section>
+    <script type="text/javascript">
+    $(document).ready(function(e) {
+        $("#main-banner").flexslider({
+                controlNav:true,
+                directionNav:false,
+                slideshow: true
+              });
+    });
+    </script>
 {% endblock %}
 {% block content %}
-<div class="inner-contents-wrapper">
-    <div class="title-area clearfix">
-        <h1>{% trans 'Search Results' %}</h1>
-        <ul class="bredcrums clearfix">
-            <li><a href="/">{% trans 'Home' %}</a></li>
-            <li>{% trans 'Search Results' %}</li>
-        </ul>
-    </div>
-    <div class="sub-title">
-        <h2>{{ page.paginator.count }} {% trans 'result(s) found for keyword :' %} "{{ query }}":</h2>
-    </div>
-    {% paginate 5 results %}
-    <div class="search clearfix">
-        {% for result in results %}
-        {% ifequal result.model_name 'news' %}
-        <article>
-            <div class="title"><a  href ="javascript:goToNewsection({{ result.object.id }})">{{ result.object.news_title }}</a></div>
-            <div class="detail">
-                <p>{{ result.object.news_desc|safe|truncatewords:60 }}<a  href ="javascript:goToNewsection({{result.object.id}})">{% trans 'Read More' %} >>></a>
-                </p>
-            </div>
-        </article>
-        {% endifequal %}
+<div class="page_width innerpages clearfix">
 
-        {% ifequal result.model_name 'events' %}
-        <article>
-            <div class="title"><a href="/news_events/events/">{{ result.object.event_title }}</a></div>
-            <div class="detail">
-                <p>{{ result.object.event_desc|safe|truncatewords:60 }}<a href="/news_events/events/">{% trans 'Read More' %} >>></a>
-                </p>
-            </div>
-        </article>
-        {% endifequal %}
-        {% ifequal result.model_name 'career' %}
-        <article>
-            <div class="title"><a href="/career/job-vacancies/">{{ result.object.designation }}</a></div>
-            <div class="detail">
-                <p>{{ result.object.short_desc|safe|truncatewords:60 }}<a href="/career/job-vacancies/">{% trans 'Read More' %} >>></a>
-                </p>
-            </div>
-        </article>
-        {% endifequal %}
+    <ul class="bread-crumb clearfix left">
+        {% show_breadcrumb 0 "breadcrumb.html" %}
+        <li>{% trans 'Search Results' %}</li>
+    </ul>
+    <h1 id="page-title">{% trans 'Search Results' %}</h1>
+    <div class="items list-view clearfix">
+        {% for result in page.object_list %}
+        {% with result|search_include as fragment %}
+        {% include fragment %}
+        {% endwith %}
+        {% empty %}
+        <p>{% trans 'No Result Found For ' %}{{ request.GET.q }}</p>
         {% endfor %}
     </div>
-    <div class="pagination">
-        {% show_pages %}
+    <div class="clearfix">
+        <ul class="pagination clearfix right">
+            {% if page.has_previous %}
+                <li><a href="?q={{ query }}&amp;page={{ page.previous_page_number }}"><</a></li>
+            {% else %}
+                <li style="display:none"><a href="#">1</a></li>
+            {% endif %}
+
+            {% for num in page.paginator.page_range %}
+                {% ifequal num page.number %}
+                    {% if page.object_list and page.paginator.page_range|length > 1 %}
+                        <li  class="selected"><a href="#">{{ num }}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="?q={{ query }}&amp;page={{ num }}">{{ num }}</a></li>
+                {% endifequal %}
+            {% endfor %}
+
+            {% if page.has_next %}
+                <li><a href="?q={{ query }}&amp;page={{ page.next_page_number }}">></a></li>
+            {% else %}
+                <li style="display:none"><a href="#">1</a></li>
+            {% endif %}
+        </ul>
     </div>
 </div>
-</div>
-</section>
 {% endblock %}

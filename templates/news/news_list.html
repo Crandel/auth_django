@@ -50,9 +50,11 @@
         <div class="search">
           <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
             <div class="searchbox">
+            <form action="/search/" method="GET" id="search_form">
               <input type="text" name="search" placeholder="Search..." />
               <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
               <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+            </form>
             </div>
           </div>
           <div class="links">
