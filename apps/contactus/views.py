@@ -21,12 +21,12 @@ class ContactView(FormView):
         # It should return an HttpResponse.
         form.save()
         form.send_mail()
-        messages.info( self.request,_('Thanks for contacting us.We will contact you soon!'))
+        messages.info( self.request,_('Thanks for contacting us. We will contact you soon!'))
         return super(ContactView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(ContactView, self).get_context_data(**kwargs)
-        current_site = Site.objects.get_current() 
+        current_site = Site.objects.get_current()
         context['google_cordinates'] = GoogleContact.objects.get(site = current_site)
         return context
 

@@ -125,7 +125,15 @@
                 {% placeholder "contactaddress" %}
             </div>
             <div class="feedback left">
-                <h4>{% trans "Feedback Form" %}</h4>
+                {% if messages %}
+                  {% for message in messages %}
+                    {% if message.tags = 'info' %}
+                      <h4>{{message}}</h4>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <h4>{% trans "Feedback Form" %}</h4>
+                {% endif %}
                 <p>{% trans "Let us know how we can serve you more efficiently. Your response is very crucial to us." %}</p>
                 <form id="contact-form" method="post" action=".">
                   {% csrf_token %}
