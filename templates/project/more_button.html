@@ -1,9 +1,0 @@
-{% load i18n %}
-{% if category %}
-    {% url 'load_more_proj' category=category as more%}
-{% else %}
-    {% url 'load_more_cat' as more %}
-{% endif %}
-{% if load_more %}
-    <button class="btn"  onclick="load_more({{ page }}, '{{ more }}')">{% trans "Load More" %}</button>
-{% endif %}
