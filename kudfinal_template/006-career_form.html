@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content="width=1250" initial-scale="0">
+
+<link href='http://fonts.googleapis.com/css?family=Michroma' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/flexslider.css" rel="stylesheet" type="text/css" />
+<link href="css/dropdown.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.flexslider.js"></script>
+<script src="js/jquery.easydropdown.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(e) {
+		
+    $("input.upload").click(function(){
+       $("input[type=file]").trigger("click");
+    });
+    $(".browse-btn input.input").click(function(){
+       $("input[type=file]").trigger("click");
+    });
+	});
+</script>
+<title>Home</title>
+</head>
+<body>
+
+<div id="container">
+<div class="inner_wrapper">
+  <header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="#"><img src="images/logo.png" alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"><a href="#" class="lang">عربي</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src="images/search_icon.jpg" alt="img" /></button>
+           	  <small id="end-search"><a href="javascript:void(0);"><img src="images/crossout.ico" alt="" /></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Services</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">Contact Us</a></li>
+      </ul>
+      </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src="images/strip3.png" alt="img" />
+      </div>
+      <ul class="slides">
+				<li><img src="images/banners/img3.jpg" alt="img" />
+                	<div class="slider-caption"><div class="page-width">KUD Experience</div></div>
+                </li>
+				
+			</ul>
+      </div>
+      </div>
+    </div>
+  </header>
+  <div class="page_width innerpages career clearfix">
+  
+    <ul class="bread-crumb clearfix">
+      <li><a href="#">Home</a></li>
+      	<li><a href="#">Our Services </a></li>
+        <li><a href="#">Design Management</a></li>
+    </ul>
+    <p class="height0">&nbsp;</p>
+    <h1 id="page-title">Careers</h1>
+    <div class="table-view career-table">
+      <div class="table-body">
+        <div class="career clearfix">
+            <form id="contact-form">
+                
+                            <div class="contect_us_half left">
+                            	<ul class="contect_us ">
+                                <li>Position Applied For</li>
+                                <li>
+                                    <input type="text" name="applied"/>
+                                </li>
+                                <li>Name </li>
+                                <li>
+                                    <input type="text" name="name"/>
+                                </li>
+                                <li>Nationality</li>
+                                <li class="form-dropdown requried">
+                                   <!-- <input type="text" />-->
+                                   <div id="bread-drop" >
+                                        <select name="" class="dropdown" data-settings='{"cutOff":10}'>
+                                          <option value="">KGL Nursery</option>
+                                          <option value="">Name </option>
+                                          <option value="">Nationality</option>
+                                          <option value="">Present Address</option>
+                                          <option value="">KGL Nursery</option>
+                                          <option value="">Name </option>
+                                          <option value="">Nationality</option>
+                                          <option value="">Present Address</option>
+                                          <option value="">KGL Nursery</option>
+                                          <option value="">Name </option>
+                                          <option value="">Nationality</option>
+                                          <option value="">Present Address</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                
+                                <li>Present Address</li>
+                                <li>
+                                    <textarea name="address" class="requried"></textarea>
+                                </li>
+                           </ul>
+                              </div>
+                              <div class="contect_us_half left">
+                              	<ul class="contect_us left">
+                              	<li>Telephone Number</li>
+                                <li>
+                                    <input type="text" name="phone"/>
+                                </li>
+                                <li>Email</li>
+                                <li>
+                                    <input type="text" name="email"/>
+                                </li>
+                                <li>CV</li>
+                                <li class="browse-btn"><input type="text" class="input requried" name="cv"><input type="file"> <input type="button" class="btn upload" value="Browse"></li>
+                                
+                                    <!--<li class="browse-btn"><input type="text" class="input"><input type="file"> <input type="button" class="btn upload" value="Browse"></li>-->
+                                
+                                <li></li>
+                                <li><script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LeFeu0SAAAAAOcGKx3x_FxsXoH6McQxtJwwW7cw"></script></li>
+                                <li></li>
+                                <li><input type="submit" value="Submit" class="btn"></li>
+                                </ul>
+                             </div>
+                 
+            </form>
+        
+     </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bluebg">
+  <div class="page_width clearfix">
+  	<div class="copyright left">&copy;2014 KUD All Rights Reserved.</div>
+    <div class="social_icons right">
+      <p>Get In Touch</p>
+      <ul class="clearfix">
+      <li><a href="#" class="twt"></a></li>
+          <li><a href="#" class="linkedin"></a></li>
+      </ul>
+    </div>
+    </div>
+  </footer>
+  </div>
+</div>
+</body>
+</html>

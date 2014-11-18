@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content="width=1250" initial-scale="0">
+	
+<link href='http://fonts.googleapis.com/css?family=Michroma' rel='stylesheet' type='text/css' />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/flexslider.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.flexslider.js"></script>
+<script src="js/validate.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(e) {
+
+      $("#contact-form").validate({
+             rules: {
+                email: {
+                     required: true,
+                     email: true
+                 },
+         phone: 
+         {
+           required: true,
+           number: true
+         } ,
+         name: 
+         {
+           required: true,
+           text: true
+         } ,
+          company: 
+         {
+           required: true,
+           text: true
+         } ,
+          subject: 
+         {
+           required: true,
+           text: true
+         } ,
+          detail: 
+         {
+           required: true,
+           text: true
+         },
+          applied: 
+         {
+           required: true,
+           text: true
+         }  
+            
+            
+             },
+             messages: {
+                 name: "Please enter your Name",
+                 phone: "Please enter Phone Number",
+                 date: "Please select Date",
+                 message: "Please enter Mesage",
+                 email: "Please enter a valid email address",
+                 subject: "Please enter Subject",
+                 detail: "Please enter Detail",
+                 company: "Please enter Company Name",
+                 applied: "Please enter Applied Position",
+                
+             },
+             submitHandler: function(form) {
+                 form.submit();
+             }
+         });
+	});
+</script>
+
+<title>007-contact_us</title>
+</head>
+<body>
+
+<div id="container">
+<div class="inner_wrapper">
+  <header class="bluebg">
+    <div class="page_width">
+      <div class="header-top clearfix">
+        <div id="logo"> <a href="#"><img src="images/logo.png" alt="img" /></a> </div>
+        <div class="search">
+          <div class="search_area clearfix"><a href="#" class="lang">عربي</a>
+            <div class="searchbox">
+              <input type="text" name="search" placeholder="Search..." />
+              <button type="submit"><img src="images/search_icon.jpg" alt="img" /></button>
+           		<small id="end-search"><a href="javascript:void(0);"><img src="images/crossout.ico" alt=""></a></small>
+            </div>
+          </div>
+          <div class="links">
+            <ul class="toplinks clearfix">
+              <li><a href="#">Sitemap</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">Email Login</a></li>
+              <li class="sep">|</li>
+              <li><a href="#">FTP Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="menu" class="clearfix">
+      <div class="main-menu">
+      <ul class="clearfix">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Services</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Careers</a></li>
+      <li class="selected"><a href="#">Contact Us</a></li>
+      </ul>
+      </div>
+      <div id="main-banner">
+      <div class="strip1">
+      <img src="images/strip3.png" alt="img" />
+      </div>
+      <ul class="slides">
+				<li>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d26081603.294420436!2d-95.677068!3d37.06250000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1411997898250" width="1072" height="405"  ></iframe>                	
+        </li>
+			</ul>
+      </div>
+      </div>
+    </div>
+  </header>
+  <div class="page_width innerpages clearfix">
+  	<ul class="bread-crumb clearfix left">
+      	<li><a href="#">Home</a></li>
+      	<li><a href="#">Our Services </a></li>
+        <li><a href="#">Design Management</a></li>
+    	</ul>
+     <h1 id="page-title">Contact Us</h1>
+     <div class="contect clearfix">
+     		<div class="addresses left">
+            	<div class="address">
+                	<h4>Head Office</h4>
+                    <p>Juwait Re Tower, 12th Floor - Al-Shaheed Street, Area 5, Opposite Al Hamra Tower, Sharq, Kuwait</p>
+                </div>
+                <div class="address">
+                	<h4>Postal Address</h4>
+                    <p>P.O. Box No. 1373 Dasman 15464, Kuwait</p>
+                    <ul>
+                    	<li>Tel. : +965 224682 47/48</li>
+                        <li>Fax : +965 22462850</li>
+                        <li>Email : <a href="#"> kud@kudq8.com </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="feedback left">
+            	<h4>Feedback Form</h4>
+                <p>Let us know how we can serve you more efficiently. Your response is very crucial to us.</p>
+                <form id="contact-form" >
+                  <ul class="contect_us left">
+                              <li>Name </li>
+                              <li>
+                                  <input type="text" class="requried"  name="name"/>
+                              </li>
+                              <li>Company Name</li>
+                              <li>
+                                  <input type="text" name="company" class="input requried"/>
+                              </li>
+                              <li>Email</li>
+                              <li>
+                                  <input type="email" name="email" class="input requried"/>
+                              </li>
+                              <li>Telephone</li>
+                              <li>
+                                  <input type="tel" name="phone" class="input requried"/>
+                              </li>
+                              <li>Subject</li>
+                              <li>
+                                  <input type="text" class="input requried" name="subject"/>
+                              </li>
+                              <li>Details</li>
+                              <li>
+                                  <textarea class="bdr-none requried" name="detail" ></textarea>
+                              </li>
+                              <li></li>
+                              <li><script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LeFeu0SAAAAAOcGKx3x_FxsXoH6McQxtJwwW7cw"></script></li>
+                              <li></li>
+                              <li><input type="submit" value="Submit" class="btn"></li>
+                                     </ul>
+                </form>
+            </div>
+     </div>
+     	
+ </div>
+  <footer class="bluebg">
+  <div class="page_width clearfix">
+  	<div class="copyright left">&copy;2014 KUD All Rights Reserved.</div>
+    <div class="social_icons right">
+      <p>Get In Touch</p>
+      <ul class="clearfix">
+      <li><a href="#" class="twt"></a></li>
+          <li><a href="#" class="linkedin"></a></li>
+      </ul>
+    </div>
+    </div>
+  </footer>
+  </div>
+</div>
+</body>
+</html>

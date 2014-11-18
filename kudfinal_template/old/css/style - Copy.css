@@ -1,0 +1,67 @@
+*{margin:0px; padding:0px; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; outline:none;}
+body{font-family: 'Open Sans', sans-serif; font-size:14px; color: #666666; }
+
+.left, .left-side, .pull-left{float:left;}
+.right, .right-side, .pull-right{float:right;}
+.clearfix{clear:both;}
+.clearfix:after{clear:both; content:""; display:block;}
+.aligncenter{text-align:center;}
+a img{border:0px;}
+a{text-decoration:none; color:#ffffff;}
+a:hover{color:#b9baba;}
+ul li{list-style:none; padding:0px; margin:0px;}
+h1{color:#0a2a3b; font-size:30px; font-family:'Michroma', sans-serif;}
+.bodybg{position:absolute; z-index:-1; height:100%;}
+.inner_wrapper{position:relative; z-index:0;}
+#container{width:100%; position:relative;}
+.page_width{width:1200px; margin:auto;}
+header{margin-bottom:20px; background-image:url(../images/header_bg.jpg); background-position:top left; background-repeat:no-repeat; height:734px;}
+.bluebg{color:#ffffff; background-color:#0a2a3b;}
+.header-top{padding-top:65px; padding-bottom:50px;}
+.header-top #logo{width:250px; float:left;}
+.header-top .search{float:right;}
+.search_area .searchbox{width:192px; float:right; position:relative;}
+.search_area .searchbox input[type="text"]{border-radius:25px; width:100%; background-color:white; padding-left:10px; border:none; padding: 5px 35px 5px 10px;}
+.search_area .searchbox button{background:none; border:none; padding-top:4px; cursor:pointer; position:absolute; top:0px; right:8px;}
+.lang{float:left; padding-right:10px; font-size:14px;}
+ul.toplinks{margin:0px; padding:0px; margin-top:15px;}
+ul.toplinks li{float:left; padding-right:5px; color:#ffffff;}
+ul.toplinks li:last-child{padding-right:0px;}
+#menu{padding-bottom:30px;}
+.intro_text{padding-bottom:30px;}
+.intro_text h1{padding-bottom:15px;}
+.intro_text p{font-size:17px; padding-bottom:13px; padding-top:8px;}
+.intro_text .signature{float:right;}
+.intro_text .signature .name{font-weight:300; font-size:18px; color:#0a2a3b; text-align:right; padding-top:8px;}
+.intro_text .signature .name span{font-weight:700; font-size:17px; color:#0a2a3b; display:block; padding-top:5px;}
+footer{padding-top:33px; padding-bottom:33px; background-color: rgba(10, 42, 59, 0.9) !important;}
+footer .copyright{padding-top:27px;}
+footer .social_icons p{font-size:12px; text-align:center}
+footer .social_icons ul{margin-top:5px;}
+footer .social_icons li{float:left; padding-right:10px; }
+footer .social_icons li .twt{ background:url(../images/twt.png) left top no-repeat; width:42px ; height:42px; display:block;}
+footer .social_icons li .twt:hover{ background:url(../images/twt_hv.png);}
+footer .social_icons li  .linkedin{ background:url(../images/linkin.png) left top no-repeat; width:42px ; height:42px; display:block;}
+footer .social_icons li  .linkedin:hover{ background:url(../images/linkin_hv.png) left top no-repeat; width:42px ; height:42px; display:block;}
+footer .social_icons li:last-child{padding-right:0px;}
+#main-banner{position:relative; width:1060px; float:right;}
+#menu{position:relative;}
+.main-menu{width:252px; position:absolute; z-index:10;}
+.main-menu ul li{width:100%; margin-bottom:33px; font-family:'Michroma', sans-serif; font-size:15px;}
+.main-menu ul li:nth-child(1){background:url(../images/menu/item_1.png) top left no-repeat; height:38px;}
+.main-menu ul li:nth-child(2){background:url(../images/menu/item_2.png) top left no-repeat; height:38px;}
+.main-menu ul li:nth-child(3){background:url(../images/menu/item_3.png) top left no-repeat; height:38px;}
+.main-menu ul li:nth-child(4){background:url(../images/menu/item_4.png) top left no-repeat; height:38px;}
+.main-menu ul li:nth-child(5){background:url(../images/menu/item_5.png) top left no-repeat; height:38px;}
+.main-menu ul li:nth-child(6){background:url(../images/menu/item_6.png) top left no-repeat; height:38px;}
+.main-menu ul li:nth-child(7){background:url(../images/menu/item_7.png) top left no-repeat; height:38px;}
+.main-menu ul li:hover{background-position:bottom left;}
+.main-menu ul li:hover a{color:#032a3a;}
+.main-menu ul li a{display:block; padding:8px 10px 8px 20px; }
+.main-menu ul li a:hover{color:#032a3a;}
+.slider-caption {
+font-size: 40px;
+width: 100%; font-family:'Michroma', sans-serif; position: absolute; z-index: 9999; top: 50px; color: #ffffff; left: 0px; text-align: center; color:#0a2a3b;
+}
+.strip1{width:180px; height:464px; position:absolute; top:0px; left:-30px; z-index:5;}
+
