@@ -8,13 +8,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
-    url(r'^', include('apps.home.urls')),
     url(r'^kud-admin/', include(admin.site.urls)),
     (r'^ckeditor/', include('ckeditor.urls')),
     url(r'^contact-us/', include('apps.contactus.urls')),
-    url(r'^news/', include('apps.news.urls')),
     url(r'^career/', include('apps.careers.urls')),
-    url(r'^portfolio/', include('apps.project.urls')),
     url(r'^kud-site/', include('apps.htmlsitemap.urls')),
     url(r'^sitemap/', TemplateView.as_view(template_name="sitemap/sitemap.html"), name="site_map"),
     url(r'^', include('apps.xmlsitemap.urls')),
