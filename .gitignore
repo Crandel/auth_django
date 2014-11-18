@@ -3,4 +3,5 @@ media/
 *.log
 nbproject/
 *.svn
+.idea
 kud/local_settings.py
