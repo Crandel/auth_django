@@ -15,8 +15,8 @@ class PortfolioInfo(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = _('Portfolio Info')
-        verbose_name_plural = _('Portfolio Info')
+        verbose_name = _('Portfolio')
+        verbose_name_plural = _('Portfolio')
 
 
 class Category(models.Model):
@@ -34,7 +34,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = _('Category')
-        verbose_name_plural = _('Category')
+        verbose_name_plural = _('Categories')
         ordering = ('order',)
 
 
@@ -42,7 +42,7 @@ class Project(models.Model):
     """
     Model for project detail page
     """
-    category = models.ForeignKey(Category, verbose_name='Category')
+    category = models.ForeignKey(Category, verbose_name='Category', related_name='projects')
     title = models.CharField(_('Title'), max_length=255)
     slug = AutoSlugField(populate_from='title', unique=True)
     client = models.CharField(_('Client'), max_length=255)
@@ -55,10 +55,10 @@ class Project(models.Model):
 
     class Meta:
         verbose_name = _('Project')
-        verbose_name_plural = _('Project')
+        verbose_name_plural = _('Projects')
 
 
-class Images(models.Model):
+class Image(models.Model):
     project = models.ForeignKey(Project, verbose_name='Project', related_name='images')
     image = models.ImageField(_('Image'), max_length=255, upload_to="project/image")
     title = models.CharField(_('Title'))
@@ -67,6 +67,6 @@ class Images(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = _('Images')
+        verbose_name = _('Image')
         verbose_name_plural = _('Images')
 
