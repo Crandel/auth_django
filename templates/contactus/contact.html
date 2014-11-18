@@ -3,6 +3,7 @@
 {% block title %}{% trans 'Contact Us' %}{% endblock %}
 
 {% block extra_js %}
+    <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
     <script src={% static "en/js/validate.js" %}></script>
     <script type="text/javascript">
         $(document).ready(function(e) {
