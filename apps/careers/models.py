@@ -31,7 +31,7 @@ class SVModel(TimeStampedModel):
 
     class Meta:
         verbose_name = _('Resume')
-        verbose_name = _('Resumes')
+        verbose_name_plural = _('Resumes')
         ordering = ('created',)
 
     def cv_file_link(self):
