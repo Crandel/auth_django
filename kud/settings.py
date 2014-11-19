@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     # 'mailer',
     'haystack',
+    'apps.portfolio',
     'apps.general',
     'apps.contact_plugin',
     'apps.contactus',
