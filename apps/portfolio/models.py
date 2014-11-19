@@ -61,7 +61,7 @@ class Project(models.Model):
 class Image(models.Model):
     project = models.ForeignKey(Project, verbose_name='Project', related_name='images')
     image = models.ImageField(_('Image'), max_length=255, upload_to="project/image")
-    title = models.CharField(_('Title'))
+    title = models.CharField(_('Title'), max_length=255)
 
     def __str__(self):
         return self.title
