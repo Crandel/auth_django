@@ -1,3 +1,32 @@
+from __future__ import unicode_literals
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
+from apps.portfolio.models import PortfolioInfo, Category, Project, Image
 
-# Register your models here.
+
+class ImageInline(admin.TabularInline):
+    model = Image
+
+
+class PortfolioInfoAdmin(TranslationAdmin):
+    model = PortfolioInfo
+    list_display = ('title', 'header_image')
+
+
+class CategoryAdmin(TranslationAdmin):
+    model = Category
+    list_display = ('title', 'thumbnail_image', 'order')
+    list_editable = ('order',)
+
+
+class ProjectAdmin(TranslationAdmin):
+    model = Project
+    list_display = ('title', 'category')
+    search_fields = ('title',)
+    list_filter = ('category',)
+    inlines = [ImageInline]
+
+
+admin.site.register(PortfolioInfo, PortfolioInfoAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Project, ProjectAdmin)
