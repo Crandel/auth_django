@@ -1,0 +1,110 @@
+{% extends 'frontend_base.html' %}
+{% load i18n thumbnail staticfiles generaltags menu_tags %}
+{% block title %}{% trans 'Portfolio' %}{% endblock %}
+{% block extra_js %}
+<script type="text/javascript" src={% static "en/js/portfolio.js" %}></script>
+{% endblock %}
+{% block header %}
+    <header class="bluebg">
+        <div class="page_width">
+            <div class="header-top clearfix">
+                <div id="logo"> <a href="/"><img src={% static "en/images/logo.png" %} alt="img" /></a> </div>
+                <div class="search">
+                    <div class="search_area clearfix"> <a href="{{request.path|get_other_language_path}}" class="lang">{% if LANGUAGE_CODE == 'ar' %}EN{% else %}عربي{% endif %}</a>
+                        <div class="searchbox">
+                            <form action="/search/" method="get" id="search_form" name="search_form">
+                                <input type="text" name="q" placeholder="Search..." />
+                                <button type="submit"><img src={% static "en/images/search_icon.jpg" %} alt="img" /></button>
+                                <small id="end-search"><a href="javascript:void(0);"><img src={% static "en/images/crossout.ico" %} alt=""></a></small>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <ul class="toplinks clearfix">
+                            <li><a href="/sitemap/">{% trans "Sitemap" %}</a></li>
+                            {% get_top_menu as top_menu %}
+                            {% for m in top_menu %}
+                                <li class="sep">|</li>
+                                <li><a href="{{ m.url }}">{{m.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="menu" class="clearfix">
+                <div class="main-menu">
+                    <ul class="clearfix">
+                        {% show_menu 0 100 100 100  "menu/menu.html" %}
+                    </ul>
+                </div>
+                <div class="header-nav padding_nav">
+                    <div class="slider">
+                        <ul class="slides">
+                            {% for list in submenu_list %}
+                                {% if forloop.counter0|divisibleby:'2' %}
+                                    <li>
+                                    <div class="row clearfix">
+
+                                {% else %}
+                                    <div class="row middle"><div></div></div>
+                                    <div class="row">
+                                {% endif %}
+                            {% for item in list %}
+                                <div><a href="#">{{ item.title }}</a></div>
+                                {% if not forloop.last %}
+                                    <div class="devider"><img src={% static "en/images/nav-devider.png"%} alt=""></div>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+
+                            {% if not forloop.counter0|divisibleby:'2' or forloop.last %}
+                                </li>
+                            {% endif %}
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div id="main-banner">
+                    <div class="strip1">
+                        <img src={% static "en/images/strip3.png" %} alt="img" />
+                    </div>
+                    <ul class="slides">
+                        <li>
+                            {% thumbnail portfolio_info.header_image "1072x321" crop="center" as im %}
+                                <img src="{{ im.url }}"  alt="{{ info.title }}" width="1072" height="321" />
+                            {% endthumbnail %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock header %}
+{% block content %}
+    <div class="page_width innerpages clearfix">
+        <ul class="bread-crumb clearfix">
+            {% show_breadcrumb 0 "breadcrumb_act.html" %}
+        </ul>
+        <h1 id="page-title">{{ portfolio_info.title }}</h1>
+        <div class="item_list clearfix">
+            {% for category in categories %}
+                <div class="item left">
+                    <a href="#">
+                        {% thumbnail category.thumbnail_image "270x174" crop="center" as im %}
+                            <img src="{{ im.url }}"  alt="{{ category.title }}" width="270" height="174" />
+                        {% endthumbnail %}
+                        <span class="img-layer"></span>
+                    </a>
+                    <p><a href="#">{{ category.title }}</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% if is_paginated %}
+        <div class="text-center" id="load_more_cat">
+        {% url 'load_more_cat' as more%}
+          <button class="btn"  onclick="load_more_cat( 1, '{{ more }}')">{% trans "Load More" %}</button>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

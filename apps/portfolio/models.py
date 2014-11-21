@@ -2,12 +2,14 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from autoslug import AutoSlugField
+from django.contrib.sites.models import Site
 
 
 class PortfolioInfo(models.Model):
     """
     Model for managing portfolio
     """
+    site = models.ForeignKey(Site, unique=True, null=True)
     title = models.CharField(_('Title'), max_length=255,)
     header_image = models.ImageField(_('Image'), max_length=255, upload_to="portfolio/header/", null=True)
 
@@ -15,8 +17,8 @@ class PortfolioInfo(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = _('Portfolio')
-        verbose_name_plural = _('Portfolio')
+        verbose_name = _('PortfolioInfo')
+        verbose_name_plural = _('PortfolioInfo`s')
 
 
 class Category(models.Model):
@@ -25,8 +27,8 @@ class Category(models.Model):
     """
     title = models.CharField(_('Title'), max_length=255,)
     slug = AutoSlugField(populate_from='title', unique=True)
-    header_image = models.ImageField(_('Image'), max_length=255, upload_to="project/header", null=True)
-    thumbnail_image = models.ImageField(_('Image'), max_length=255, upload_to="project/thumbnail", null=True)
+    header_image = models.ImageField(_('Image for header'), max_length=255, upload_to="project/header", null=True)
+    thumbnail_image = models.ImageField(_('Image for thumbnail'), max_length=255, upload_to="project/thumbnail", null=True)
     order = models.PositiveSmallIntegerField(_('Sort Order'), default=1)
 
     def __str__(self):
@@ -69,4 +71,3 @@ class Image(models.Model):
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')
-
