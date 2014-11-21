@@ -2,16 +2,7 @@
 {% load i18n thumbnail staticfiles generaltags menu_tags %}
 {% block title %}{% trans 'Portfolio' %}{% endblock %}
 {% block extra_js %}
-    <script type="text/javascript">
-        $(document).ready(function(e) {
-            $(".header-nav .slider").flexslider({animation: "slide", controlNav: false, slideshow:false, animationSpeed:1500,});
-            $("#main-banner").flexslider({
-                controlNav:true,
-                directionNav:false,
-                slideshow: true
-            });
-        });
-    </script>
+<script type="text/javascript" src={% static "en/js/portfolio.js" %}></script>
 {% endblock %}
 {% block header %}
     <header class="bluebg">
@@ -109,7 +100,11 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="text-center">
+    {% if is_paginated %}
+        <div class="text-center" id="load_more_cat">
+        {% url 'load_more_cat' as more%}
+          <button class="btn"  onclick="load_more_cat( 1, '{{ more }}')">{% trans "Load More" %}</button>
         </div>
+    {% endif %}
     </div>
 {% endblock %}
