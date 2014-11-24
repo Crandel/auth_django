@@ -6,9 +6,3 @@ $(document).ready(function(e) {
         slideshow: true
     });
 });
-function load_more_cat(page, url){
-    $.get(url, {page: page}, function(data){
-        $(".item_list").append(data.items);
-        $("#load_more_cat").html(data.more)
-    });
-}

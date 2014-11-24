@@ -1,0 +1,12 @@
+{% load i18n thumbnail staticfiles generaltags %}
+{% for project in projects %}
+    <div class="item left">
+        <a href="{{ project.slug }}">
+            {% thumbnail project.images.all.0.image "270x174" crop="center" as im %}
+                <img src="{{ im.url }}"  alt="{{ project.title }}" width="270" height="174" />
+            {% endthumbnail %}
+            <span class="img-layer"></span>
+        </a>
+        <p><a href="{{ project.slug }}">{{ project.title }}</a></p>
+    </div>
+{% endfor %}

@@ -31,6 +31,10 @@ class Category(models.Model):
     thumbnail_image = models.ImageField(_('Image for thumbnail'), max_length=255, upload_to="project/thumbnail", null=True)
     order = models.PositiveSmallIntegerField(_('Sort Order'), default=1)
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('project_list', kwargs={'category': self.slug})
+
     def __str__(self):
         return self.title
 
