@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from autoslug import AutoSlugField
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
 
 
 class PortfolioInfo(models.Model):
@@ -32,7 +33,6 @@ class Category(models.Model):
     order = models.PositiveSmallIntegerField(_('Sort Order'), default=1)
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
         return reverse('project_list', kwargs={'category': self.slug})
 
     def __str__(self):
@@ -62,6 +62,9 @@ class Project(models.Model):
     class Meta:
         verbose_name = _('Project')
         verbose_name_plural = _('Projects')
+
+    def get_absolute_url(self):
+        return reverse('project_detail', kwargs={'project': self.slug, 'category': self.category.slug})
 
 
 class Image(models.Model):

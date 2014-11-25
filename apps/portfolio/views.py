@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, View
+from django.views.generic import ListView, View, DetailView
 from apps.portfolio.models import PortfolioInfo, Category, Project
 from django.contrib.sites.models import Site
 from django.http import HttpResponse, Http404
@@ -8,7 +8,18 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 
 
-class CategoryList(ListView):
+class TopMenuMixin(object):
+
+    def create_top_menu(self, queryset):
+        # generator for submenu
+        first_list = [
+            queryset[c * 6: (c + 1) * 6]
+            for c in range((len(queryset) + 5) / 6)
+        ]
+        return  first_list
+
+
+class CategoryList(TopMenuMixin, ListView):
     template_name = 'project/portfolio_info.html'
     model = Category
     paginate_by = 12
@@ -19,12 +30,7 @@ class CategoryList(ListView):
         context = super(CategoryList, self).get_context_data(**kwargs)
         context['portfolio_info'] = PortfolioInfo.objects.get(site=self.site)
         queryset = self.get_queryset()
-        # generator for submenu
-        first_list = [
-            queryset[c * 6: (c + 1) * 6]
-            for c in range((len(queryset) + 5) / 6)
-        ]
-        context['submenu_list'] = first_list
+        context['submenu_list'] = self.create_top_menu(queryset)
         return context
 
 
@@ -32,11 +38,11 @@ class LoadMore(View):
 
     def get(self, request, *args, **kwargs):
         if not request.is_ajax():
-            raise Http404
+            return Http404
 
         page = int(request.GET.get('page', None))
         if not page:
-            raise Http404
+            return Http404
 
         self.site = Site.objects.get_current()
 
@@ -63,11 +69,11 @@ class LoadMoreProj(View):
 
     def get(self, request, *args, **kwargs):
         if not request.is_ajax():
-            raise Http404
+            return Http404
 
         page = int(request.GET.get('page', None))
         if not page:
-            raise Http404
+            return Http404
 
         self.site = Site.objects.get_current()
 
@@ -90,7 +96,7 @@ class LoadMoreProj(View):
             content_type='application/json')
 
 
-class ProjectList(ListView):
+class ProjectList(TopMenuMixin, ListView):
     """docstring for ProjectList"""
     template_name = 'project/project_list.html'
     model = Project
@@ -102,12 +108,8 @@ class ProjectList(ListView):
         context = super(ProjectList, self).get_context_data(**kwargs)
         context['category'] = self.get_category()
         queryset = Category.objects.all()
-        # generator for submenu
-        first_list = [
-            queryset[c * 6: (c + 1) * 6]
-            for c in range((len(queryset) + 5) / 6)
-        ]
-        context['submenu_list'] = first_list
+        context['categories'] = queryset
+        context['submenu_list'] = self.create_top_menu(queryset)
         return context
 
 
@@ -117,8 +119,27 @@ class ProjectList(ListView):
     def get_category(self):
         if self.category:
             return self.category
-        category_id = self.kwargs.get('category', None)
-        if not category_id:
-            raise Http404
-        self.category = get_object_or_404(Category, slug=category_id)
+        category_slug = self.kwargs.get('category', None)
+        if not category_slug:
+            return Http404
+        self.category = get_object_or_404(Category, slug=category_slug)
         return self.category
+
+
+class ProjectDetail(TopMenuMixin, DetailView):
+    model = Project
+    template_name = 'project/project_detail.html'
+    slug_url_kwarg = 'project'
+    context_object_name = 'project_detail'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetail, self).get_context_data(**kwargs)
+        queryset = Category.objects.all()
+        context['submenu_list'] = self.create_top_menu(queryset)
+        category_slug = self.kwargs.get('category', None)
+        category = get_object_or_404(Category, slug=category_slug)
+        context['projects'] = Project.objects.filter(category=category)
+        context['category'] = category
+        return context
+
+

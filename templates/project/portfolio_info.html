@@ -51,7 +51,7 @@
                                     <div class="row">
                                 {% endif %}
                             {% for item in list %}
-                                <div><a href={{ item.title }}>{{ item.title }}</a></div>
+                                <div><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></div>
                                 {% if not forloop.last %}
                                     <div class="devider"><img src={% static "en/images/nav-devider.png"%} alt=""></div>
                                 {% endif %}
