@@ -136,8 +136,7 @@ class ProjectDetail(TopMenuMixin, DetailView):
         context = super(ProjectDetail, self).get_context_data(**kwargs)
         queryset = Category.objects.all()
         context['submenu_list'] = self.create_top_menu(queryset)
-        category_slug = self.kwargs.get('category', None)
-        category = get_object_or_404(Category, slug=category_slug)
+        category = self.get_object().category
         context['projects'] = Project.objects.filter(category=category)
         context['category'] = category
         return context
