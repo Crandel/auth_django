@@ -103,6 +103,7 @@ INSTALLED_APPS = (
     'apps.contact_plugin',
     'apps.contactus',
     'apps.flatpages',
+    'apps.news',
     'django.contrib.flatpages',
     'apps.careers',
     'apps.xmlsitemap',
