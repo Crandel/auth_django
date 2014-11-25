@@ -2,7 +2,8 @@
 {% load i18n thumbnail staticfiles generaltags menu_tags %}
 {% block title %}{% trans 'Portfolio' %}{% endblock %}
 {% block extra_js %}
-<script type="text/javascript" src={% static "en/js/portfolio.js" %}></script>
+    <script type="text/javascript" src={% static "en/js/portfolio.js" %}></script>
+    <script type="text/javascript" src={% static "en/js/project_load_more.js" %}></script>
 {% endblock %}
 {% block header %}
     <header class="bluebg">
@@ -50,7 +51,7 @@
                                     <div class="row">
                                 {% endif %}
                             {% for item in list %}
-                                <div><a href="#">{{ item.title }}</a></div>
+                                <div><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></div>
                                 {% if not forloop.last %}
                                     <div class="devider"><img src={% static "en/images/nav-devider.png"%} alt=""></div>
                                 {% endif %}
@@ -90,21 +91,21 @@
         <div class="item_list clearfix">
             {% for category in categories %}
                 <div class="item left">
-                    <a href="#">
+                    <a href="{{ category.get_absolute_url }}">
                         {% thumbnail category.thumbnail_image "270x174" crop="center" as im %}
                             <img src="{{ im.url }}"  alt="{{ category.title }}" width="270" height="174" />
                         {% endthumbnail %}
                         <span class="img-layer"></span>
                     </a>
-                    <p><a href="#">{{ category.title }}</a></p>
+                    <p><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></p>
                 </div>
             {% endfor %}
         </div>
-    {% if is_paginated %}
-        <div class="text-center" id="load_more_cat">
-        {% url 'load_more_cat' as more%}
-          <button class="btn"  onclick="load_more_cat( 1, '{{ more }}')">{% trans "Load More" %}</button>
-        </div>
-    {% endif %}
+        {% if is_paginated %}
+            <div class="text-center" id="load_more">
+                {% url 'load_more_cat' as more%}
+                <button class="btn"  onclick="load_more( 1, '{{ more }}')">{% trans "Load More" %}</button>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
