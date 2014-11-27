@@ -1,11 +1,14 @@
+from __future__ import unicode_literals
 import json
+
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, View, DetailView
-from apps.portfolio.models import PortfolioInfo, Category, Project
 from django.contrib.sites.models import Site
 from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.template.loader import render_to_string
+
+from apps.portfolio.models import PortfolioInfo, Category, Project
 
 
 class TopMenuMixin(object):
@@ -16,7 +19,7 @@ class TopMenuMixin(object):
             queryset[c * 6: (c + 1) * 6]
             for c in range((len(queryset) + 5) / 6)
         ]
-        return  first_list
+        return first_list
 
 
 class CategoryList(TopMenuMixin, ListView):
@@ -112,7 +115,6 @@ class ProjectList(TopMenuMixin, ListView):
         context['submenu_list'] = self.create_top_menu(queryset)
         return context
 
-
     def get_queryset(self):
         return super(ProjectList, self).get_queryset().filter(category=self.get_category())
 
@@ -136,8 +138,7 @@ class ProjectDetail(TopMenuMixin, DetailView):
         context = super(ProjectDetail, self).get_context_data(**kwargs)
         queryset = Category.objects.all()
         context['submenu_list'] = self.create_top_menu(queryset)
-        category_slug = self.kwargs.get('category', None)
-        category = get_object_or_404(Category, slug=category_slug)
+        category = self.get_object().category
         context['projects'] = Project.objects.filter(category=category)
         context['category'] = category
         return context

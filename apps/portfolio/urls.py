@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+
 from apps.portfolio.views import CategoryList, LoadMore, ProjectList, LoadMoreProj, ProjectDetail
 
 

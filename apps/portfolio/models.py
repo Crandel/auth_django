@@ -1,7 +1,8 @@
 from __future__ import unicode_literals
+from autoslug import AutoSlugField
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from autoslug import AutoSlugField
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 
