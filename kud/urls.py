@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.autodiscover()
 
@@ -12,7 +11,6 @@ urlpatterns = i18n_patterns('',
     (r'^ckeditor/', include('ckeditor.urls')),
     url(r'^contact-us/', include('apps.contactus.urls')),
     url(r'^portfolio/', include('apps.portfolio.urls')),
-    url(r'^news/', include('apps.news.urls')),
     url(r'^career/', include('apps.careers.urls')),
     url(r'^kud-site/', include('apps.htmlsitemap.urls')),
     url(r'^sitemap/', TemplateView.as_view(template_name="sitemap/sitemap.html"), name="site_map"),
