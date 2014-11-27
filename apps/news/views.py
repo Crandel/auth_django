@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView, View
 from django.http import HttpResponse, Http404
 
-from apps.news.models import NewsModel
+from apps.news.models import NewsModel, NewsInfo
 
 
 class NewsList(TemplateView):
@@ -34,6 +34,7 @@ class NewsList(TemplateView):
         # list with news for last 6 months
         news = [new for new in all_filtered_news if new.created_at.month in months[-6:]]
         context['news'] = news
+        context['news_info'] = NewsInfo.objects.all()
         return context
 
 

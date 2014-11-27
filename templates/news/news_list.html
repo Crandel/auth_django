@@ -14,7 +14,13 @@
                 visible: 5,
                 circular: true
             });
-
+            $(document).ready(function(e) {
+                $("#main-banner").flexslider({
+                    controlNav:true,
+                    directionNav:false,
+                    slideshow: true
+                });
+            });
             $(".accordion-wrapper > h3").click(function(e){
                 if($(this).hasClass("expand")==true){
                     $(this).next().slideUp();
@@ -70,9 +76,15 @@
                         <img src={% static "en/images/strip3.png" %} alt="img" />
                     </div>
                     <ul class="slides">
-                        <li><img src={% static "en/images/banners/img3.jpg" %} alt="img" />
-                            <div class="slider-caption"><div class="page-width">News</div></div>
-                        </li>
+                        {% for new_image in news_info %}
+                            <li>
+                                {% thumbnail new_image.header_image "1072x405" crop="center" as im %}
+                                    <img src="{{ im.url }}"  alt="{{ info.title }}" width="1072" height="405" />
+                                {% endthumbnail %}
+                                <div class="slider-caption"><div class="page-width">{{ new_image.title }}</div></div>
+                            </li>
+                        {% endfor %}
+
                     </ul>
                 </div>
             </div>
@@ -127,6 +139,6 @@
             {% endif %}
 
         </div>
-    <div class="clearfix"></div>
+        <div class="clearfix"></div>
     </div>
 {% endblock %}
