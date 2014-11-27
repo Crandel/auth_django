@@ -1,6 +1,0 @@
-{% load menu_tags %}
-{% if children %}
-    {% for page in children %}
-      <li {% if page.selected %}class="selected"{% endif %}><a href="{{ page.get_absolute_url }}">{{ page.get_menu_title }}</a></li>
-    {% endfor %}
-{% endif %}
