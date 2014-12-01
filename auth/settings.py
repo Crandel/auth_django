@@ -56,6 +56,8 @@ DATABASES = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
