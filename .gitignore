@@ -1,0 +1,7 @@
+*.pyc
+media/
+*.log
+nbproject/
+*.svn
+.idea
+auth/local_settings.py
