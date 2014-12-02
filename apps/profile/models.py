@@ -8,6 +8,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User)
     tweeter = models.CharField(_('Tweeter'), max_length=255, null=True)
     facebook = models.CharField(_('Facebook'), max_length=255, null=True)
+    autentification_hash = models.CharField(_('hash'), max_length=255)
 
     def __str__(self):
         return self.user.username
@@ -17,4 +18,4 @@ class Profile(models.Model):
         verbose_name_plural = _('Contact Us')
 
     def get_absolute_url(self):
-        return reverse('sign', kwargs={'pk': self.pk})
+        return reverse('activate', kwargs={'key': self.autentification_hash})
