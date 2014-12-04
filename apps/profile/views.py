@@ -63,7 +63,10 @@ class MainView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
         user = self.request.user
+        if not user.is_authenticated():
+            return redirect(reverse('login'))
         context['user'] = user
+        context['profile'] = Profile.objects.get(user=user)
         return self.render_to_response(context)
 
     def get(self, request, *args, **kwargs):

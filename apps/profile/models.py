@@ -6,8 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    tweeter = models.CharField(_('Tweeter'), max_length=255, null=True)
+    twitter = models.CharField(_('Tweeter'), max_length=255, null=True)
     facebook = models.CharField(_('Facebook'), max_length=255, null=True)
+    profile_photo = models.ImageField(_('Photo'), max_length=255, upload_to="profile", null=True)
     autentification_hash = models.CharField(_('hash'), max_length=255)
 
     def __str__(self):
