@@ -66,6 +66,8 @@ DATABASES = {
 }
 LOGIN_URL = 'login/'
 LOGOUT_URL = 'logout/'
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 LANGUAGE_CODE = 'en-us'
