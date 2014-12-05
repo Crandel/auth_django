@@ -34,3 +34,10 @@ def save_profile(backend, user, response, is_new=False, *args, **kwargs):
             user=user, autentification_hash=hashing, profile_photo=response['image']['url'], google=response['id']
         )
         profile.save()
+
+    if is_new and backend.name == 'vk-oauth2':
+        hashing = hashlib.sha224(str(datetime.now())).hexdigest()
+        profile = Profile.objects.create(
+            user=user, autentification_hash=hashing, profile_photo=response['user_photo'], vk=response['uid']
+        )
+        profile.save()
