@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, FormView, CreateView, View
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse, Http404
@@ -35,6 +34,7 @@ class SuccessView(View):
 
     def get(self, *args, **kwargs):
         return HttpResponse('Thank you for signing, please activate your email')
+
 
 class LogoutView(View):
 
@@ -84,14 +84,18 @@ class SignView(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        password = User.objects.make_random_password()
+        password = user.password
         hashing = hashlib.sha224(str(datetime.now())).hexdigest()
+
         user.is_active = False
         user.set_password(password)
-
         user.save()
-        profile = Profile.objects.create(user=user, autentification_hash=hashing)
+
+        profile = Profile.objects.create(user=user, autentification_hash=hashing, profile_photo='empty')
+
         url = self.request.META['HTTP_HOST'] + profile.get_absolute_url()
+
         html = render_to_string('email.html', {'user': user, 'password': password, 'url': url})
+
         send_mail('Confirm email', html, 'vitaliy@steelkiwi.com', [user.email])
         return super(SignView, self).form_valid(form)

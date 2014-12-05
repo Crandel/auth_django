@@ -2,6 +2,6 @@
 {% block title %}Main{% endblock %}
 {% block content %}
     <img src="{{ profile.profile_photo }}" alt="avatar">
-    <h1>Congratuations {{ user.username }}, you are logined</h1>
-    <input type="button" value="Logout" onclick="window.location.href='{% url 'logout' %}'">
+    <h2>Congratuations {{ user.username }}, you are logined</h2>
+    <input class="btn btn-primary btn-medium" type="button" value="Logout" onclick="window.location.href='{% url 'logout' %}'">
 {% endblock %}
