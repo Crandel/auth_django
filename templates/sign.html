@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Sign{% endblock %}
 {% block content %}
-    <h2>It`s a first sign page</h2>
+    <h2>It`s a sign page</h2>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Sign"/>
+        {{ profile.as_p }}
+        <input type="submit" value="Sign" class="btn btn-primary btn-medium"/>
     </form>
 {% endblock %}

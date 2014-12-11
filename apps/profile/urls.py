@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from apps.profile.views import LoginView, MainView, SignView, ActivateView, LogoutView, SuccessView
+from apps.profile.views import LoginView, MainView, SignView, ActivateView, LogoutView, SuccessView, ChangeView
 
 
 urlpatterns = patterns(
@@ -10,4 +10,5 @@ urlpatterns = patterns(
     url(r'^activate/(?P<key>[\w-]+)/$', ActivateView.as_view(), name='activate'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
-    url(r'^success/$', SuccessView.as_view(), name='success'),)
+    url(r'^success/$', SuccessView.as_view(), name='success'),
+    url(r'^change/$', ChangeView.as_view(), name='change'),)

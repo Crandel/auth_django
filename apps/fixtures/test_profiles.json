@@ -6,10 +6,12 @@
       "google": "google",
       "twitter": "twitter",
       "vk": "vk",
-      "profile_photo": "https://pp.vk.me/c614826/v614826167/18c41/Bb9zfz2XBpA.jpg",
+      "authentication_hash": "72945c5230160b298dbb14e274d2f2a05c09773576803e1c6f489066",
+      "profile_photo": "empty",
+      "phone": "+380977777777",
       "facebook": "facebook",
-      "user": 83,
-      "autentification_hash": "684308a807f90f52d87df694c2d86644166d770340dc4f6ac4263368"
+      "user": 2,
+      "address": "address"
     }
   }
 ]

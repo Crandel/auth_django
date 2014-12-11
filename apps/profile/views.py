@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse, Http404
 
 
-from apps.profile.forms import LoginForm, ProfileForm
+from apps.profile.forms import LoginForm, UserForm, ProfileForm
 from apps.profile.models import Profile
 
 
@@ -47,7 +47,7 @@ class ActivateView(View):
 
     def get(self, *args, **kwargs):
         hashing = self.kwargs.get('key', None)
-        profile = Profile.objects.get(autentification_hash=hashing)
+        profile = Profile.objects.get(authentication_hash=hashing)
         if not profile.user:
             raise Http404
         profile.user.is_active = True
@@ -79,23 +79,45 @@ class MainView(TemplateView):
 
 class SignView(CreateView):
     template_name = 'sign.html'
-    form_class = ProfileForm
+    form_class = UserForm
     success_url = '/success'
 
-    def form_valid(self, form):
-        user = form.save(commit=False)
-        password = user.password
-        hashing = hashlib.sha224(str(datetime.now())).hexdigest()
+    def get_context_data(self, **kwargs):
+        context = super(SignView, self).get_context_data(**kwargs)
+        context['profile'] = ProfileForm
+        return context
 
-        user.is_active = False
-        user.set_password(password)
-        user.save()
+    def post(self, request, *args, **kwargs):
 
-        profile = Profile.objects.create(user=user, autentification_hash=hashing, profile_photo='empty')
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
 
-        url = self.request.META['HTTP_HOST'] + profile.get_absolute_url()
+        if form.is_valid():
+            user = form.save(commit=False)
+            password = user.password
+            hashing = hashlib.sha224(str(datetime.now())).hexdigest()
 
-        html = render_to_string('email.html', {'user': user, 'password': password, 'url': url})
+            user.is_active = False
+            user.set_password(password)
+            user.save()
+            address = request.POST['address']
+            phone = request.POST['phone']
+            profile = Profile.objects.create(
+                user=user, authentication_hash=hashing, address=address, phone=phone
+            )
 
-        send_mail('Confirm email', html, 'vitaliy@steelkiwi.com', [user.email])
-        return super(SignView, self).form_valid(form)
+            url = self.request.META['HTTP_HOST'] + profile.get_absolute_url()
+
+            html = render_to_string('email.html', {'user': user, 'password': password, 'url': url})
+
+            send_mail('Confirm email', html, 'vitaliy@steelkiwi.com', [user.email])
+            # return super(SignView, self).form_valid(form)
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+
+class ChangeView(CreateView):
+    template_name = ''
