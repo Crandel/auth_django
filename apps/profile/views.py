@@ -4,10 +4,11 @@ from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from django.views.generic import TemplateView, FormView, CreateView, View
+from django.views.generic import TemplateView, FormView, CreateView, View, UpdateView
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse, Http404
+from django.contrib.auth.models import User
 
 
 from apps.profile.forms import LoginForm, UserForm, ProfileForm
@@ -100,24 +101,40 @@ class SignView(CreateView):
 
             user.is_active = False
             user.set_password(password)
-            user.save()
-            address = request.POST['address']
-            phone = request.POST['phone']
-            profile = Profile.objects.create(
-                user=user, authentication_hash=hashing, address=address, phone=phone
-            )
 
+            data = {'address': request.POST['address'], 'phone': request.POST['phone']}
+            profile_form = ProfileForm(data=data)
+
+            if not profile_form.is_valid():
+                return self.render_to_response(self.get_context_data(form=form, profile=profile_form))
+
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.authentication_hash = hashing
+            profile.save()
             url = self.request.META['HTTP_HOST'] + profile.get_absolute_url()
 
             html = render_to_string('email.html', {'user': user, 'password': password, 'url': url})
 
             send_mail('Confirm email', html, 'vitaliy@steelkiwi.com', [user.email])
-            # return super(SignView, self).form_valid(form)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
 
 
+class ChangeUserView(UpdateView):
+    model = User
+    fields = ['username', 'email', 'first_name', 'last_name']
+    template_name = 'change_user.html'
 
-class ChangeView(CreateView):
-    template_name = ''
+    def form_valid(self, form):
+        user = form.save()
+        profile = Profile.objects.get(user=user)
+        return redirect(reverse('change_profile', kwargs={'pk': profile.id}))
+
+
+class ChangeProfileView(UpdateView):
+    model = Profile
+    fields = ['phone', 'address']
+    template_name = 'change_profile.html'

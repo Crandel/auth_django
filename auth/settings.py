@@ -75,8 +75,6 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Kiev'
 
-AUTH_PROFILE_MODULE = 'apps.profile.'
-
 USE_I18N = True
 
 USE_L10N = True
