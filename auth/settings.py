@@ -21,6 +21,7 @@ INSTALLED_APPS = (
     'apps.profile',
     'south',
     'social.apps.django_app.default',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
