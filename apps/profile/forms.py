@@ -20,4 +20,4 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['phone', 'address']
+        fields = ['phone', 'address', 'profile_photo']

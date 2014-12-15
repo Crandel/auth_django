@@ -7,3 +7,6 @@ footer{
 .helptext{
     display: none;
 }
+.errorlist{
+    color: red;
+}

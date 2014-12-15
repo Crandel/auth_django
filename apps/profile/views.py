@@ -85,7 +85,7 @@ class SignView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(SignView, self).get_context_data(**kwargs)
-        context['profile'] = ProfileForm
+        context['profile'] = kwargs['profile'] if 'profile' in kwargs else ProfileForm
         return context
 
     def post(self, request, *args, **kwargs):
@@ -93,7 +93,6 @@ class SignView(CreateView):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-
         if form.is_valid():
             user = form.save(commit=False)
             password = user.password
@@ -102,16 +101,16 @@ class SignView(CreateView):
             user.is_active = False
             user.set_password(password)
 
-            data = {'address': request.POST['address'], 'phone': request.POST['phone']}
-            profile_form = ProfileForm(data=data)
+            profile_form = ProfileForm(request.POST, request.FILES)
 
             if not profile_form.is_valid():
-                return self.render_to_response(self.get_context_data(form=form, profile=profile_form))
+                return self.render_to_response(self.get_context_data(profile=profile_form, form=form))
 
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.authentication_hash = hashing
+
             profile.save()
             url = self.request.META['HTTP_HOST'] + profile.get_absolute_url()
 
@@ -126,7 +125,7 @@ class SignView(CreateView):
 class ChangeUserView(UpdateView):
     model = User
     fields = ['username', 'email', 'first_name', 'last_name']
-    template_name = 'change_user.html'
+    template_name = 'change/change_user.html'
 
     def form_valid(self, form):
         user = form.save()
@@ -136,5 +135,5 @@ class ChangeUserView(UpdateView):
 
 class ChangeProfileView(UpdateView):
     model = Profile
-    fields = ['phone', 'address']
-    template_name = 'change_profile.html'
+    fields = ['phone', 'address', 'profile_photo']
+    template_name = 'change/change_profile.html'

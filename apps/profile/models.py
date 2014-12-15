@@ -13,7 +13,7 @@ class Profile(models.Model):
     facebook = models.CharField(_('Facebook'), max_length=255, null=True)
     google = models.CharField(_('Google+'), max_length=255, null=True)
     vk = models.CharField(_('Vkontakte'), max_length=255, null=True)
-    profile_photo = models.ImageField(_('Photo'), max_length=255, upload_to="profile", null=True)
+    profile_photo = models.ImageField(_('Photo'), max_length=255, upload_to="profile", null=True, blank=True)
     authentication_hash = models.CharField(_('hash'), max_length=255)
     address = models.CharField(_('Adress'), max_length=255, null=True)
     phone = PhoneNumberField(blank=True)

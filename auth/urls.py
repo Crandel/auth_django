@@ -9,8 +9,6 @@ urlpatterns = patterns(
     url(r'^', include('apps.profile.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
