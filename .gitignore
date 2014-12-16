@@ -4,4 +4,4 @@ media/
 nbproject/
 *.svn
 .idea
-kud/local_settings.py
+auth/local_settings.py

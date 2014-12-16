@@ -1,27 +1,9 @@
-{% extends "frontend_base.html" %}
-{% load i18n thumbnail staticfiles cms_tags menu_tags %}
-{% block title %}{% trans 'Home' %}{% endblock %}
-{% block extra_js %}
-    <script type="text/javascript">
-    $(document).ready(function(e) {
-        $("#main-banner").flexslider({
-                controlNav:true,
-                directionNav:false,
-                slideshow: true
-              });
-    });
-    </script>
-{% endblock %}
-{% block extra_css %}
+{% templatetag openblock %} extends "base.html" {% templatetag closeblock %}
 
-{% endblock %}
-{% block content %}
-<div class="page_width innerpages clearfix">
-    <ul class="bread-crumb clearfix left">
-        {% show_breadcrumb 0 "breadcrumb.html" %}
-        <li>{% trans "Sitemap" %}</li>
-      </ul>
-    <h1 id="page-title">{% trans "Sitemap" %}</h1>
-    {% show_menu 0 100 100 100  "menu/sitemap_menu.html" %}
-</div>
-{% endblock %}
+{% templatetag openblock %} block title {% templatetag closeblock %}Page Not found{% templatetag openblock %} endblock {% templatetag closeblock %}
+
+{% templatetag openblock %} block page_title {% templatetag closeblock %}Page Not found{% templatetag openblock %} endblock page_title {% templatetag closeblock %}
+
+{% templatetag openblock %} block content {% templatetag closeblock %}
+<p>This is not the page you were looking for.</p>
+{% templatetag openblock %} endblock content {% templatetag closeblock %}
