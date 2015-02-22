@@ -62,9 +62,8 @@ DATABASES = {
         'NAME': 'auth',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '',
+        'HOST': 'mysql',
         'PORT': '',
-        'STORAGE_ENGINE': 'MYISAM'
     }
 }
 LOGIN_URL = 'login/'

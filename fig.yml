@@ -1,0 +1,33 @@
+mysqldata:
+  image: debian:wheezy
+  volumes:
+    - /media/data/virtual/work/db/mysql:/var/lib/mysql
+data:
+  image: debian:wheezy
+  volumes:
+    - /media/data/virtual/work/auth:/opt/code
+mysql:
+  image: mysql:5.6
+  ports:
+   - "127.0.0.3:3306:3306"
+  environment:
+    MYSQL_DATABASE: auth
+  volumes_from:
+    - mysqldata
+  hostname: mysqlhost
+auth:
+  build: .
+  command: sh run.sh
+  environment:
+    - DEBUG=True
+    - PYTHONUNBUFFERED=1
+  volumes_from:
+    - data
+  ports:
+    - "127.0.0.4:8000:8000"
+    - "127.0.0.5:2221:22"
+  hostname: authhost
+  links:
+    - mysqldata
+    - mysql
+    - data
