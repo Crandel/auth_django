@@ -19,7 +19,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.profile',
-    'south',
     'social.apps.django_app.default',
     'django_extensions',
 )

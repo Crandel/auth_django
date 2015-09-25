@@ -1,6 +1,8 @@
 #!/bin/bash
-/usr/sbin/sshd
-#pip install -r requirements.txt
-#python manage.py syncdb
-#python manage.py migrate
-python manage.py runserver 0.0.0.0:8000
+
+sudo /usr/sbin/sshd
+# virtualenv /opt/env
+. /opt/env/bin/activate
+# pip install --no-cache-dir -r requirements.txt
+./manage.py migrate
+./manage.py runserver 0.0.0.0:8000

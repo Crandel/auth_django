@@ -1,0 +1,29 @@
+mysql:
+  image: mysql:5.6
+  ports:
+   - "127.0.0.5:3306:3306"
+  volumes:
+   - /opt/db/mysql/auth:/var/lib/mysql
+  environment:
+   - MYSQL_HISTFILE=/var/lib/mysql/.history
+  hostname: mysqlhost
+  cpu_shares: 256
+  mem_limit: 1024M
+auth:
+  build: .
+  command: sh run.sh
+  environment:
+    - DEBUG=True
+    - PYTHONUNBUFFERED=1
+    - color_prompt=yes
+  volumes:
+    - .:/opt/code
+    - /opt/env/auth:/opt/env
+  ports:
+    - "127.0.0.4:80:8000"
+    - "127.0.0.4:2221:22"
+  hostname: authhost
+  links:
+    - mysql
+  cpu_shares: 256
+  mem_limit: 1024M
