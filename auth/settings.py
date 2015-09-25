@@ -55,16 +55,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'auth',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'mysql',
-        'PORT': '',
-    }
-}
 LOGIN_URL = 'login/'
 LOGOUT_URL = 'logout/'
 
