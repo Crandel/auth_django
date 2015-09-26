@@ -9,6 +9,10 @@ mysql:
   hostname: mysqlhost
   cpu_shares: 256
   mem_limit: 1024M
+  log_driver: "json-file"
+  log_opt:
+    max-size: "50k"
+    max-file: "1"
 auth:
   build: .
   command: sh run.sh
@@ -27,3 +31,7 @@ auth:
     - mysql
   cpu_shares: 256
   mem_limit: 1024M
+  log_driver: "json-file"
+  log_opt:
+    max-size: "100k"
+    max-file: "10"

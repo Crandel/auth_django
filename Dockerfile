@@ -6,7 +6,7 @@ RUN mkdir /opt/code && mkdir /opt/env && \
     apt-get install -y apt-utils && \
     apt-get install -y openssh-server sudo && \
     echo 'root:root' |chpasswd && \
-    useradd -m -G sudo,users -s /bin/bash -u 1000 -U crandel && \
+    useradd -m -G root,sudo,users -s /bin/bash -u 1000 -U crandel && \
     usermod -p "" crandel && \
     mkdir -p /var/run/sshd && \
     apt-get autoclean && apt-get -y autoremove && \
