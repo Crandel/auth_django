@@ -1,7 +1,7 @@
-*.pyc
-media/
 *.log
-nbproject/
+*.pyc
 *.svn
 .idea
-auth/local_settings.py
+media/
+nbproject/
+.env

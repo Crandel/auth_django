@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from webtest import Upload
 
-from django.core import mail
 from django_webtest import WebTest
 from django.test import TestCase
 from django.conf import settings
@@ -53,7 +52,7 @@ class RegistrationTest(WebTest):
         profile_form = user_page.submit().follow().form
         profile_form['phone'] = '+380977370429'
         profile_form['address'] = 'new_address'
-        profile_form['profile_photo'] = Upload('test.png', open(settings.BASE_DIR+'/test.png').read())
+        profile_form['profile_photo'] = Upload('test.png', open(settings.BASE_DIR + '/test.png').read())
         profile_form.submit().follow()
         confirm = self.app.get(reverse('main'))
         self.assertEqual(confirm.context['user'].username, 'second')

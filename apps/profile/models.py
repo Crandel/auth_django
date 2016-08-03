@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -19,7 +18,7 @@ class Profile(models.Model):
     phone = PhoneNumberField(blank=True)
 
     def __str__(self):
-        return unicode(self.user.username).encode('utf-8')
+        return self.user.username
 
     class Meta:
         verbose_name = _('Profile')
