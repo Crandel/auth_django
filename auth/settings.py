@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 environ.Env.read_env('%s%s' % (ROOT_DIR, '/.env'))
 env = environ.Env()
 
-DEBUG = env.bool('DJANGO_DEBUG', False)
+DEBUG = env.bool('DEBUG', False)
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -74,18 +74,18 @@ AUTHENTICATION_BACKENDS = (
 )
 
 DATABASES = {
-    'default': env.db('DJANGO_DATABASE_URL')
+    'default': env.db('DATABASE_URL')
 }
 
 WSGI_APPLICATION = 'auth.wsgi.application'
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 LOGIN_URL = 'login/'
 LOGOUT_URL = 'logout/'
 
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='CHANGEME!!!#=$rcwjy2mk5)17-yb$(bkaju8r9*683(+1$+b@etxc9m^48)+')
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+SECRET_KEY = env('SECRET_KEY', default='CHANGEME!!!#=$rcwjy2mk5)17-yb$(bkaju8r9*683(+1$+b@etxc9m^48)+')
 
 
 LANGUAGE_CODE = 'en-us'

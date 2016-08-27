@@ -1,0 +1,28 @@
+version: '2'
+services:
+  db:
+    restart: unless-stopped
+    build:
+      context: ./docker/db
+    ports:
+     - "127.0.2.1:5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    cpu_shares: 256
+    mem_limit: 1024M
+    environment:
+      - APP=${APP}
+      - ENV=${ENV}
+      - PGPASSWORD=${PGPASSWORD}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+  app:
+    restart: "no"
+    links:
+      - db:db
+    volumes:
+      - .:/app
+    entrypoint: /app/docker/app/run.sh
+
+volumes:
+  db_data:
+    external: false

@@ -1,37 +1,21 @@
-data:
-  image: debian:latest
-  volumes:
-   - .:/opt
-   - /opt/work/backup/sh/.bashrc:/root/.bashrc
-   - /opt/work/backup/sh/.vimrc:/root/.vimrc
-   - /opt/work/db/postgres/:/var/lib/postgresql/data
-   - /opt/work/backup/.history:/home/postgres/.psql_history
-   - /opt/work/backup/.psqlrc:/home/postgres/.psqlrc
-postgres:
-  image: postgres:latest
-  ports:
-   - "127.0.2.1:5432:5432"
-  volumes_from:
-   - data
-  cpu_shares: 256
-  mem_limit: 1024M
-  log_driver: "json-file"
-  log_opt:
-    max-size: "10k"
-    max-file: "2"
-auth:
-  build: .
-  command: bash run.sh
-  environment:
-    - DEBUG=True
-    - PYTHONUNBUFFERED=1
-    - color_prompt=yes
-  volumes_from:
-    - data
-  ports:
-    - "127.0.0.5:80:8000"
-  links:
-    - data
-    - postgres
-  cpu_shares: 256
-  mem_limit: 1024M
+version: '2'
+services:
+  app:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+      args:
+        USER: ${USER}
+        UID: ${UID}
+    ports:
+      - "127.0.0.5:80:8000"
+    cpu_shares: 256
+    mem_limit: 1024M
+    env_file: .env
+    environment:
+      - PGHOST=db
+      - PGUSER=${APP}${ENV}
+      - PGDATABASE=${APP}${ENV}
+      - PGPASSWORD=${PGPASSWORD}
+      - DATABASE_URL=psql://${APP}${ENV}:${PGPASSWORD}@db:5432/${APP}${ENV}
