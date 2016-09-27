@@ -1,0 +1,28 @@
+# Bleeding edge Django
+django
+
+
+# Configuration
+django-environ
+
+# Forms
+django-crispy-forms
+django-ckeditor
+django-phonenumber-field
+
+# Models
+django-model-utils
+
+# Images
+Pillow
+
+# Python-PostgreSQL Database Adapter
+psycopg2
+
+# Time zones support
+pytz # Redis support
+django-redis
+redis
+
+# Your custom requirements go here
+python-social-auth

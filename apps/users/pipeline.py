@@ -7,7 +7,6 @@ from django.conf import settings
 
 from apps.profile.models import Profile
 
-
 def save_profile(backend, user, response, is_new=False, *args, **kwargs):
 
     if backend.name == 'facebook':

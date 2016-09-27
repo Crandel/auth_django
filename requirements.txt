@@ -1,13 +1,3 @@
-Django
-coverage
-django-coverage
-django-debug-toolbar
-django-environ
-django-phonenumber-field
-django-webtest
-django_extensions
-ipdb
-pillow
-psycopg2
-python-social-auth
-webtest
+# This file is here because many Platforms as a Service look for
+#	requirements.txt in the root directory of a project.
+-r requirements/production.txt

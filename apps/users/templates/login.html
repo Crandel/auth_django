@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <h2>It`s a login page</h2>
+    <div>
+        <form action="" method="post" class="form-signin">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary btn-medium" value="Login"/>
+            <input type="button" value="Sign in" class="btn btn-primary btn-medium" onclick="window.location.href='{% url 'sign' %}'">
+        </form>
+    </div>
+    <div>
+        <input type="button" value="Twitter" class="btn btn-primary btn-medium" onclick="window.location.href='{% url 'social:begin' "twitter" %}'">
+        <input type="button" value="Facebook" class="btn btn-primary btn-medium" onclick="window.location.href='{% url 'social:begin' "facebook" %}'">
+        <input type="button" value="Google+" class="btn btn-primary btn-medium" onclick="window.location.href='{% url 'social:begin' "google-oauth2" %}'">
+        <input type="button" value="Vkontakte" class="btn btn-primary btn-medium" onclick="window.location.href='{% url 'social:begin' "vk-oauth2" %}'">
+    </div>
+
+
+{% endblock %}

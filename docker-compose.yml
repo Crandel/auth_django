@@ -9,13 +9,12 @@ services:
         USER: ${USER}
         UID: ${UID}
     ports:
-      - "127.0.0.5:80:8000"
+      - "${SERVER_HOST}:80:8000"
     cpu_shares: 256
     mem_limit: 1024M
     env_file: .env
     environment:
-      - PGHOST=db
       - PGUSER=${APP}${ENV}
       - PGDATABASE=${APP}${ENV}
       - PGPASSWORD=${PGPASSWORD}
-      - DATABASE_URL=psql://${APP}${ENV}:${PGPASSWORD}@db:5432/${APP}${ENV}
+      - DATABASE_URL=psql://${APP}${ENV}:${PGPASSWORD}@db/${APP}${ENV}
