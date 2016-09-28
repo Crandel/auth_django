@@ -19,6 +19,7 @@ admin.site.index_title = _('Auth administration')
 
 urlpatterns = [
     url(r'^', include('users.urls')),
+    url(r'', include('social.apps.django_app.urls', namespace='social')),
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, include(admin.site.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

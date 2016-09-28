@@ -28,6 +28,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': PG_NAME,
         'USER': PG_NAME,
+        'HOST': 'db',
         'PASSWORD': PGPASSWORD,
         'ATOMIC_REQUESTS': True
     }

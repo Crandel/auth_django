@@ -2,13 +2,12 @@ import sys
 import environ
 from os import path
 ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
-APPS_DIR = ROOT_DIR.path('infoblox')
+APPS_DIR = ROOT_DIR.path('apps')
 sys.path.append('apps')
 
 env = environ.Env()
 env_file = '.env'
 if path.isfile(env_file):
-    print(env_file)
     environ.Env.read_env(env_file)
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
