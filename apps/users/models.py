@@ -18,13 +18,13 @@ AbstractUser._meta.get_field('username').validators = [validators.RegexValidator
 
 
 class User(AbstractUser):
-    twitter = models.CharField(_('Tweeter'), max_length=255, null=True)
-    facebook = models.CharField(_('Facebook'), max_length=255, null=True)
-    google = models.CharField(_('Google+'), max_length=255, null=True)
-    vk = models.CharField(_('Vkontakte'), max_length=255, null=True)
+    twitter = models.CharField(_('Tweeter'), max_length=255, blank=True)
+    facebook = models.CharField(_('Facebook'), max_length=255, blank=True)
+    google = models.CharField(_('Google+'), max_length=255, blank=True)
+    vk = models.CharField(_('Vkontakte'), max_length=255, blank=True)
     avatar = models.ImageField(_('Avatar'), max_length=255, upload_to="user", null=True, blank=True)
     authentication_hash = models.CharField(_('hash'), max_length=255)
-    address = models.CharField(_('Address'), max_length=255, null=True)
+    address = models.CharField(_('Address'), max_length=255, blank=True)
     phone = PhoneNumberField(blank=True)
 
     def __str__(self):

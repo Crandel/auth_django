@@ -11,5 +11,4 @@ urlpatterns = [
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
     url(r'^success/$', views.SuccessView.as_view(), name='success'),
     url(r'^user/(?P<pk>[\d-]+)/$', views.ChangeUserView.as_view(), name='change_user'),
-    url(r'^profile/(?P<pk>[\d-]+)/$', views.ChangeProfileView.as_view(), name='change_profile'),
 ]

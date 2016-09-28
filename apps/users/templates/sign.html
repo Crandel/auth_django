@@ -5,7 +5,7 @@
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        {{ profile.as_p }}
+        {{ user.as_p }}
         <input type="submit" value="Sign" class="btn btn-primary btn-medium"/>
     </form>
 {% endblock %}

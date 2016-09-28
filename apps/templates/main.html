@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Main{% endblock %}
 {% block content %}
-    <img src="{% get_media_prefix %}{{ profile.profile_photo }}"  alt="avatar" />
+    <img src="{% get_media_prefix %}{{ user.avatar }}"  alt="avatar" />
     <h2>Congratuations {{ user.username }}, you are logined</h2>
     <input class="btn btn-primary btn-medium" type="button" value="Logout" onclick="window.location.href='{% url 'logout' %}'">
     <input class="btn btn-primary btn-medium" type="button"

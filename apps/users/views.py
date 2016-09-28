@@ -1,5 +1,5 @@
 import hashlib
-from datetime import datetime
+from time import time
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse, Http404
 
-from .forms import LoginForm, UserForm, ProfileForm
+from .forms import LoginForm, UserForm
 
 User = get_user_model()
 
@@ -47,14 +47,12 @@ class LogoutView(View):
 class ActivateView(View):
 
     def get(self, *args, **kwargs):
-        # hashing = self.kwargs.get('key', None)
-        # profile = Profile.objects.get(authentication_hash=hashing)
-        # if not profile.user:
-        #     raise Http404
-        # profile.user.is_active = True
-        # profile.user.save()
-        # profile.user.backend = 'django.contrib.auth.backends.ModelBackend'
-        # login(self.request, profile.user)
+        hashing = self.kwargs.get('key', None)
+        user = User.objects.get(authentication_hash=hashing)
+        user.is_active = True
+        user.save()
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(self.request, user)
         return redirect(reverse('main'))
 
 
@@ -82,11 +80,6 @@ class SignView(CreateView):
     form_class = UserForm
     success_url = '/success'
 
-    def get_context_data(self, **kwargs):
-        context = super(SignView, self).get_context_data(**kwargs)
-        context['profile'] = kwargs['profile'] if 'profile' in kwargs else ProfileForm
-        return context
-
     def post(self, request, *args, **kwargs):
 
         self.object = None
@@ -95,23 +88,16 @@ class SignView(CreateView):
         if form.is_valid():
             user = form.save(commit=False)
             password = user.password
-            hashing = hashlib.sha224(str(datetime.now())).hexdigest()
+
+            hashing = hashlib.sha224(str.encode(str(time()))).hexdigest()
 
             user.is_active = False
             user.set_password(password)
 
-            profile_form = ProfileForm(request.POST, request.FILES)
-
-            if not profile_form.is_valid():
-                return self.render_to_response(self.get_context_data(profile=profile_form, form=form))
-
+            user.authentication_hash = hashing
             user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.authentication_hash = hashing
 
-            profile.save()
-            url = self.request.META['HTTP_HOST'] + profile.get_absolute_url()
+            url = self.request.META['HTTP_HOST'] + user.get_absolute_url()
 
             html = render_to_string('email.html', {'user': user, 'password': password, 'url': url})
 
@@ -124,14 +110,8 @@ class SignView(CreateView):
 class ChangeUserView(UpdateView):
     model = User
     fields = ['username', 'email', 'first_name', 'last_name']
-    template_name = 'change/change_user.html'
+    template_name = 'change_user.html'
 
     def form_valid(self, form):
         user = form.save()
         return redirect(reverse('change_profile', kwargs={'pk': user.id}))
-
-
-class ChangeProfileView(UpdateView):
-    model = User
-    fields = ['phone', 'address', 'profile_photo']
-    template_name = 'change/change_profile.html'
