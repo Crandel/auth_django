@@ -4,7 +4,8 @@ from time import time
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, FormView, CreateView, View, UpdateView
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -56,14 +57,14 @@ class ActivateView(View):
         return redirect(reverse('main'))
 
 
-class MainView(TemplateView):
+class MainView(LoginRequiredMixin, TemplateView):
+    login_url = reverse_lazy('login')
+    redirect_field_name = 'redirect_to'
     template_name = 'main.html'
 
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
         user = self.request.user
-        if not user.is_authenticated():
-            return redirect(reverse('login'))
         context['user'] = user
         return self.render_to_response(context)
 
